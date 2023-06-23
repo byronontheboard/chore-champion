@@ -66,7 +66,8 @@ router.get('/browse', async (req, res) => {
     const posts = postData.map((project) => project.get({ plain: true }));
     console.log(posts);
     res.render('browse', {
-      posts
+      posts,
+      logged_in: req.session.logged_in,
     });
   } catch (err) {
     res.status(500).json(err);
