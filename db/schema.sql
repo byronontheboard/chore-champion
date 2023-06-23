@@ -1,2 +1,3 @@
-DROP DATABASE IF EXISTS user_db;
-CREATE DATABASE user_db;
+
+DROP DATABASE IF EXISTS chore_champion_db;
+CREATE DATABASE chore_champion_db;

@@ -1,3 +1,4 @@
+
 const path = require('path');
 const express = require('express');
 const session = require('express-session');
@@ -7,7 +8,8 @@ const helpers = require('./utils/helpers');
 
 const sequelize = require('./config/connection');
 
-// TODO: Add a comment describing the functionality of this expression
+const Task = require('./models/Task');
+
 // Importing SequelizeStore session information in MySQL.
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
@@ -29,7 +31,6 @@ const sess = {
   })
 };
 
-// TODO: Add a comment describing the functionality of this statement
 // Using the session with the object "sess" that is connecting express and the user's session.
 app.use(session(sess));
 
@@ -44,4 +45,5 @@ app.use(routes);
 
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log(`Now listening on http://localhost:${PORT}/` + '.'));
+
 });
