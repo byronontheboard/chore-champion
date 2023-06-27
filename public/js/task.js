@@ -3,19 +3,19 @@ const loginFormHandler = async (event) => {
   event.preventDefault();
 
   // TODO: Add a comment describing the functionality of these expressions
-  const title = document.querySelector('#title-post').value.trim();
-  const body = document.querySelector('#body-post').value.trim();
+  const title = document.querySelector('#title-task').value.trim();
+  const body = document.querySelector('#body-task').value.trim();
 
   if (title && body) {
     // TODO: Add a comment describing the functionality of this expression
-    const response = await fetch('/api/posts/create', {
+    const response = await fetch('/api/tasks/create', {
       method: 'POST',
       body: JSON.stringify({ title, body }),
       headers: { 'Content-Type': 'application/json' },
     });
 
     if (response.ok) {
-      alert('Successfully posted!');
+      alert('Successfully tasked!');
       document.location.replace('/');
     } else {
       alert('Failed to log in');
@@ -24,5 +24,5 @@ const loginFormHandler = async (event) => {
 };
 
 document
-  .querySelector('.post-form')
+  .querySelector('.task-form')
   .addEventListener('submit', loginFormHandler);

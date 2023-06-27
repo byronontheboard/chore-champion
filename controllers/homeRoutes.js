@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Post } = require('../models');
+const { User, Task } = require('../models');
 const withAuth = require('../utils/auth');
 
 // Prevent non logged in users from viewing the homepage
@@ -41,13 +41,13 @@ router.get('/create', (req, res) => {
   res.render('create');
 });
 
-router.get('/post', withAuth, (req, res) => {
+router.get('/task', withAuth, (req, res) => {
   // If a session exists, redirect the request to the homepage
   if (!req.session.logged_in) {
     res.redirect('/');
     return;
   } else {
-    res.render('post', {
+    res.render('task', {
       logged_in: req.session.logged_in
     });
   }
@@ -55,7 +55,7 @@ router.get('/post', withAuth, (req, res) => {
 
 router.get('/browse', async (req, res) => {
   try {
-    const postData = await Post.findAll({
+    const taskData = await Task.findAll({
       include: [
         {
           model: User
@@ -63,10 +63,10 @@ router.get('/browse', async (req, res) => {
       ]
     });
 
-    const posts = postData.map((project) => project.get({ plain: true }));
-    console.log(posts);
+    const tasks = taskData.map((project) => project.get({ plain: true }));
+    console.log(tasks);
     res.render('browse', {
-      posts,
+      tasks,
       logged_in: req.session.logged_in,
     });
   } catch (err) {
