@@ -1,14 +1,14 @@
-{{#each posts as |post| }}
+{{#each tasks as |task| }}
 <div class="mx-0 m-4">
   <div class="row align-center">
     <div>
-      <h2>{{{get_emoji}}} {{post.title}}</h2>
+      <h2>{{{get_emoji}}} {{task.title}}</h2>
     </div>
     <div>
-      <p>{{post.body}}</p>
+      <p>{{task.body}}</p>
     </div>
     <div>
-      <h7>By: {{post.user.name}} @ {{post.createdAt}}</a></h7>
+      <h7>By: {{task.user.name}} @ {{task.createdAt}}</a></h7>
     </div>
   </div>
 </div>
