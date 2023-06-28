@@ -1,4 +1,4 @@
-function knapsackWithItems(weights, values, capacity) {
+const knapsackWithItems = (weights, values, capacity) => {
   const n = weights.length;
   const dp = Array.from({ length: n + 1 }, () => Array(capacity + 1).fill(0));
   const included = Array(n).fill(false);
@@ -46,45 +46,4 @@ function knapsackWithItems(weights, values, capacity) {
   };
 }
 
-let dummyData = [
-    {
-        minutes: 5,
-        points: 100,
-        taskName: "Take out trash."
-    },
-    {
-        minutes: 15,
-        points: 200,
-        taskName: "Do dishes."
-    },
-    {
-        minutes: 600,
-        points: 1000,
-        taskName: "Read a book."
-    },
-    {
-        minutes: 1,
-        points: 50,
-        taskName: "Check email."
-    },
-    {
-        minutes: 60,
-        points: 250,
-        taskName: "Wash car."
-    }
-]
-
-let minutes = [];
-let points = [];
-
-dummyData.forEach(item => {
-  minutes.push(item.minutes);
-  points.push(item.points);
-});
-
-const timeLimit = 60;
-
-const result = knapsackWithItems(minutes, points, timeLimit);
-console.log("Max Points Gained:", result.maxValue);
-console.log("Selected Items:", result.selectedItems);
-console.log("Selected Values:", result.selectedValues);
+module.exports = knapsackWithItems;

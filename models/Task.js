@@ -30,6 +30,9 @@ Task.init(
     complete_date: {
       type: DataTypes.DATE,
     },
+    minutes: {
+      type: DataTypes.INTEGER,
+    },
     user_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
