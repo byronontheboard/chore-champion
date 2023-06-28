@@ -105,9 +105,6 @@ router.get('/knockout/:time', async (req, res) => {
       });
       
       const result = knapsackWithItems(minutes, points, +timeLimit);
-      console.log("Max Points Gained:", result.maxValue);
-      console.log("Selected Items:", result.selectedItems);
-      console.log("Selected Values:", result.selectedValues);
 
       let tasks = [];
 
@@ -119,7 +116,7 @@ router.get('/knockout/:time', async (req, res) => {
           }
         }
       }
-      console.log(tasks);
+
       res.render('knockout', {
         time_limit: timeLimit,
         result,

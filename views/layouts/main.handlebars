@@ -69,20 +69,20 @@
           <span class="fs-4">CHORECHAMPION</span>
         </a>
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-          <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
-          <li><a href="/browse" class="nav-link px-2 text-white">Browse Chores</a></li>
+          <li><a href="#" class="btn btn-light px-3 m-1">Home</a></li>
+          <li><a href="/browse" class="btn btn-light px-3 m-1">Browse</a></li>
           {{#if logged_in}}
-          <li><a href="/knockoutSelect" class="nav-link px-2 text-white">Knockout</a></li>
-          <li><a href="/task" class="nav-link px-2 text-white">Add Chore</a></li>
+          <li><a href="/knockoutSelect" class="btn btn-light px-3 m-1">Knockout</a></li>
+          <li><a href="/task" class="btn btn-light px-3 m-1">Add</a></li>
           {{/if}}
         </ul>
 
         <div class="text-end">
           {{#if logged_in}}
-          <a class="btn btn-light px-3" id="logout">Logout</a>
+          <a class="btn btn-light px-3 m-1" id="logout">Logout</a>
           {{else}}
-          <a class="btn btn-light px-3" href="/login">Login</a>
-          <a class="btn btn-light px-3" href="/create">Create Account</a>
+          <a class="btn btn-light px-3 m-1" href="/login">Login</a>
+          <a class="btn btn-light px-3 m-1" href="/create">Create Account</a>
           {{/if}}
         </div>
       </div>

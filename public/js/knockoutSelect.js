@@ -1,4 +1,4 @@
-const loginFormHandler = async (event) => {
+const knapackHandler = async (event) => {
   // TODO: Add a comment describing the functionality of this statement
   event.preventDefault();
 
@@ -10,4 +10,4 @@ const loginFormHandler = async (event) => {
 
 document
   .querySelector('.task-form')
-  .addEventListener('submit', loginFormHandler);
+  .addEventListener('submit', knapackHandler);
