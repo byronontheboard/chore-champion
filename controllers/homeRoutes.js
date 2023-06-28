@@ -74,56 +74,63 @@ router.get('/browse', async (req, res) => {
     res.status(500).json(err);
   }
 });
+router.get('/knockoutSelect', async (req, res) => {
+  res.render('knockoutSelect');
+});
 
 router.get('/knockout/:time', async (req, res) => {
-  try {
-    const taskData = await Task.findAll({
-      include: [
-        {
-          model: User
-        }        
-      ],
-      where: {
-        user_id: req.session.user_id
-      }
-    });
+  if (req.params.time) {
+    try {
+      const taskData = await Task.findAll({
+        include: [
+          {
+            model: User
+          }
+        ],
+        where: {
+          user_id: req.session.user_id
+        }
+      });
 
-    let minutes = [];
-    let points = [];
+      let minutes = [];
+      let points = [];
 
-    const timeLimit = req.params.time;
+      const timeLimit = req.params.time;
 
-    const taskFilter = taskData.map((project) => project.get({ plain: true }));
+      const taskFilter = taskData.map((project) => project.get({ plain: true }));
 
-    taskFilter.forEach(item => {
-      minutes.push(item.minutes);
-      points.push((1/item.priority) * item.minutes);
-    });
-    
-    const result = knapsackWithItems(minutes, points, +timeLimit);
-    console.log("Max Points Gained:", result.maxValue);
-    console.log("Selected Items:", result.selectedItems);
-    console.log("Selected Values:", result.selectedValues);
+      taskFilter.forEach(item => {
+        minutes.push(item.minutes);
+        points.push((1 / item.priority) * item.minutes);
+      });
+      
+      const result = knapsackWithItems(minutes, points, +timeLimit);
+      console.log("Max Points Gained:", result.maxValue);
+      console.log("Selected Items:", result.selectedItems);
+      console.log("Selected Values:", result.selectedValues);
 
-    let tasks = [];
+      let tasks = [];
 
-    for (let i = 0; i < taskFilter.length; i++) {
-      for (let j = 0; j < result.selectedItems.length; j++) {
-        if (i === result.selectedItems[j]) {
+      for (let i = 0; i < taskFilter.length; i++) {
+        for (let j = 0; j < result.selectedItems.length; j++) {
+          if (i === result.selectedItems[j]) {
             console.log(i)
             tasks.push(taskFilter[result.selectedItems[j]]);
           }
+        }
       }
+      console.log(tasks);
+      res.render('knockout', {
+        time_limit: timeLimit,
+        result,
+        tasks,
+        logged_in: req.session.logged_in,
+      });
+    } catch (err) {
+      res.status(500).json(err);
     }
-    console.log(tasks);
-    res.render('knockout', {
-      time_limit: timeLimit,
-      result,
-      tasks,
-      logged_in: req.session.logged_in,
-    });
-  } catch (err) {
-    res.status(500).json(err);
+  } else {
+    
   }
 });
 

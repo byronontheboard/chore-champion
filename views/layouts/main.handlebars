@@ -65,13 +65,14 @@
     <div class="container">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
         <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-          <img src="/images/chorechampion.svg" style="height:75px"/>
+          <img src="/images/chorechampion.svg" style="height:75px" />
           <span class="fs-4">CHORECHAMPION</span>
         </a>
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
           <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
           <li><a href="/browse" class="nav-link px-2 text-white">Browse Chores</a></li>
           {{#if logged_in}}
+          <li><a href="/knockoutSelect" class="nav-link px-2 text-white">Knockout</a></li>
           <li><a href="/task" class="nav-link px-2 text-white">Add Chore</a></li>
           {{/if}}
         </ul>
