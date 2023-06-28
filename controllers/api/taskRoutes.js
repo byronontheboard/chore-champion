@@ -70,6 +70,7 @@ router.post('/create', async (req, res) => {
     const newTask = await Task.create({
       title: req.body.title,
       body: req.body.body,
+      due_date: req.body.due_date,
       user_id: req.session.user_id
     });
     res.status(200).json("Successfully created task.");
