@@ -1,56 +1,90 @@
-/* A Naive recursive implementation of
-    0-1 Knapsack problem */
+function knapsackWithItems(weights, values, capacity) {
+  const n = weights.length;
+  const dp = Array.from({ length: n + 1 }, () => Array(capacity + 1).fill(0));
+  const included = Array(n).fill(false);
 
-var knapsackTestData = [
-    { priority: 100, minutes: 15 },
-    { priority: 75, minutes: 20 },
-    { priority: 50, minutes: 5 },
-    { priority: 25, minutes: 5 },
-    { priority: 12.5, minutes: 30 }
+  for (let i = 1; i <= n; i++) {
+    const weight = weights[i - 1];
+    const value = values[i - 1];
+
+    for (let j = 1; j <= capacity; j++) {
+      if (weight > j) {
+        dp[i][j] = dp[i - 1][j];
+      } else {
+        const includeItemValue = value + dp[i - 1][j - weight];
+        const excludeItemValue = dp[i - 1][j];
+        dp[i][j] = Math.max(includeItemValue, excludeItemValue);
+      }
+    }
+  }
+
+  let i = n;
+  let j = capacity;
+
+  while (i > 0 && j > 0) {
+    if (dp[i][j] !== dp[i - 1][j]) {
+      included[i - 1] = true;
+      j -= weights[i - 1];
+    }
+    i--;
+  }
+
+  const selectedItems = [];
+  for (let k = 0; k < n; k++) {
+    if (included[k]) {
+      selectedItems.push(k);
+    }
+  }
+    let selectedValues = [];
+    for (let m = 0; m < selectedItems.length; m++) {
+        selectedValues.push(values[m]);
+    }
+  return {
+    maxValue: dp[n][capacity],
+    selectedItems: selectedItems,
+    selectedValues: selectedValues
+  };
+}
+
+let dummyData = [
+    {
+        minutes: 5,
+        points: 100,
+        taskName: "Take out trash."
+    },
+    {
+        minutes: 15,
+        points: 200,
+        taskName: "Do dishes."
+    },
+    {
+        minutes: 600,
+        points: 1000,
+        taskName: "Read a book."
+    },
+    {
+        minutes: 1,
+        points: 50,
+        taskName: "Check email."
+    },
+    {
+        minutes: 60,
+        points: 250,
+        taskName: "Wash car."
+    }
 ]
-var knapsackData = [];
-// A utility function that returns
-// maximum of two integers
-/* A Naive recursive implementation of
-0-1 Knapsack problem */
-    
-// A utility function that returns
-// maximum of two integers
-function max(a, b)
-{
-        return (a > b) ? a : b;
-}
 
-// Returns the maximum value that can
-// be put in a knapsack of capacity W
-function knapSack(W, wt, val, n)
-{
+let minutes = [];
+let points = [];
 
-    // Base Case
-    if (n == 0 || W == 0)
-        return 0;
+dummyData.forEach(item => {
+  minutes.push(item.minutes);
+  points.push(item.points);
+});
 
-    // If weight of the nth item is
-    // more than Knapsack capacity W,
-    // then this item cannot be
-    // included in the optimal solution
-    if (wt[n - 1] > W)
-        return knapSack(W, wt, val, n - 1);
+const timeLimit = 60;
 
-    // Return the maximum of two cases:
-    // (1) nth item included
-    // (2) not included
-    else
-        return max(val[n - 1] +
-        knapSack(W - wt[n - 1], wt, val, n - 1),
-        knapSack(W, wt, val, n - 1));
-}
-    
-let profit = [ 60, 100, 120 ];
-let weight = [ 10, 20, 30 ];
-let W = 50;
-let n = profit.length;
-
-console.log(knapSack(W, weight, profit, n));
-
-console.log(knapsackData);
+const result = knapsackWithItems(minutes, points, timeLimit);
+console.log("Max Points Gained:", result.maxValue);
+console.log("Selected Items:", result.selectedItems);
+console.log("Selected Values:", result.selectedValues);
