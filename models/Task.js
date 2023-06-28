@@ -12,6 +12,14 @@ Task.init(
       primaryKey: true,
       autoIncrement: true
     },
+    user_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: User,
+        key: 'id'
+      }
+    },
     title: {
       type: DataTypes.STRING,
       allowNull: false
@@ -20,26 +28,18 @@ Task.init(
       type: DataTypes.TEXT,
       allowNull: false
     },
-    due_date: {
-      type: DataTypes.DATE // or DATEONLY if you don't want time.  Might be easier to have a default time if a user doesn't import one
-    },
     priority: {
       type: DataTypes.INTEGER,
       defaultValue: 0,
     },
-    complete_date: {
-      type: DataTypes.DATE,
-    },
     minutes: {
       type: DataTypes.INTEGER,
     },
-    user_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: User,
-        key: 'id'
-      }
+    due_date: {
+      type: DataTypes.DATE // or DATEONLY if you don't want time.  Might be easier to have a default time if a user doesn't import one
+    },
+    complete_date: {
+      type: DataTypes.DATE,
     },
   },
   {

@@ -97,7 +97,7 @@ router.get('/knockout/:time', async (req, res) => {
 
     taskFilter.forEach(item => {
       minutes.push(item.minutes);
-      points.push(item.priority * item.minutes);
+      points.push((1/item.priority) * item.minutes);
     });
     
     const result = knapsackWithItems(minutes, points, +timeLimit);
