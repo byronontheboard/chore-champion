@@ -9,7 +9,7 @@ const loginFormHandler = async (event) => {
   const minutes = document.querySelector('#minutes').value;
   const points = document.querySelector('#points').value
   const priority = document.querySelector('#priority').value;
-  const complete_date = document.querySelector('#complete_date').value;
+ 
 
   // console.log(due_date);
   if (title && body) {
