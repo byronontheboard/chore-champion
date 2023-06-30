@@ -21,14 +21,14 @@ Task.init(
       allowNull: false
     },
     due_date: {
-      type: DataTypes.DATE // or DATEONLY if you don't want time.  Might be easier to have a default time if a user doesn't import one
+      type: DataTypes.DATE // or DATEONLY if you don't want time.  Might be easier to have a default time if a user doesn't import one. Would that be in hooks?
     },
     priority: {
       type: DataTypes.INTEGER,
       defaultValue: 0,
     },
     complete_date: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATE, // value is null if incomplete
     },
     user_id: {
       type: DataTypes.INTEGER,
@@ -40,12 +40,6 @@ Task.init(
     },
   },
   {
-    // hooks: {
-    //   beforeCreate: async (newUserData) => {
-    //     newUserData.password = await bcrypt.hash(newUserData.password, 10);
-    //     return newUserData;
-    //   },
-    // },
     sequelize,
     timestamps: true,
     freezeTableName: true,
