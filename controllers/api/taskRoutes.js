@@ -70,6 +70,7 @@ router.post('/create', async (req, res) => {
       due_date: new Date(req.body.due_date),
       priority: req.body.priority,
       points: req.body.points,
+      minutes: req.body.minutes,
       user_id: req.session.user_id
     });
     res.status(200).json("Successfully created task.");
@@ -112,7 +113,7 @@ router.put(':id', async (req, res) => {
     const task_id = req.params.id;
     const taskToUpdate = await Task.findByPk(task_id);
 
-    if (req.session.user_id !== taskToDelete.user_id) {
+    if (req.session.user_id !== taskToUpdate.user_id) {
       res
         .status(400)
         .json({ message: 'You can only update your own tasks.' });
@@ -125,6 +126,7 @@ router.put(':id', async (req, res) => {
       due_date: new Date(req.body.due_date) || taskToUpdate.due_date,
       priority: req.body.priority || taskToUpdate.priority,
       points: req.body.points || taskToUpdate.points,
+      minutes: req.body.minutes || taskToUpdate.minutes,
     })
     
     taskToUpdate.save();
