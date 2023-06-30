@@ -1,12 +1,17 @@
 const User = require('./User');
 const Task = require('./Task');
 const Stats = require('./Stats');
+const NotTask = require('./NotTask');
 
 Task.belongsTo(User, {
     foreignKey: 'user_id'
 });
 
 User.hasMany(Task, {
+    foreignKey: 'user_id'
+});
+
+User.hasMany(NotTask, {
     foreignKey: 'user_id'
 });
 
@@ -22,5 +27,6 @@ User.hasMany(Stats, {
 module.exports = {
     User,
     Task,
-    Stats
+    Stats,
+    NotTask
 };

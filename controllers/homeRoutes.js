@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { User, Task } = require('../models');
 const withAuth = require('../utils/auth');
+const knapsackWithItems = require('../utils/knapsack');
 
 // Prevent non logged in users from viewing the homepage
 router.get('/', withAuth, async (req, res) => {
@@ -71,6 +72,62 @@ router.get('/browse', async (req, res) => {
     });
   } catch (err) {
     res.status(500).json(err);
+  }
+});
+router.get('/knockoutSelect', async (req, res) => {
+  res.render('knockoutSelect');
+});
+
+router.get('/knockout/:time', async (req, res) => {
+  if (req.params.time) {
+    try {
+      const taskData = await Task.findAll({
+        include: [
+          {
+            model: User
+          }
+        ],
+        where: {
+          user_id: req.session.user_id
+        }
+      });
+
+      let minutes = [];
+      let points = [];
+
+      const timeLimit = req.params.time;
+
+      const taskFilter = taskData.map((project) => project.get({ plain: true }));
+
+      taskFilter.forEach(item => {
+        minutes.push(item.minutes);
+        points.push((1 / item.priority) * item.minutes);
+      });
+      
+      const result = knapsackWithItems(minutes, points, +timeLimit);
+
+      let tasks = [];
+
+      for (let i = 0; i < taskFilter.length; i++) {
+        for (let j = 0; j < result.selectedItems.length; j++) {
+          if (i === result.selectedItems[j]) {
+            console.log(i)
+            tasks.push(taskFilter[result.selectedItems[j]]);
+          }
+        }
+      }
+
+      res.render('knockout', {
+        time_limit: timeLimit,
+        result,
+        tasks,
+        logged_in: req.session.logged_in,
+      });
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  } else {
+    
   }
 });
 
