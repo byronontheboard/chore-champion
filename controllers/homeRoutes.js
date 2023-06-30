@@ -54,7 +54,7 @@ router.get('/task', withAuth, (req, res) => {
   }
 });
 
-router.get('/browse', async (req, res) => {
+router.get('/browse', withAuth, async (req, res) => {
   try {
     const taskData = await Task.findAll({
       include: [
