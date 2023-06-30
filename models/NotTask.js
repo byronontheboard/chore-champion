@@ -2,9 +2,9 @@ const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 const User = require('./User');
 
-class Task extends Model {}
+class NotTask extends Model {}
 
-Task.init(
+NotTask.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -43,18 +43,12 @@ Task.init(
     },
   },
   {
-    // hooks: {
-    //   beforeCreate: async (newUserData) => {
-    //     newUserData.password = await bcrypt.hash(newUserData.password, 10);
-    //     return newUserData;
-    //   },
-    // },
     sequelize,
     timestamps: true,
     freezeTableName: true,
     underscored: true,
-    modelName: 'task',
+    modelName: 'NotTask',
   }
 );
 
-module.exports = Task;
+module.exports = NotTask;

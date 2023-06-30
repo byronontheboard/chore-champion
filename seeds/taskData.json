@@ -1,17 +1,58 @@
 [
   {
-    "title": "Why I Can't",
-    "body": "Ever since I was a kid...",
-    "user_id": 1
+    "title" : "Wash Car",
+    "body" : "...",
+    "user_id" : 1,
+    "priority" : 2,
+    "minutes" : 60
   },
   {
-    "title": "Seven Ways to Sabotage Yourself",
-    "body": "Now that I'm an adult, I ...",
-    "user_id": 3
+    "title" : "Do Dishes",
+    "body" : "...",
+    "user_id" : 1,
+    "priority" : 2,
+    "minutes" : 20
   },
   {
-    "title": "Inversing Your Inverse",
-    "body": "In conclusion, that is why you need to keep a growth mindset.",
-    "user_id": 2
+    "title" : "Read a Book",
+    "body" : "...",
+    "user_id" : 1,
+    "priority" : 5,
+    "minutes" : 600
+  },
+  {
+    "title" : "Do Laundry",
+    "body" : "...",
+    "user_id" : 1,
+    "priority" : 3,
+    "minutes" : 30
+  },
+  {
+    "title" : "Take Out Trash",
+    "body" : "...",
+    "user_id" : 1,
+    "priority" : 1,
+    "minutes" : 5
+  },
+  {
+    "title" : "Clean House",
+    "body" : "...",
+    "user_id" : 1,
+    "priority" : 1,
+    "minutes" : 120
+  },
+  {
+    "title" : "Pick Up Food",
+    "body" : "...",
+    "user_id" : 1,
+    "priority" : 2,
+    "minutes" : 30
+  },
+  {
+    "title" : "Run Errands",
+    "body" : "...",
+    "user_id" : 1,
+    "priority" : 4,
+    "minutes" : 60
   }
 ]
