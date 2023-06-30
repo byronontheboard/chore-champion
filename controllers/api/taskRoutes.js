@@ -62,7 +62,7 @@ router.get('/user/:id', async (req, res) => {
   }
 });
 
-router.post('/create', async (req, res) => {
+router.post('/', async (req, res) => {
    try {
     const newTask = await Task.create({
       title: req.body.title,
