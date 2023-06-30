@@ -15,7 +15,7 @@ const loginFormHandler = async (event) => {
   if (title && body) {
     // const due_date = '2023-06-27 12:00:00'
     // TODO: Add a comment describing the functionality of this expression
-    const response = await fetch('/api/tasks/create', {
+    const response = await fetch('/api/tasks', {
       method: 'POST',
       body: JSON.stringify({ 
         title,
