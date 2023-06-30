@@ -57,6 +57,10 @@ router.get('/task', withAuth, (req, res) => {
 router.get('/browse', withAuth, async (req, res) => {
   try {
     const taskData = await Task.findAll({
+      order: [
+        [sequelize.literal('CASE WHEN priority = 0 THEN 1 ELSE 0 END'), 'ASC'],
+        ['priority', 'ASC']
+      ],
       include: [
         {
           model: User
