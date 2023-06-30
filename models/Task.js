@@ -37,6 +37,20 @@ Task.init(
     complete_date: {
       type: DataTypes.DATE,
     },
+    is_complete: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+      allowNull: false,
+      set(value) {
+        // When setting the value of 'is_complete', check if 'complete_date' is null
+        // and update 'is_complete' accordingly
+        if (this.complete_date === null) {
+          this.setDataValue('is_complete', false);
+        } else {
+          this.setDataValue('is_complete', true);
+        }
+      },
+    },
     user_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
