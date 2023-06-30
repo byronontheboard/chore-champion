@@ -1,5 +1,6 @@
 const router = require('express').Router();
-const { User } = require('../../models');
+const { User, Stats, Task } = require('../../models');
+const withAuth = require('../../utils/auth');
 
 router.post('/login', async (req, res) => {
   try {
@@ -68,5 +69,20 @@ router.post('/logout', (req, res) => {
     res.status(404).end();
   }
 });
+
+router.get('/:id/stats', withAuth, async (req, res) => {
+  const user_id = req.params.id;
+  const statsData = await Stats.findAll({
+    include: [
+      {
+        model: User
+      }        
+    ],
+    where: {
+      user_id: req.params.id
+    },
+    attributes: { exclude: ['password', 'user_id'] },
+  });
+})
 
 module.exports = router;
