@@ -3,7 +3,7 @@ const { User } = require('../../models');
 
 router.post('/login', async (req, res) => {
   try {
-    // Find the user who matches the tasked e-mail address
+    // Find the user who matches the posted e-mail address
     const userData = await User.scope('loginScope').findOne({
       where: { email: req.body.email },
       // include: [
@@ -21,7 +21,7 @@ router.post('/login', async (req, res) => {
       return;
     }
 
-    // Verify the tasked password with the password store in the database
+    // Verify the posted password with the password store in the database
     const validPassword = await userData.checkPassword(req.body.password);
 
     if (!validPassword) {
