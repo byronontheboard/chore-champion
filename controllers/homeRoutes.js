@@ -75,7 +75,9 @@ router.get('/browse', withAuth, async (req, res) => {
   }
 });
 router.get('/knockoutSelect', async (req, res) => {
-  res.render('knockoutSelect');
+  res.render('knockoutSelect', {
+    logged_in: req.session.logged_in,
+  });
 });
 
 router.get('/knockout/:time', async (req, res) => {
