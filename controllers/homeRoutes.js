@@ -130,11 +130,13 @@ router.get('/knockout/:time', async (req, res) => {
         order: [['priority', 'ASC']],
       });
       // console.log(notTaskData);
+      var notResult;
+      let notMinutes = [];
+      let notPoints = [];
+      var notMinutesSum = 0;
       if (notTaskData) {
-        let notMinutes = [];
-        let notPoints = [];
 
-        notTimeLimit = +req.params.time -  +minutesSum + .5 * +req.params.time;
+        notTimeLimit = (+req.params.time - +minutesSum) + (.5 * +req.params.time);
         // console.log(notTimeLimit);
         const notTaskFilter = notTaskData.map((project) => project.get({ plain: true }));
 
@@ -144,10 +146,10 @@ router.get('/knockout/:time', async (req, res) => {
         });
         
         notResult = knapsackWithItems(notMinutes, notPoints, +notTimeLimit);
-
+        
         if (notResult.selectedItems.length > 0) {
           notTasks = [];
-          var notMinutesSum = 0;
+          
           for (let i = 0; i < notTaskFilter.length; i++) {
             for (let j = 0; j < notResult.selectedItems.length; j++) {
               if (i === notResult.selectedItems[j]) {
@@ -160,8 +162,11 @@ router.get('/knockout/:time', async (req, res) => {
       }
       //End of breaking things.
       // console.log(result);
+      console.log("minutes Sum", minutesSum);
       var utilization = ((minutesSum/time_limit)*100).toFixed(1);
-      var notUtilization = ((+minutesSum + +notMinutesSum/time_limit)*100).toFixed(1);
+      console.log("Utilization");
+      console.log(utilization);
+      var notUtilization = (((notMinutesSum)/time_limit)*100).toFixed(1);
       console.log(notTasks);
 
       res.render('knockout', {
@@ -170,6 +175,7 @@ router.get('/knockout/:time', async (req, res) => {
         utilization,
         notUtilization,
         minutesSum,
+        notMinutesSum,
         result,
         notTasks,
         tasks,
