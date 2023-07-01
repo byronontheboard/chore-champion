@@ -44,6 +44,7 @@ box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 
 .task-card:hover {
     box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .25);
+    border-color: black;
 }
 
 .custom-gutter {
@@ -54,4 +55,22 @@ box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 .custom-gutter > [class^="col-"] {
 padding-left: 0.5rem;
 padding-right: 0.5rem;
+}
+
+.card-title {
+    text-shadow: 0 .25rem .75rem rgba(0, 0, 0, .25);
+}
+.btn-warning {
+    color: #fff !important;
+    background-color: #ffca2c;
+}
+
+.btn-warning:hover {
+    --bs-btn-color: #fff;
+    background-color: #ffc107;
+    color: #fff;
+}
+
+input {
+    text-align: center;
 }

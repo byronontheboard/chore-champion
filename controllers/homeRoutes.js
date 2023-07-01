@@ -124,9 +124,9 @@ router.get('/knockout/:time', async (req, res) => {
       var notTimeLimit;
       // This might break things.
       const notTaskData = await NotTask.findAll({
-        where: {
-          user_id: req.session.user_id
-        },
+        // where: {
+        //   user_id: req.session.user_id
+        // },
         order: [['priority', 'ASC']],
       });
       // console.log(notTaskData);

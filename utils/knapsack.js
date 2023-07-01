@@ -1,5 +1,6 @@
 const knapsackWithItems = (weights, values, capacity) => {
   // var capacity = Math.abs(capacity).toFixed(0)+1;
+  var capacity = Math.ceil(capacity);
   const n = weights.length;
   console.log("Capacity");
   console.log(capacity);
