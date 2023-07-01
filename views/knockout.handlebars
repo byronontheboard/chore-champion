@@ -1,38 +1,50 @@
 <h1 class="text-center">We've Planned {{minutes_sum}} of {{time_limit}} Minutes...</h1>
 {{!-- <h1>Points: {{result.maxValue}}</h1> --}}
-<div class="row d-flex progress m-4 mx-auto" style="width: {{utilization}}%; height: 35px;">
-  <div class="col align-center progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="{{utilization}}" aria-valuemin="0" aria-valuemax="100" style="width: {{utilization}}%;">{{utilization}}% of Time Used!</div>
+<div class="row d-flex progress m-4 mx-auto" style="height: 35px;">
+  <div class="col-12 align-center progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="{{utilization}}" aria-valuemin="0" aria-valuemax="100" style="width: {{utilization}}%;">{{utilization}}% of Time Used!</div>
 </div>
-<div class="row d-flex justify-content-around m-2">
-  {{#each tasks as |task| }}
-    <div class="col-md-5 col-sm-4 m-3 p-2 card">
-      <div class="card-body">
-        <h3 class="mb-3 card-title text-center w-100">{{task.title}}</h3>
-        <hr/>
-        <div class="row">
-          <div class="col-4 text-center card-subtitle mb-2 text-muted">{{{get_priority task.priority}}} Priority</br> {{task.priority}}<br/></div>
-          <div class="col-4 text-center card-subtitle mb-2 text-muted">⌛ Minutes<br/> {{task.minutes}}</div>
-          <div class="col-4 text-center card-subtitle mb-2 text-muted">⭐ Points<br/> {{task.points}}</div>
+<div class="container">
+    <div class="row justify-content-center">
+      <div class="col">
+        <div class="custom-gutter">
+          <div class="row">
+            {{#each tasks as |task| }}
+            <div class="col-12 col-sm-12 col-md-6 my-3">
+              <div class="p-2 card task-card m-2">
+                <div class="card-body m-2">
+                  <h3 class="mb-3 card-title text-center w-100">{{task.title}}</h3>
+                  <hr/>
+                  <div class="row">
+                    <div class="col-4 text-center card-subtitle mb-2 text-muted">{{{get_priority task.priority}}} Priority</br> {{task.priority}}<br/></div>
+                    <div class="col-4 text-center card-subtitle mb-2 text-muted">⌛ Minutes<br/> {{task.minutes}}</div>
+                    <div class="col-4 text-center card-subtitle mb-2 text-muted">⭐ Points<br/> {{task.points}}</div>
+                  </div>
+                  <div class="row my-3">
+                    <div class="col-6 text-center card-subtitle mb-2 text-muted">🐣 Created<br/>{{{timeAgo task.createdAt}}}</div>
+                    {{#if task.due_date}}
+                    <div class="col-6 text-center card-subtitle mb-2 text-muted">🗓️ Due<br/>{{timeAgo task.due_date}}</div>
+                    {{/if}}
+                  </div>
+                  <hr/>
+                  <div class="row">
+                    <div class="col-12">
+                      <p>{{task.body}}</p>
+                    </div>
+                  </div>
+                  <hr/>
+                  <div class="d-flex btn-group">
+                    <a href="#" class="mx-auto m-2 btn btn-outline-success">Completed</a>
+                    <a href="#" class="mx-auto m-2 btn btn-outline-danger">Snooze</a>
+                    <a href="#" class="mx-auto m-2 btn btn-outline-warning">Edit</a>
+                    <a href="#" class="mx-auto m-2 btn btn-outline-primary">Task</a>
+                  </div>
+                  <div class="d-flex "><span class="mx-auto">(these buttons do nothing)</span></div>
+                </div>
+              </div>
+              </div>
+            {{/each}}
+          </div>
         </div>
-        <div class="row my-3">
-          <div class="col-6 text-center card-subtitle mb-2 text-muted">🐣 Created<br/>{{{timeAgo task.createdAt}}}</div>
-          {{#if task.due_date}}
-          <div class="col-6 text-center card-subtitle mb-2 text-muted">🗓️ Due<br/>{{timeAgo task.due_date}}</div>        </div>
-          {{/if}}
-        </div>
-        <hr/>
-        <div class="row">
-          <p>{{task.body}}</p>
-        </div>
-        <hr/>
-        <div class="d-flex btn-group">
-          <a href="#" class="mx-auto m-2 btn btn-outline-success">Completed</a>
-          <a href="#" class="mx-auto m-2 btn btn-outline-danger">Snooze</a>
-          <a href="#" class="mx-auto m-2 btn btn-outline-warning">Edit</a>
-          <a href="#" class="mx-auto m-2 btn btn-outline-primary">Task</a>
-        </div>
-        <div class="d-flex "><span class="mx-auto">(these buttons do nothing)</span></div>
       </div>
     </div>
-  {{/each}}
-</div>
+  </div>

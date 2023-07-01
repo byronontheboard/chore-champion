@@ -35,13 +35,16 @@ border-bottom: 1px solid #e5e5e5;
 box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
 
-/* .card {
-    min-width: 500px;
-    float: left;
+.task-card:hover {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .25);
 }
 
-@media (min-width: 768px) {
-    .card {
-        min-width: 300px;
-    }
-} */
+.custom-gutter {
+    margin-left: -0.5rem;
+    margin-right: -0.5rem;
+}
+
+.custom-gutter > [class^="col-"] {
+padding-left: 0.5rem;
+padding-right: 0.5rem;
+}
