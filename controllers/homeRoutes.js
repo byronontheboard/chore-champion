@@ -120,7 +120,7 @@ router.get('/knockout/:time', async (req, res) => {
         }
       }
       console.log(result);
-      var utilization = ((minutes_sum/time_limit)*100).toFixed(2);
+      var utilization = ((minutes_sum/time_limit)*100).toFixed(1);
       res.render('knockout', {
         time_limit: time_limit,
         utilization,
