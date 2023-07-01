@@ -2,6 +2,13 @@ html {
     overflow: scroll;
 }
 
+body {
+    font-family: 'Koulen', sans-serif;
+}
+.header-text {
+    font-size: 2em;
+    font-weight: 700;
+}
 .chorechampion-text {
     color: white;
 }

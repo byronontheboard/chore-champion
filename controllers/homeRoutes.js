@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Task } = require('../models');
+const { User, Task, NotTask } = require('../models');
 const withAuth = require('../utils/auth');
 const knapsackWithItems = require('../utils/knapsack');
 
@@ -110,27 +110,74 @@ router.get('/knockout/:time', async (req, res) => {
       const result = knapsackWithItems(minutes, points, +time_limit);
 
       let tasks = [];
-      let minutes_sum = 0;
+      let minutesSum = 0;
       for (let i = 0; i < taskFilter.length; i++) {
         for (let j = 0; j < result.selectedItems.length; j++) {
           if (i === result.selectedItems[j]) {
             tasks.push(taskFilter[result.selectedItems[j]]);
-            minutes_sum = minutes_sum + taskFilter[result.selectedItems[j]].minutes;
+            minutesSum = minutesSum + taskFilter[result.selectedItems[j]].minutes;
           }
         }
       }
-      console.log(result);
-      var utilization = ((minutes_sum/time_limit)*100).toFixed(1);
+      var notResult;
+      var notTasks;
+      var notTimeLimit;
+      // This might break things.
+      const notTaskData = await NotTask.findAll({
+        where: {
+          user_id: req.session.user_id
+        },
+        order: [['priority', 'ASC']],
+      });
+      // console.log(notTaskData);
+      if (notTaskData) {
+        let notMinutes = [];
+        let notPoints = [];
+
+        notTimeLimit = +req.params.time -  +minutesSum + .5 * +req.params.time;
+        // console.log(notTimeLimit);
+        const notTaskFilter = notTaskData.map((project) => project.get({ plain: true }));
+
+        notTaskFilter.forEach(item => {
+          notMinutes.push(item.minutes);
+          notPoints.push((1 / item.priority) * item.minutes);
+        });
+        
+        notResult = knapsackWithItems(notMinutes, notPoints, +notTimeLimit);
+
+        if (notResult.selectedItems.length > 0) {
+          notTasks = [];
+          var notMinutesSum = 0;
+          for (let i = 0; i < notTaskFilter.length; i++) {
+            for (let j = 0; j < notResult.selectedItems.length; j++) {
+              if (i === notResult.selectedItems[j]) {
+                notTasks.push(notTaskFilter[notResult.selectedItems[j]]);
+                notMinutesSum = notMinutesSum + notTaskFilter[notResult.selectedItems[j]].minutes;
+              }
+            }
+          }
+        }
+      }
+      //End of breaking things.
+      // console.log(result);
+      var utilization = ((minutesSum/time_limit)*100).toFixed(1);
+      var notUtilization = ((+minutesSum + +notMinutesSum/time_limit)*100).toFixed(1);
+      console.log(notTasks);
+
       res.render('knockout', {
         time_limit: time_limit,
+        notTimeLimit,
         utilization,
-        minutes_sum,
+        notUtilization,
+        minutesSum,
         result,
+        notTasks,
         tasks,
         logged_in: req.session.logged_in,
       });
     } catch (err) {
       res.status(500).json(err);
+      console.log(err);
     }
   } else {
     
