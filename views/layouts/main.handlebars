@@ -7,27 +7,53 @@
   <title>CHORECHAMPION</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
     integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="/css/style.css" />
 </head>
 
 <body>
-  <header class="p-3 text-bg-dark">
-    <div class="container">
-      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-          <img src="/images/chorechampion.svg" style="height:75px" />
-          <span class="fs-4">CHORECHAMPION</span>
-        </a>
-        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+  <header class="p-1 box-shadow">
+    <nav class="navbar w-100 navbar-expand-lg bg-body-tertiary">
+      <div class="ml-auto container-fluid">
+        <img src="/images/chorechampion.svg" style="height:75px" />
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           {{#if logged_in}}
           <li><a href="#" class="btn btn-light px-3 m-1">Home</a></li>
           <li><a href="/browse" class="btn btn-light px-3 m-1">Browse</a></li>
           <li><a href="/knockoutSelect" class="btn btn-light px-3 m-1">Knockout</a></li>
           <li><a href="/task" class="btn btn-light px-3 m-1">Add</a></li>
           {{/if}}
-        </ul>
-
-        <div class="text-end">
+          {{#if logged_in}}
+          <li><a class="btn btn-light px-3 m-1" id="logout">Logout</a></li>
+          {{else}}
+          <li><a class="btn btn-light px-3 m-1" href="/login">Login</a></li>
+          <li><a class="btn btn-light px-3 m-1" href="/create">Create Account</a></li>
+          {{/if}} 
+          </ul>
+        </div>
+      </div>
+    </nav>
+{{!-- 
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+          <img src="/images/chorechampion.svg" style="height:75px" />
+          <span class="fs-4 chorechampion-text">CHORECHAMPION</span>
+        </a>
+        <div class="text-end collapse navbar-collapse">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          {{#if logged_in}}
+          <a href="#" class="btn btn-light px-3 m-1">Home</a>
+          <a href="/browse" class="btn btn-light px-3 m-1">Browse</a>
+          <a href="/knockoutSelect" class="btn btn-light px-3 m-1">Knockout</a>
+          <a href="/task" class="btn btn-light px-3 m-1">Add</a>
+          {{/if}}
           {{#if logged_in}}
           <a class="btn btn-light px-3 m-1" id="logout">Logout</a>
           {{else}}
@@ -36,7 +62,7 @@
           {{/if}}
         </div>
       </div>
-    </div>
+    </div> --}}
   </header>
 
   <!-- TODO: Add a comment describing the functionality of this helper -->

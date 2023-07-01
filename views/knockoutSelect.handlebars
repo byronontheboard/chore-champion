@@ -1,11 +1,38 @@
-<h1>Knock Out Your Tasks</h1>
+<h1>Knock Out Your Chores</h1>
 <form class="task-form">
-  <div class="form-group">
-    <label for="minutes">How many minutes can you spare to spar with these chores?</label>
-    <input type="number" class="w-100" id="minutes" />
+  <div class="row">
+      <div class="col-9 form-group">
+        <label for="minutes m-2 mx-0">How many minutes can you spare to spar with these chores?</label>
+        <input type="number" class="w-100" id="minutes" />
+      </div>
+      <div class="col-3 form-group">
+        <button class="w-100 mx-0 m-3 btn btn-primary" type="submit">Knockout</button>
+      </div>
+
+  </div> 
+  </form> 
+  <div class="d-flex text-center">
+    <span class="mx-auto text-center">or</span>
   </div>
-  <div class="form-group">
-    <button class="w-100 mx-0 m-1 btn btn-primary" type="submit">Knockout</button>
+  <form class="or-form">
+  <div class="row">
+      <div class="col-3 form-group">
+        <label for="hours">Days</label>
+        <input type="number" class="w-100" id="days" />
+      </div>
+      <div class="col-3 form-group">
+        <label for="hours">Hours</label>
+        <input type="number" class="w-100" id="hours" />
+      </div>
+      <div class="col-3 form-group">
+        <label for="or-minutes">Minutes</label>
+        <input type="number" class="w-100" id="or-minutes" />
+      </div>
+      <div class="col-3 form-group">
+        <button class="w-100 mx-0 m-3 btn btn-primary" type="submit">Knockout</button>
+      </div>
   </div>
+  </form>
+ 
 </form>
 <script src="js/knockoutSelect.js"></script>

@@ -54,5 +54,96 @@
     "user_id" : 1,
     "priority" : 4,
     "minutes" : 60
+  },
+  {
+    "title" : "Water Plants",
+    "body" : "...",
+    "user_id" : 1,
+    "priority" : 3,
+    "minutes" : 15
+  },
+  {
+    "title" : "Organize Closet",
+    "body" : "...",
+    "user_id" : 1,
+    "priority" : 2,
+    "minutes" : 90
+  },
+  {
+    "title" : "Pay Bills",
+    "body" : "...",
+    "user_id" : 1,
+    "priority" : 3,
+    "minutes" : 60
+  },
+  {
+    "title" : "Prepare Meals for the Week",
+    "body" : "...",
+    "user_id" : 1,
+    "priority" : 4,
+    "minutes" : 120
+  },
+  {
+    "title" : "Clean Windows",
+    "body" : "...",
+    "user_id" : 1,
+    "priority" : 2,
+    "minutes" : 60
+  },
+  {
+    "title" : "Sort and File Documents",
+    "body" : "...",
+    "user_id" : 1,
+    "priority" : 3,
+    "minutes" : 45
+  },
+  {
+    "title" : "Vacuum the House",
+    "body" : "...",
+    "user_id" : 1,
+    "priority" : 2,
+    "minutes" : 30
+  },
+  {
+    "title" : "Wash Windows",
+    "body" : "...",
+    "user_id" : 1,
+    "priority" : 3,
+    "minutes" : 60
+  },
+  {
+    "title" : "Change Bed Sheets",
+    "body" : "...",
+    "user_id" : 1,
+    "priority" : 2,
+    "minutes" : 15
+  },
+  {
+    "title" : "Clean Bathroom",
+    "body" : "...",
+    "user_id" : 1,
+    "priority" : 2,
+    "minutes" : 45
+  },
+  {
+    "title" : "Sort and Declutter Wardrobe",
+    "body" : "...",
+    "user_id" : 1,
+    "priority" : 3,
+    "minutes" : 60
+  },
+  {
+    "title" : "Take Pets for a Walk",
+    "body" : "...",
+    "user_id" : 1,
+    "priority" : 4,
+    "minutes" : 30
+  },
+  {
+    "title" : "Clean the Garage",
+    "body" : "...",
+    "user_id" : 1,
+    "priority" : 3,
+    "minutes" : 120
   }
 ]

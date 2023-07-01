@@ -91,13 +91,14 @@ router.get('/knockout/:time', async (req, res) => {
         ],
         where: {
           user_id: req.session.user_id
-        }
+        },
+        order: [['priority', 'ASC']],
       });
 
       let minutes = [];
       let points = [];
 
-      const timeLimit = req.params.time;
+      const time_limit = +req.params.time;
 
       const taskFilter = taskData.map((project) => project.get({ plain: true }));
 
@@ -106,21 +107,24 @@ router.get('/knockout/:time', async (req, res) => {
         points.push((1 / item.priority) * item.minutes);
       });
       
-      const result = knapsackWithItems(minutes, points, +timeLimit);
+      const result = knapsackWithItems(minutes, points, +time_limit);
 
       let tasks = [];
-
+      let minutes_sum = 0;
       for (let i = 0; i < taskFilter.length; i++) {
         for (let j = 0; j < result.selectedItems.length; j++) {
           if (i === result.selectedItems[j]) {
-            console.log(i)
             tasks.push(taskFilter[result.selectedItems[j]]);
+            minutes_sum = minutes_sum + taskFilter[result.selectedItems[j]].minutes;
           }
         }
       }
-
+      console.log(result);
+      var utilization = ((minutes_sum/time_limit)*100).toFixed(2);
       res.render('knockout', {
-        time_limit: timeLimit,
+        time_limit: time_limit,
+        utilization,
+        minutes_sum,
         result,
         tasks,
         logged_in: req.session.logged_in,
