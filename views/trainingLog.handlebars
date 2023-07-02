@@ -1,0 +1,73 @@
+<h1>Training Log</h1>
+{{!-- Each stats chart data, or each type of chart we decide to do. --}}
+<div class="row">
+  <div class="col d-flex flex-column justify-content-center">
+    <h2 class="text-center m-3">Completed vs. Not Completed Tasks</h2>
+    <div class="mx-auto mb-4" style="width:250px; height:250px">
+        <canvas id="completed-vs-not-completed"></canvas>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col d-flex flex-column justify-content-center">
+    <h2 class="text-center m-3">Priority Type</h2>
+    <div class="mx-auto mb-4" style="width:250px; height:250px">
+        <canvas id="priority"></canvas>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+var completedVsNotCompleted = document.getElementById('completed-vs-not-completed').getContext('2d');
+var completedVsNotCompletedChart = new Chart(completedVsNotCompleted, {
+    type: 'doughnut',
+    data: {
+        labels: ['Not Completed', 'Completed'],
+        datasets: [{
+            data: [50, 50],
+            backgroundColor: [
+                'white',
+                'green'
+            ],
+            borderColor: [
+                'darkgreen',
+                'darkgreen'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+       
+    }
+});
+
+var priority = document.getElementById('priority').getContext('2d');
+var priorityChart = new Chart(priority, {
+    type: 'doughnut',
+    data: {
+        labels: ['1', '2', '3', 'Other'],
+        datasets: [{
+            data: [5, 5, 5, 15],
+            backgroundColor: [
+                'gold',
+                'silver',
+                '#CD7F32',
+                'white'
+            ],
+            borderColor: [
+                'black',
+                'black',
+                'black',
+                'black'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+       
+    }
+});
+
+</script>

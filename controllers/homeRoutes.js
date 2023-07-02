@@ -53,26 +53,27 @@ router.get('/task', withAuth, (req, res) => {
   }
 });
 
-router.get('/browse', withAuth, async (req, res) => {
-  try {
-    const taskData = await Task.findAll({
-      include: [
-        {
-          model: User
-        }        
-      ]
-    });
+// router.get('/browse', withAuth, async (req, res) => {
+//   try {
+//     const taskData = await Task.findAll({
+//       include: [
+//         {
+//           model: User
+//         }        
+//       ]
+//     });
 
-    const tasks = taskData.map((project) => project.get({ plain: true }));
-    console.log(tasks);
-    res.render('browse', {
-      tasks,
-      logged_in: req.session.logged_in,
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+//     const tasks = taskData.map((project) => project.get({ plain: true }));
+//     console.log(tasks);
+//     res.render('browse', {
+//       tasks,
+//       logged_in: req.session.logged_in,
+//     });
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
+
 router.get('/knockoutSelect', async (req, res) => {
   res.render('knockoutSelect', {
     logged_in: req.session.logged_in,
@@ -188,4 +189,10 @@ router.get('/knockout/:time', async (req, res) => {
   }
 });
 
+
+router.get('/trainingLog', async (req, res) => {
+  res.render('trainingLog', {
+    logged_in: req.session.logged_in,
+  });
+});
 module.exports = router;
