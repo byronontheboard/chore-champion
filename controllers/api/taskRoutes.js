@@ -64,10 +64,17 @@ router.get('/user/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
    try {
+    // var due_date;
+    // if (req.body.due_date = '') {
+    //   due_date = null;
+    // } else {
+    //   due_date = new Date(req.body.due_date);
+    // }
+    // console.log(due_date);
     const newTask = await Task.create({
       title: req.body.title,
       body: req.body.body,
-      due_date: new Date(req.body.due_date),
+      due_date: req.body.due_date,
       priority: req.body.priority,
       points: req.body.points,
       minutes: req.body.minutes,

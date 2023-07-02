@@ -5,7 +5,13 @@ const loginFormHandler = async (event) => {
   // TODO: Add a comment describing the functionality of these expressions
   const title = document.querySelector('#title-task').value.trim();
   const body = document.querySelector('#body-task').value.trim();
-  const due_date = new Date(document.querySelector('#due_date').value);
+  var due_date;
+  if (document.querySelector('#due_date') === '') {
+    due_date = new Date(document.querySelector('#due_date').value);
+  } else {
+    due_date = null;
+  }
+  console.log("due date", due_date);
   const minutes = document.querySelector('#minutes').value;
   const points = document.querySelector('#points').value
   const priority = document.querySelector('#priority').value;

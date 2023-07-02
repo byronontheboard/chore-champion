@@ -12,7 +12,6 @@ router.get('/', withAuth, async (req, res) => {
     });
 
     const users = userData.map((project) => project.get({ plain: true }));
-
     res.render('homepage', {
       users,
       // Pass the logged in flag to the template
@@ -92,7 +91,7 @@ router.get('/knockout/:time', async (req, res) => {
         where: {
           user_id: req.session.user_id
         },
-        order: [['priority', 'ASC']],
+        order: [['priority', 'ASC'], ['points', 'DESC']]
       });
 
       let minutes = [];
@@ -111,11 +110,14 @@ router.get('/knockout/:time', async (req, res) => {
 
       let tasks = [];
       let minutesSum = 0;
+      let pointsSum = 0;
+
       for (let i = 0; i < taskFilter.length; i++) {
         for (let j = 0; j < result.selectedItems.length; j++) {
           if (i === result.selectedItems[j]) {
             tasks.push(taskFilter[result.selectedItems[j]]);
             minutesSum = minutesSum + taskFilter[result.selectedItems[j]].minutes;
+            pointsSum = pointsSum + taskFilter[result.selectedItems[j]].points;
           }
         }
       }
@@ -175,6 +177,7 @@ router.get('/knockout/:time', async (req, res) => {
         utilization,
         notUtilization,
         minutesSum,
+        pointsSum,
         notMinutesSum,
         result,
         notTasks,

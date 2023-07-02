@@ -1,7 +1,7 @@
-<h1 class="text-center">Out of {{time_limit}} Minutes,</h1>
-<h2 class="text-center">We Planned {{tasks.length}} Tasks to Knockout!</h2>
+<h1 class="text-center">We Planned {{minutesSum}} Out of {{time_limit}} Minutes, Worth {{pointsSum}} Points.</h1>
+<h2 class="text-center">Let's Get to Work on These {{tasks.length}} Chores!</h2>
 {{!-- <h1>Points: {{result.maxValue}}</h1> --}}
-<div class="row d-flex progress m-4 mx-auto" style="height: 35px;">
+<div class="row d-flex progress m-4 mx-auto" style="height: 50px;">
   <div class="col-12 fs-3 align-center progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="{{utilization}}" aria-valuemin="0" aria-valuemax="100" style="width: {{utilization}}%;">{{utilization}}% of Time Used</div>
 </div>
 <hr/>
@@ -35,10 +35,10 @@
                   </div>
                   <hr/>
                   <div class="d-flex btn-group">
-                    <a href="#" class="mx-auto m-2 btn btn-primary">Task</a>
-                    <a href="#" class="mx-auto m-2 btn btn-success">Completed</a>
-                    <a href="#" class="mx-auto m-2 btn btn-warning">Edit</a>
-                    <a href="#" class="mx-auto m-2 btn btn-danger">Snooze</a>
+                    <a href="/delegate/{{task.id}}" class="mx-auto m-2 btn btn-primary">Delegate</a>
+                    <a href="/complete/{{task.id}}" class="mx-auto m-2 btn btn-success">Complete</a>
+                    <a href="/edit/{{task.id}}" class="mx-auto m-2 btn btn-warning">Edit</a>
+                    <a href="/snooze/{{task.id}}" class="mx-auto m-2 btn btn-danger">Snooze</a>
                   </div>
                   <div class="d-flex "><span class="mx-auto">(these buttons do nothing)</span></div>
                 </div>
@@ -51,7 +51,7 @@
     </div>
   </div>
 {{#if notTasks}}
-<h1 class="text-center my-3">Finish Early?</h1>
+<h1 class="text-center my-3">Finished Early?</h1>
 {{!-- <div class="row d-flex progress m-4 mx-auto" style="height: 35px;">
   <div class="col-12 fs-3 align-center progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="{{capAt100 notUtilization}}" aria-valuemin="0" aria-valuemax="100" style="width: {{capAt100 notUtilization}}%;">{{notUtilization}}% of Time Used!</div>
 </div> --}}
@@ -83,10 +83,10 @@
                     </div>
                     <hr/>
                     <div class="d-flex btn-group">
-                      <a href="#" class="mx-auto m-2 btn btn-primary">Task</a>
-                      <a href="#" class="mx-auto m-2 btn btn-success">Completed</a>
-                      <a href="#" class="mx-auto m-2 btn btn-warning">Edit</a>
-                      <a href="#" class="mx-auto m-2 btn btn-danger">Snooze</a>
+                      <a href="/delegateNot/{{task.id}}" class="mx-auto m-2 btn btn-primary">Delegate</a>
+                      <a href="/completeNot/{{task.id}}" class="mx-auto m-2 btn btn-success">Complete</a>
+                      <a href="/editNot/{{task.id}}" class="mx-auto m-2 btn btn-warning">Edit</a>
+                      <a href="/snoozeNot/{{task.id}}" class="mx-auto m-2 btn btn-danger">Snooze</a>
                     </div>
                     <div class="d-flex "><span class="mx-auto">(these buttons do nothing)</span></div>
                   </div>
