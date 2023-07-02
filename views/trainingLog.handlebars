@@ -8,7 +8,7 @@
     </div>
   </div>
 </div>
-
+<hr/>
 <div class="row">
   <div class="col d-flex flex-column justify-content-center">
     <h2 class="text-center m-3">Priority Type</h2>
@@ -17,57 +17,31 @@
     </div>
   </div>
 </div>
+<hr/>
+<div class="row">
+  <div class="col d-flex flex-column justify-content-center">
+    <h2 class="text-center m-3">Points</h2>
+    <h3 class="text-center">Total: 9999</h3>
+    <div class="row">
+      <div class="col-sm-6 justify-contents-center">
+        <div class="row">
+          <h4 class="text-center">Points Weekly</h4>  
+        </div>
+        <div class="row w-100 mx-auto mb-4">
+            <canvas id="points-weekly"></canvas>
+        </div>
+      </div>
+      <div class="col-sm-6 justify-contents-center">
+        <div class="row">
+          <h4 class="text-center">Points Daily</h4>  
+        </div>
+        <div class="row w-100 mx-auto mb-4">
+            <canvas id="points-daily"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-var completedVsNotCompleted = document.getElementById('completed-vs-not-completed').getContext('2d');
-var completedVsNotCompletedChart = new Chart(completedVsNotCompleted, {
-    type: 'doughnut',
-    data: {
-        labels: ['Not Completed', 'Completed'],
-        datasets: [{
-            data: [50, 50],
-            backgroundColor: [
-                'white',
-                'green'
-            ],
-            borderColor: [
-                'darkgreen',
-                'darkgreen'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-       
-    }
-});
-
-var priority = document.getElementById('priority').getContext('2d');
-var priorityChart = new Chart(priority, {
-    type: 'doughnut',
-    data: {
-        labels: ['1', '2', '3', 'Other'],
-        datasets: [{
-            data: [5, 5, 5, 15],
-            backgroundColor: [
-                'gold',
-                'silver',
-                '#CD7F32',
-                'white'
-            ],
-            borderColor: [
-                'black',
-                'black',
-                'black',
-                'black'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-       
-    }
-});
-
-</script>
+<script src="/js/trainingLog.js"></script>

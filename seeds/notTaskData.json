@@ -326,5 +326,13 @@
     "priority": 2,
     "minutes": 15,
     "points": 100
+  },
+  {
+    "title": "Train Dogs",
+    "body": "...",
+    "user_id": 1,
+    "priority": 1,
+    "minutes": 5,
+    "points": 500
   }    
 ]
