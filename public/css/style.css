@@ -45,6 +45,7 @@ box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 .task-card:hover {
     box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .25);
     border-color: black;
+    transition: all 0.5s ease-out;
 }
 
 .custom-gutter {
@@ -73,4 +74,10 @@ padding-right: 0.5rem;
 
 input {
     text-align: center;
+}
+
+.btn:hover {
+    font-weight: bold;
+    font-size: 1.1em;
+    transition: all 0.5s ease-out;
 }
