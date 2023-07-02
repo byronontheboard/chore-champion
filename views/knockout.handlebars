@@ -27,7 +27,7 @@
                     <div class="col-6 text-center card-subtitle mb-2 text-muted">🗓️ Due<br/>{{timeAgo task.due_date}}</div>
                     {{/if}}
                   </div>
-                  <hr/>
+                  {{!-- <hr/> --}}
                   <div class="row">
                     <div class="col-12">
                       <p>{{task.body}}</p>
@@ -72,23 +72,22 @@
                       <div class="col-4 text-center card-subtitle mb-2 text-muted">⌛ Minutes<br/> {{notTask.minutes}}</div>
                       <div class="col-4 text-center card-subtitle mb-2 text-muted">⭐ Points<br/> {{notTask.points}}</div>
                     </div>
-                    <div class="row my-3">
+                    {{!-- <div class="row my-3">
                       <div class="col-6 text-center card-subtitle mb-2 text-muted">🐣 Created<br/>{{{timeAgo notTask.createdAt}}}</div>
-                    </div>
-                    <hr/>
+                    </div> --}}
                     <div class="row">
                       <div class="col-12">
                         <p>{{task.body}}</p>
                       </div>
                     </div>
-                    <hr/>
+                    {{!-- <hr/>
                     <div class="d-flex btn-group">
                       <a href="/delegateNot/{{task.id}}" class="mx-auto m-2 btn btn-primary">Delegate</a>
                       <a href="/completeNot/{{task.id}}" class="mx-auto m-2 btn btn-success">Complete</a>
                       <a href="/editNot/{{task.id}}" class="mx-auto m-2 btn btn-warning">Edit</a>
                       <a href="/snoozeNot/{{task.id}}" class="mx-auto m-2 btn btn-danger">Snooze</a>
                     </div>
-                    <div class="d-flex "><span class="mx-auto">(these buttons do nothing)</span></div>
+                    <div class="d-flex "><span class="mx-auto">(these buttons do nothing)</span></div> --}}
                   </div>
                 </div>
                 </div>

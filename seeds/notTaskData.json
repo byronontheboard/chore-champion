@@ -4,286 +4,327 @@
     "body" : "...",
     "user_id" : 1,
     "priority" : 2,
-    "minutes" : 60
+    "minutes" : 60,
+    "points": 50
   },
   {
     "title" : "Paint",
     "body" : "...",
     "user_id" : 1,
     "priority" : 2,
-    "minutes" : 20
+    "minutes" : 20,
+    "points": 50
   },
   {
     "title" : "Scuplt",
     "body" : "...",
     "user_id" : 1,
     "priority" : 5,
-    "minutes" : 600
+    "minutes" : 600,
+    "points": 250
   },
   {
     "title" : "Hike",
     "body" : "...",
     "user_id" : 1,
     "priority" : 3,
-    "minutes" : 300
+    "minutes" : 300,
+    "points": 250
   },
   {
     "title" : "Go for a Brief Walk",
     "body" : "...",
     "user_id" : 1,
     "priority" : 1,
-    "minutes" : 10
+    "minutes" : 10,
+    "points": 150
   },
   {
     "title" : "Read a Book",
     "body" : "...",
     "user_id" : 1,
     "priority" : 4,
-    "minutes" : 120
+    "minutes" : 120,
+    "points": 250
   },
   {
     "title" : "Write a Poem",
     "body" : "...",
     "user_id" : 1,
     "priority" : 3,
-    "minutes" : 45
+    "minutes" : 45,
+    "points": 250
   },
   {
     "title" : "Cook a Meal",
     "body" : "...",
     "user_id" : 1,
     "priority" : 2,
-    "minutes" : 90
+    "minutes" : 90,
+    "points": 100
   },
   {
     "title" : "Play a Musical Instrument",
     "body" : "...",
     "user_id" : 1,
     "priority" : 3,
-    "minutes" : 60
+    "minutes" : 60,
+    "points": 150
   },
   {
     "title" : "Dance",
     "body" : "...",
     "user_id" : 1,
     "priority" : 2,
-    "minutes" : 40
+    "minutes" : 15,
+    "points": 150
   },
   {
     "title" : "Watch a Movie",
     "body" : "...",
     "user_id" : 1,
     "priority" : 1,
-    "minutes" : 120
+    "minutes" : 120,
+    "points": 50
   },
   {
     "title" : "Play Video Games",
     "body" : "...",
     "user_id" : 1,
     "priority" : 2,
-    "minutes" : 60
+    "minutes" : 60,
+    "points": 50
   },
   {
     "title" : "Do Yoga",
     "body" : "...",
     "user_id" : 1,
     "priority" : 4,
-    "minutes" : 30
+    "minutes" : 30,
+    "points": 150
   },
   {
     "title" : "Meditate",
     "body" : "...",
     "user_id" : 1,
     "priority" : 3,
-    "minutes" : 20
+    "minutes" : 20,
+    "points": 150
   },
   {
     "title" : "Go for a Run",
     "body" : "...",
     "user_id" : 1,
     "priority" : 2,
-    "minutes" : 45
+    "minutes" : 45,
+    "points": 250
   },
   {
     "title" : "Play Chess",
     "body" : "...",
     "user_id" : 1,
     "priority" : 3,
-    "minutes" : 60
+    "minutes" : 60,
+    "points": 150
   },
   {
     "title" : "Solve Puzzles",
     "body" : "...",
     "user_id" : 1,
     "priority" : 2,
-    "minutes" : 30
+    "minutes" : 30,
+    "points": 150
   },
   {
     "title" : "Write in a Journal",
     "body" : "...",
     "user_id" : 1,
     "priority" : 4,
-    "minutes" : 20
+    "minutes" : 20,
+    "points": 150
   },
   {
     "title" : "Take Photographs",
     "body" : "...",
     "user_id" : 1,
     "priority" : 3,
-    "minutes" : 60
+    "minutes" : 60,
+    "points": 150
   },
   {
     "title" : "Learn a New Language",
     "body" : "...",
     "user_id" : 1,
     "priority" : 4,
-    "minutes" : 60
+    "minutes" : 60,
+    "points": 250
   },
   {
     "title" : "Garden",
     "body" : "...",
     "user_id" : 1,
     "priority" : 2,
-    "minutes" : 90
+    "minutes" : 90,
+    "points": 200
   },
   {
     "title": "Sketch",
     "body": "...",
     "user_id": 1,
     "priority": 2,
-    "minutes": 10
+    "minutes": 10,
+    "points": 50
   },
   {
     "title": "Color",
     "body": "...",
     "user_id": 1,
     "priority": 2,
-    "minutes": 15
+    "minutes": 15,
+    "points": 150
   },
   {
     "title": "Make a Paper Airplane",
     "body": "...",
     "user_id": 1,
     "priority": 3,
-    "minutes": 5
+    "minutes": 5,
+    "points": 25
   },
   {
     "title": "Take a Short Nature Walk",
     "body": "...",
     "user_id": 1,
     "priority": 1,
-    "minutes": 15
+    "minutes": 15,
+    "points": 200
   },
   {
     "title": "Listen to a Podcast Episode",
     "body": "...",
     "user_id": 1,
     "priority": 4,
-    "minutes": 10
+    "minutes": 10,
+    "points": 150
   },
   {
     "title": "Write a Short Story",
     "body": "...",
     "user_id": 1,
     "priority": 3,
-    "minutes": 15
+    "minutes": 15,
+    "points": 200
   },
   {
     "title": "Prepare a Quick Snack",
     "body": "...",
     "user_id": 1,
     "priority": 2,
-    "minutes": 10
+    "minutes": 10,
+    "points": 100
   },
   {
     "title": "Play a Few Chords on a Guitar",
     "body": "...",
     "user_id": 1,
     "priority": 3,
-    "minutes": 10
+    "minutes": 10,
+    "points": 100
   },
   {
     "title": "Learn a Basic Dance Routine",
     "body": "...",
     "user_id": 1,
     "priority": 2,
-    "minutes": 15
+    "minutes": 15,
+    "points": 100
   },
   {
     "title": "Watch a Short Film",
     "body": "...",
     "user_id": 1,
     "priority": 1,
-    "minutes": 15
+    "minutes": 15,
+    "points": 75
   },
   {
     "title": "Play a Mobile Game",
     "body": "...",
     "user_id": 1,
     "priority": 2,
-    "minutes": 10
+    "minutes": 10,
+    "points": 25
   },
   {
     "title": "Do a Quick Stretching Routine",
     "body": "...",
     "user_id": 1,
     "priority": 4,
-    "minutes": 10
+    "minutes": 10,
+    "points": 50
   },
   {
     "title": "Practice Deep Breathing",
     "body": "...",
     "user_id": 1,
     "priority": 3,
-    "minutes": 5
+    "minutes": 5,
+    "points": 100
   },
   {
     "title": "Run in Place",
     "body": "...",
     "user_id": 1,
     "priority": 2,
-    "minutes": 10
+    "minutes": 10,
+    "points": 100
   },
   {
     "title": "Play a Quick Game of Checkers",
     "body": "...",
     "user_id": 1,
     "priority": 3,
-    "minutes": 15
+    "minutes": 15,
+    "points": 100
   },
   {
     "title": "Solve a Sudoku Puzzle",
     "body": "...",
     "user_id": 1,
     "priority": 2,
-    "minutes": 15
+    "minutes": 15,
+    "points": 100
   },
   {
     "title": "Write a Journal Entry",
     "body": "...",
     "user_id": 1,
     "priority": 4,
-    "minutes": 10
+    "minutes": 10,
+    "points": 100
   },
   {
     "title": "Capture Close-up Photos",
     "body": "...",
     "user_id": 1,
     "priority": 3,
-    "minutes": 15
+    "minutes": 15,
+    "points": 100
   },
   {
     "title": "Learn Basic Phrases in a New Language",
     "body": "...",
     "user_id": 1,
     "priority": 4,
-    "minutes": 15
+    "minutes": 15,
+    "points": 100
   },
   {
     "title": "Tend to Indoor Plants",
     "body": "...",
     "user_id": 1,
     "priority": 2,
-    "minutes": 15
+    "minutes": 15,
+    "points": 100
   }    
 ]
