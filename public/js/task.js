@@ -7,9 +7,9 @@ const loginFormHandler = async (event) => {
   const body = document.querySelector('#body-task').value.trim();
   var due_date;
   if (document.querySelector('#due_date') === '') {
-    due_date = new Date(document.querySelector('#due_date').value);
-  } else {
     due_date = null;
+  } else {
+    due_date = new Date(document.querySelector('#due_date').value);
   }
   console.log("due date", due_date);
   const minutes = document.querySelector('#minutes').value;

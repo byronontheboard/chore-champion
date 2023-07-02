@@ -9,7 +9,7 @@
   },
   {
     "title" : "Do Dishes",
-    "         " : "...",
+    "body" : "...",
     "user_id" : 1,
     "priority" : 2,
     "minutes" : 20,

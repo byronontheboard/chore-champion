@@ -8,6 +8,8 @@ body {
 .header-text {
     font-size: 2em;
     font-weight: 700;
+    text-shadow: 1px 1px 1px #919191,
+        1px 2px 5px #919191;
 }
 .chorechampion-text {
     color: white;
@@ -45,6 +47,7 @@ box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 .task-card:hover {
     box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .25);
     border-color: black;
+    transform: scale(1.01); 
     transition: all 0.5s ease-out;
 }
 
@@ -58,7 +61,7 @@ padding-left: 0.5rem;
 padding-right: 0.5rem;
 }
 
-.card-title {
+hr{
     text-shadow: 0 .25rem .75rem rgba(0, 0, 0, .25);
 }
 .btn-warning {
@@ -80,4 +83,79 @@ input {
     font-weight: 400;
     /* font-size: 1.1em; */
     transition: all 0.5s ease-out;
+}
+
+.slide-in:hover {
+    animation: slide-in-animation 1s linear infinite alternate;
+}
+
+@keyframes slide-in-animation {
+    0% {
+        transform: translateY(3px);
+    }
+    100% {
+        transform: translateY(-3px);
+    }
+    /* 75% {
+        transform: rotate(30deg);
+    }
+    87.5% {
+        transform: rotate(-60deg);
+    }
+    100% {
+        transform: rotate(30deg);
+    } */
+}
+
+.jump-in:hover {
+    animation: jump-in-animation 1s linear infinite alternate;
+}
+
+@keyframes jump-in-animation {
+    0% {
+        transform: translateY(-3px);
+    }
+    50% {
+        transform: translateY(3px);
+    }
+    75% {
+        transform: rotate(15deg);
+    }
+    87.5% {
+        transform: rotate(-30deg);
+    }
+    100% {
+        transform: rotate(15deg);
+    }
+}
+
+.flip:hover {
+    rotate: 360deg;
+    transition: all .5s;
+}
+
+.fade-in {
+    opacity: 1;
+}
+
+.fade-in:hover {
+    rotate: 360deg;
+    animation: fade 2s linear infinite alternate;
+}
+
+@keyframes fade {
+    0% { opacity: .5}
+    50% { opacity: 1; transform: scale(1.25);  }
+    100% { opacity: .5}
+}
+
+.spin:hover {
+    animation: rock 2s linear infinite alternate;
+}
+
+@keyframes rock {
+    0%   {rotate: 30deg;}
+    25%  {rotate: -45deg;}
+    50%  {rotate: 60deg;}
+    100% {rotate: -60deg;}
 }

@@ -126,20 +126,15 @@ router.get('/knockout/:time', async (req, res) => {
       var notTimeLimit;
       // This might break things.
       const notTaskData = await NotTask.findAll({
-        // where: {
-        //   user_id: req.session.user_id
-        // },
         order: [['priority', 'ASC']],
       });
-      // console.log(notTaskData);
+      console.log(notTaskData);
       var notResult;
       let notMinutes = [];
       let notPoints = [];
       var notMinutesSum = 0;
       if (notTaskData) {
-
         notTimeLimit = (+req.params.time - +minutesSum) + (.5 * +req.params.time);
-        // console.log(notTimeLimit);
         const notTaskFilter = notTaskData.map((project) => project.get({ plain: true }));
 
         notTaskFilter.forEach(item => {

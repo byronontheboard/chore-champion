@@ -17,14 +17,14 @@
                   <h3 class="mb-3 card-title text-center w-100">{{task.title}}</h3>
                   <hr/>
                   <div class="row">
-                    <div class="col-4 text-center card-subtitle mb-2 text-muted">{{{get_priority task.priority}}} Priority</br> {{task.priority}}<br/></div>
-                    <div class="col-4 text-center card-subtitle mb-2 text-muted">⌛ Minutes<br/> {{task.minutes}}</div>
-                    <div class="col-4 text-center card-subtitle mb-2 text-muted">⭐ Points<br/> {{task.points}}</div>
+                    <div class="col-4 text-center card-subtitle mb-2 text-muted"><div class="slide-in">{{{get_priority task.priority}}}</div>Priority</br>{{task.priority}}<br/></div>
+                    <div class="col-4 text-center card-subtitle mb-2 text-muted"><div class="flip">⌛</div>Minutes</br>{{task.minutes}}</div>
+                    <div class="col-4 text-center card-subtitle mb-2 text-muted"><div class="spin">⭐</div>Points</br>{{task.points}}</div>
                   </div>
                   <div class="row my-3">
-                    <div class="col-6 text-center card-subtitle mb-2 text-muted">🐣 Created<br/>{{{timeAgo task.createdAt}}}</div>
+                    <div class="col-6 text-center card-subtitle mb-2 text-muted"><div class="jump-in">🐣</div>Created<br/>{{{timeAgo task.createdAt}}}</div>
                     {{#if task.due_date}}
-                    <div class="col-6 text-center card-subtitle mb-2 text-muted">🗓️ Due<br/>{{timeAgo task.due_date}}</div>
+                    <div class="col-6 text-center card-subtitle mb-2 text-muted"><div class="fade-in">🗓️</div>Due<br/>{{timeAgo task.due_date}}</div>
                     {{/if}}
                   </div>
                   {{!-- <hr/> --}}
@@ -50,6 +50,7 @@
       </div>
     </div>
   </div>
+  {{log notTasks}}
 {{#if notTasks}}
 <h1 class="text-center my-3">Finished Early?</h1>
 {{!-- <div class="row d-flex progress m-4 mx-auto" style="height: 35px;">
@@ -68,9 +69,9 @@
                     <h3 class="mb-3 card-title text-center w-100">{{notTask.title}}</h3>
                     <hr/>
                     <div class="row">
-                      <div class="col-4 text-center card-subtitle mb-2 text-muted">{{{get_priority notTask.priority}}} Priority</br> {{notTask.priority}}<br/></div>
-                      <div class="col-4 text-center card-subtitle mb-2 text-muted">⌛ Minutes<br/> {{notTask.minutes}}</div>
-                      <div class="col-4 text-center card-subtitle mb-2 text-muted">⭐ Points<br/> {{notTask.points}}</div>
+                    <div class="col-4 text-center card-subtitle mb-2 text-muted"><div class="slide-in">{{{get_priority notTask.priority}}}</div>Priority</br>{{task.priority}}<br/></div>
+                    <div class="col-4 text-center card-subtitle mb-2 text-muted"><div class="flip">⌛</div>Minutes</br>{{notTask.minutes}}</div>
+                    <div class="col-4 text-center card-subtitle mb-2 text-muted"><div class="spin">⭐</div>Points</br>{{notTask.points}}</div>
                     </div>
                     {{!-- <div class="row my-3">
                       <div class="col-6 text-center card-subtitle mb-2 text-muted">🐣 Created<br/>{{{timeAgo notTask.createdAt}}}</div>
