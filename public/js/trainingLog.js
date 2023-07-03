@@ -56,7 +56,7 @@ var minutesChart = new Chart(minutes, {
     data: {
         labels: [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
         datasets: [{
-            data: [4087, 8786, 17079, 2315, 30983, 39465, 54211, 67334, 80324, 91283, 100075, 101071],
+            data: [4087, 8786, 17079, 2315, 30983, 39465, 45213, 67334, 80324, 91283, 100075, 101071],
             backgroundColor: [
                 'black'
             ],

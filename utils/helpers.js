@@ -3,20 +3,16 @@ const fs = require('fs');
 module.exports = {
   get_priority: (priority) => {
     var priority_icon;
-    switch (priority) {
-      case 1:
-         priority_icon = "🥇";
-        break;
-      case 2:
-         priority_icon = "🥈";
-         break;
-      // …
-      case 3:
-        priority_icon = "🥉";
-        break;
-      default:
-        priority_icon = "🎖️";
-       break;
+    if (priority <= 0) {
+      priority_icon = "🧠";
+    } else if (priority === 1) {
+      priority_icon = "🥇";
+    } else if (priority === 2) {
+      priority_icon = "🥈";
+    } else if (priority === 3) {
+      priority_icon = "🥉";
+    } else {
+      priority_icon = "🎖️";
     }
     return `<span for="img" aria-label="medal">${priority_icon}</span>`;
   },

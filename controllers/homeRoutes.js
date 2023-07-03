@@ -94,7 +94,7 @@ router.get('/knockout/:time', async (req, res) => {
         },
         order: [['priority', 'ASC'], ['points', 'DESC']]
       });
-
+      
       let minutes = [];
       let points = [];
 
@@ -104,7 +104,7 @@ router.get('/knockout/:time', async (req, res) => {
 
       taskFilter.forEach(item => {
         minutes.push(item.minutes);
-        points.push((1 / item.priority) * item.minutes);
+        points.push(item.points);
       });
       
       const result = knapsackWithItems(minutes, points, +time_limit);
@@ -140,7 +140,7 @@ router.get('/knockout/:time', async (req, res) => {
 
         notTaskFilter.forEach(item => {
           notMinutes.push(item.minutes);
-          notPoints.push((1 / item.priority) * item.minutes);
+          notPoints.push(item.points);
         });
         
         notResult = knapsackWithItems(notMinutes, notPoints, +notTimeLimit);
