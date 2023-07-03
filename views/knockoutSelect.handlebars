@@ -1,41 +1,40 @@
 <h1>Knock Out Your Chores!</h1>
 <form class="task-form">
-  <div class="row">
-      <div class="col-6 form-group">
-        <label for="minutes m-2 mx-0">How many minutes can you spare to spar with these chores?</label>
-        <input type="number" placeholder="15" value="15" class="fs-1 w-100" id="minutes" />
+  <div class="d-flex text-center row">
+      <div class="col-sm-6 form-group align-items-center">
+        <label class="text-center" for="minutes m-2 mx-0">How many minutes can you spare to spar with these chores?</label>
+        <input type="number" style="border: 0px" onClick="this.select();" placeholder="15" value="15" class="fs-4 w-100" id="minutes" />
       </div>
-      <div class="col-6 form-group">
-        <button class="w-50 mx-0 mt-4 btn btn-success" type="submit">Knock Out</button>
+      <div class="col-sm-6 form-group">
+        <button class="w-100 mx-0 mt-4 btn btn-success knock-out" type="submit">Knock Out</button>
       </div>
   </div> 
   </form> 
-  <div class="d-flex row text-center my-4">
-    <div class="col-6">
+  <div class="d-flex row text-center mt-3">
+    <div class="col-sm-6">
+      <hr/>
       <h3 class="mx-auto  text-center card-title">or</h3>
+      <hr/>
     </div>
   </div>
   <form class="or-form">
-    <div class="row">
-      <h2>Dial it in!</h2>
+    <div class="d-flex text-center row">
+        <div class="col-sm-2 form-group">
+          <label class="text-center time-delimiter-label" for="hours">Days</label>
+          <input type="number" style="border: 0px;" onClick="this.select();" value="0" class="time-delimiter-adjust w-100 fs-4" id="days" />
+        </div>
+        <div class="col-sm-2 form-group">
+          <label class="text-center time-delimiter-label" for="hours">Hours</label>
+          <input type="number" style="border: 0px" onClick="this.select();" value="1" class="time-delimiter-adjust w-100 fs-4" id="hours" />
+        </div>
+        <div class="col-sm-2 form-group">
+          <label class="text-center time-delimiter-label" for="or-minutes">Minutes</label>
+          <input type="number" style="border: 0px" onClick="this.select();" step=15 value="30" class="time-delimiter-adjust w-100 fs-4" id="or-minutes" />
+        </div>
+        <div class="col-sm-6 form-group">
+          <button class="w-100 mx-0 mt-4 btn btn-success knock-out" type="submit">Knockout</button>
+        </div>
     </div>
-  <div class="row my-2">
-      <div class="col-2 form-group">
-        <label for="hours">Days</label>
-        <input type="number" value="0" class="w-100 fs-2" id="days" />
-      </div>
-      <div class="col-2 form-group">
-        <label for="hours">Hours</label>
-        <input type="number" value="1" class="w-100 fs-2" id="hours" />
-      </div>
-      <div class="col-2 form-group">
-        <label for="or-minutes">Minutes</label>
-        <input type="number" value="30" class="w-100 fs-2" id="or-minutes" />
-      </div>
-      <div class="col-6 form-group">
-        <button class="w-50 mx-0 mt-4 btn btn-success" type="submit">Knockout</button>
-      </div>
-  </div>
   </form>
  
 </form>

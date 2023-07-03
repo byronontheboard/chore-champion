@@ -159,3 +159,30 @@ input {
     50%  {rotate: 60deg;}
     100% {rotate: -60deg;}
 }
+
+.knock-out:hover {
+    animation: knock-out-animation 1s linear infinite alternate;
+}
+
+@keyframes knock-out-animation {
+    0%   {rotate: .1deg; transform: scale(1.01);}
+    50%  {rotate: -.1deg; transform: scale(1.03);}
+    100%  {rotate: .1deg; transform: scale(1.03);}
+}
+
+.time-delimiter-adjust {
+    margin-left: .25em;
+    user-select: all;
+}
+
+@media screen and (max-width: 768px) {
+    .time-delimiter-adjust {
+        margin-left: .005em;
+    }
+    
+}
+
+::selection {
+    color: white;
+    background: darkgreen;
+  }

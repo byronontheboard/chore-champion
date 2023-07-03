@@ -118,14 +118,37 @@ var pointsYearChart = new Chart(pointsYear, {
     data: {
         labels: [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
         datasets: [{
-            data: [9456, 12659, 10675, 11352, 9575, 11023, 9002, 10214, 12012, 13234, 12021, 8105],
+            data: [10456, 12659, 10675, 11352, 9575, 11023, 9002, 10214, 12012, 13234, 12021, 11105],
             backgroundColor: [
-                'white',
+                'white'
             ],
             borderColor: [
-                'black',
-                'black',
-                'black',
+                'black'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        plugins: {
+            legend: {
+                display: false
+            },
+        }
+    }
+});
+
+
+var minutes = document.getElementById('minutes').getContext('2d');
+var minutesChart = new Chart(minutes, {
+    type: 'line',
+    data: {
+        labels: [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+        datasets: [{
+            data: [4087, 8786, 17079, 2315, 30983, 39465, 54211, 67334, 80324, 91283, 100075, 101071],
+            backgroundColor: [
+                'white'
+            ],
+            borderColor: [
                 'black'
             ],
             borderWidth: 1
