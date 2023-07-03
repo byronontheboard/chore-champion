@@ -4,7 +4,7 @@ var completedVsNotCompletedChart = new Chart(completedVsNotCompleted, {
     data: {
         labels: ['Not Completed', 'Completed'],
         datasets: [{
-            data: [50, 50],
+            data: [1, 99],
             backgroundColor: [
                 'white',
                 'green'
@@ -48,6 +48,38 @@ var priorityChart = new Chart(priority, {
     }
 });
 
+
+
+var minutes = document.getElementById('minutes').getContext('2d');
+var minutesChart = new Chart(minutes, {
+    type: 'line',
+    data: {
+        labels: [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+        datasets: [{
+            data: [4087, 8786, 17079, 2315, 30983, 39465, 54211, 67334, 80324, 91283, 100075, 101071],
+            backgroundColor: [
+                'black'
+            ],
+            borderColor: [
+                'black'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        plugins: {
+            legend: {
+                display: false
+            },
+        },
+        elements: {
+            line: {
+                tension : 0.4  // smooth lines
+            },
+        }
+    }
+});
+
 var pointsWeekly = document.getElementById('points-weekly').getContext('2d');
 var pointsWeeklyChart = new Chart(pointsWeekly, {
  type: 'line',
@@ -76,7 +108,12 @@ var pointsWeeklyChart = new Chart(pointsWeekly, {
             legend: {
                 display: false
             },
-        }
+        },
+        elements: {
+            line: {
+                tension : 0.4  // smooth lines
+            },
+        },
     }
 });
 
@@ -95,9 +132,6 @@ var pointsDailyChart = new Chart(pointsDaily, {
                 'red'
             ],
             borderColor: [
-                'black',
-                'black',
-                'black',
                 'black'
             ],
             borderWidth: 1
@@ -108,7 +142,12 @@ var pointsDailyChart = new Chart(pointsDaily, {
             legend: {
                 display: false
             },
-        }
+        },
+        elements: {
+            line: {
+                tension : 0.4  // smooth lines
+            },
+        },
     }
 });
 
@@ -120,7 +159,7 @@ var pointsYearChart = new Chart(pointsYear, {
         datasets: [{
             data: [10456, 12659, 10675, 11352, 9575, 11023, 9002, 10214, 12012, 13234, 12021, 11105],
             backgroundColor: [
-                'white'
+                'black'
             ],
             borderColor: [
                 'black'
@@ -133,32 +172,11 @@ var pointsYearChart = new Chart(pointsYear, {
             legend: {
                 display: false
             },
-        }
-    }
-});
-
-
-var minutes = document.getElementById('minutes').getContext('2d');
-var minutesChart = new Chart(minutes, {
-    type: 'line',
-    data: {
-        labels: [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-        datasets: [{
-            data: [4087, 8786, 17079, 2315, 30983, 39465, 54211, 67334, 80324, 91283, 100075, 101071],
-            backgroundColor: [
-                'white'
-            ],
-            borderColor: [
-                'black'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        plugins: {
-            legend: {
-                display: false
+        },
+        elements: {
+            line: {
+                tension : 0.4  // smooth lines
             },
-        }
+        },  
     }
 });
