@@ -172,7 +172,7 @@ input {
 
 @keyframes due-animate-animation {
     0% { opacity: .5}
-    50% { opacity: 1; transform: scale(1.25);  }
+    50% { opacity: 1; transform: scale(1.1);  }
     100% { opacity: .5; text-shadow: 0 .25rem .75rem rgba(0, 0, 0, .25); }
 }
 
@@ -201,4 +201,27 @@ input {
 ::selection {
     color: white;
     background: darkgreen;
-  }
+}
+
+.start-timer {
+    position: relative;
+}
+
+.start-timer-progress {
+    position: absolute;
+    height: 100%;
+    width: 0%;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, .1);
+    animation: progress-bar-animation 1s linear;
+}
+
+@keyframes progress-bar-animation {
+    0%   {opacity: 0;}
+    100%  {opacity: 1;}
+}
+
+.start-timer-text {
+    position: relative;
+}

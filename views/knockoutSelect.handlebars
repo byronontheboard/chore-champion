@@ -1,39 +1,40 @@
-<h1>Knock Out Your Chores!</h1>
-<form class="task-form">
+<h1 class="text-center">Knock Out Your Tasks</h1>
+<h2 class="text-center">We'll Optimize Them For You!</h2>
+<h4 class="text-center">How many minutes can you spare to spar?</h4>
+{{!-- <form class="task-form">
   <div class="d-flex text-center row">
-      <div class="col-sm-6 form-group align-items-center">
+      <div class="col-12 form-group align-items-center">
         <label class="text-center" for="minutes m-2 mx-0">How many minutes can you spare to spar with these chores?</label>
         <input type="number" style="border: 0px" onClick="this.select();" placeholder="15" value="15" class="fs-4 w-100" id="minutes" />
-      </div>
-      <div class="col-sm-6 form-group">
         <button class="w-100 mx-0 mt-4 btn btn-success knock-out" type="submit">Knock Out</button>
       </div>
+
   </div> 
-  </form> 
-  <div class="d-flex row text-center mt-3">
-    <div class="col-sm-6">
+  </form>  --}}
+  {{!-- <div class="d-flex row text-center mt-3">
+    <div class="col-12">
       <hr/>
       <h3 class="mx-auto  text-center card-title">or</h3>
       <hr/>
     </div>
-  </div>
+  </div> --}}
   <form class="or-form">
     <div class="d-flex text-center row">
-        <div class="col-sm-2 form-group">
-          <label class="text-center time-delimiter-label" for="hours">Days</label>
+        <div class="col-sm-4 form-group">
+          <label class="text-center time-delimiter-label" for="hours">Days (8 Hour)</label>
           <input type="number" style="border: 0px;" onClick="this.select();" value="0" class="time-delimiter-adjust w-100 fs-4" id="days" />
         </div>
-        <div class="col-sm-2 form-group">
+        <div class="col-sm-4 form-group">
           <label class="text-center time-delimiter-label" for="hours">Hours</label>
-          <input type="number" style="border: 0px" onClick="this.select();" value="1" class="time-delimiter-adjust w-100 fs-4" id="hours" />
+          <input type="number" style="border: 0px" onClick="this.select();" value="0" class="time-delimiter-adjust w-100 fs-4" id="hours" />
         </div>
-        <div class="col-sm-2 form-group">
+        <div class="col-sm-4 form-group">
           <label class="text-center time-delimiter-label" for="or-minutes">Minutes</label>
           <input type="number" style="border: 0px" onClick="this.select();" step=15 value="30" class="time-delimiter-adjust w-100 fs-4" id="or-minutes" />
         </div>
-        <div class="col-sm-6 form-group">
-          <button class="w-100 mx-0 mt-4 btn btn-success knock-out" type="submit">Knockout</button>
-        </div>
+    </div>
+    <div class="row">
+        <button class="w-100 mx-0 mt-4 btn btn-success knock-out" type="submit">Knockout</button>
     </div>
   </form>
  
