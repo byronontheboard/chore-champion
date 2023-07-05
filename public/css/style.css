@@ -90,102 +90,6 @@ input {
     transition: all 0.5s ease-out;
 }
 
-.priority-animate:hover {
-    animation: priority-animate-animation 1s linear infinite alternate;
-    cursor: pointer;
-}
-
-@keyframes priority-animate-animation {
-    0% {
-        transform: translateY(3px);
-    }
-    100% {
-        transform: translateY(-3px);
-    }
-}
-
-.minutes-animate:hover {
-    animation: minutes-animate-animation 1s linear infinite alternate;
-}
-
-@keyframes minutes-animate-animation {
-    0% {
-        transform: rotate(195deg);
-    }
-    50% {
-        transform: rotate(-25deg);
-    }
-    75% {
-        transform: rotate(10deg);
-    }
-    87.5% {
-        transform: rotate(5deg);
-    }
-    100% {
-        transform: rotate(-5deg);
-    }
-}
-
-.points-animate:hover {
-    animation: points-animate-animation 1s linear infinite alternate .25s;
-    cursor: pointer;
-}
-
-@keyframes points-animate-animation {
-    0% {
-        transform: translateY(-15px);
-        opacity: 0;
-    }
-    100% {
-        transform: rotate(-1280deg);
-        opacity: 1;
-    }
-}
-
-.created-animate:hover {
-    animation: created-animate-animation 1s linear infinite alternate;
-    cursor: pointer;
-}
-
-@keyframes created-animate-animation {
-    0% {
-        transform: translateY(-3px);
-    }
-    50% {
-        transform: translateY(3px);
-    }
-    75% {
-        transform: rotate(15deg);
-    }
-    87.5% {
-        transform: rotate(-30deg);
-    }
-    100% {
-        transform: rotate(15deg);
-    }
-}
-
-.due-animate:hover {
-    animation: due-animate-animation 2s linear infinite alternate;
-    cursor: pointer;
-}
-
-@keyframes due-animate-animation {
-    0% { opacity: .5}
-    50% { opacity: 1; transform: scale(1.1);  }
-    100% { opacity: .5; text-shadow: 0 .25rem .75rem rgba(0, 0, 0, .25); }
-}
-
-.knock-out:hover {
-    animation: knock-out-animation 1s linear infinite alternate;
-}
-
-@keyframes knock-out-animation {
-    0%   {rotate: .1deg; transform: scale(1.01);}
-    50%  {rotate: -.1deg; transform: scale(1.03);}
-    100%  {rotate: .1deg; transform: scale(1.03);}
-}
-
 .time-delimiter-adjust {
     margin-left: .25em;
     user-select: all;
@@ -213,15 +117,119 @@ input {
     width: 0%;
     top: 0;
     left: 0;
-    background-color: rgba(0, 0, 0, .1);
-    animation: progress-bar-animation 1s linear;
-}
-
-@keyframes progress-bar-animation {
-    0%   {opacity: 0;}
-    100%  {opacity: 1;}
+    background-color: rgba(0, 0, 0, .251);
+    transition: width .1s;
+    border-radius: .1em;
 }
 
 .start-timer-text {
     position: relative;
 }
+
+/* Explicitly stop all animation if the user has recued motion set up. */
+
+@media (prefers-reduced-motion: ) {
+    * {
+        animation: none !important;
+     
+     }
+}
+
+/* Animations, if the user is cool with that. */
+@media (prefers-reduced-motion: no-preference) {
+    .priority-animate:hover {
+        animation: priority-animate-animation 1s linear infinite alternate;
+        cursor: pointer;
+    }
+    
+    @keyframes priority-animate-animation {
+        0% {
+            transform: translateY(3px);
+        }
+        100% {
+            transform: translateY(-3px);
+        }
+    }
+    
+    .minutes-animate:hover {
+        animation: minutes-animate-animation 1s linear infinite alternate;
+    }
+    
+    @keyframes minutes-animate-animation {
+        0% {
+            transform: rotate(195deg);
+        }
+        50% {
+            transform: rotate(-25deg);
+        }
+        75% {
+            transform: rotate(10deg);
+        }
+        87.5% {
+            transform: rotate(5deg);
+        }
+        100% {
+            transform: rotate(-5deg);
+        }
+    }
+    
+    .points-animate:hover {
+        animation: points-animate-animation 1s linear infinite alternate .25s;
+        cursor: pointer;
+    }
+    
+    @keyframes points-animate-animation {
+        0% {
+            transform: translateY(-15px);
+            opacity: 0;
+        }
+        100% {
+            transform: rotate(-1280deg);
+            opacity: 1;
+        }
+    }
+    
+    .created-animate:hover {
+        animation: created-animate-animation 1s linear infinite alternate;
+        cursor: pointer;
+    }
+    
+    @keyframes created-animate-animation {
+        0% {
+            transform: translateY(-3px);
+        }
+        50% {
+            transform: translateY(3px);
+        }
+        75% {
+            transform: rotate(15deg);
+        }
+        87.5% {
+            transform: rotate(-30deg);
+        }
+        100% {
+            transform: rotate(15deg);
+        }
+    }
+    
+    .due-animate:hover {
+        animation: due-animate-animation 2s linear infinite alternate;
+        cursor: pointer;
+    }
+    
+    @keyframes due-animate-animation {
+        0% { opacity: .5}
+        50% { opacity: 1; transform: scale(1.1);  }
+        100% { opacity: .5; text-shadow: 0 .25rem .75rem rgba(0, 0, 0, .25); }
+    }
+    
+    .knock-out:hover {
+        animation: knock-out-animation 1s linear infinite alternate;
+    }
+    
+    @keyframes knock-out-animation {
+        0%   {rotate: .1deg; transform: scale(1.01);}
+        50%  {rotate: -.1deg; transform: scale(1.03);}
+        100%  {rotate: .1deg; transform: scale(1.03);}
+    }
+  }

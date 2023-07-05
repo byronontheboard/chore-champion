@@ -22,19 +22,30 @@ function calculateTimeDifference(initializationTimestamp, currentTimestamp) {
     };
   }
   
-const setButtonProgress = (buttonProgress, text, percent) => {
+const setButtonProgress = (clickedStartButton, buttonProgress, text, percent) => {
     buttonProgress.style.width = `${percent}%`;
     let percentToFixed = percent.toFixed(2);
+    
+    /* Change the look of the button. */
+    if (percent > 66) {
+      clickedStartButton.classList.replace('btn-warning', 'btn-success');
+    } else if (percent > 33) {
+      clickedStartButton.classList.replace('btn-light', 'btn-warning');
+    } else if (percent >= 0) {
+      clickedStartButton.classList.replace('btn-success', 'btn-light');
+    }
+
+    /* Change the text. */
     if (percent > 100) {
         percent = 100;
         text.innerHTML = `${percentToFixed}% - You did it!`;
     } else if (percent > 87.5) {
         text.innerHTML = `${percentToFixed}% - Final stretch!`;
-    } else if (percent > 75) {
+    } else if (percent > 66) {
         text.innerHTML = `${percentToFixed}% - Almost!`;
     } else if (percent > 50) {
         text.innerHTML = `${percentToFixed}% - Half way there!`;
-    } else if (percent > 30) {
+    } else if (percent > 33) {
         text.innerHTML = `${percentToFixed}% - Making progress!`;
     } else if (percent > 20) {
         text.innerHTML = `${percentToFixed}% - Great start!`;
@@ -55,6 +66,7 @@ const clearIntervalOnTimer = (interval) => {
 }
 
 var timers = [];
+var timerToggle = [];
 var startButtons = document.querySelectorAll(`.start-timer`);
 var stopButtons = document.querySelectorAll(`.stop-button`);
 var pauseButtons = document.querySelectorAll(`.pause-button`);
@@ -63,20 +75,25 @@ for (let i = 0; i < startButtons.length; i++) {
   createEventListener(startButtons[i], stopButtons[i], pauseButtons[i]);
 }
 
-function createEventListener(startButton, stopButton, pauseButton) {
+function createEventListener(startButton) {
   startButton.addEventListener(`click`, (event) => {
     event.preventDefault();
+
     let startTime = Date.now();
     let id = startButton.dataset.id;
+    // if (timerToggle[])
     let minutes = startButton.dataset.minutes;
     let seconds = minutes * 60;
+    let clickedStartButton = document.querySelector(`#start-${id}`);
     let clickedStartProgress = document.querySelector(`#start-progress-${id}`);
     let clickedStartText = document.querySelector(`#start-timer-text-${id}`);
-    let increment = 20;
+    let increment = 250;
     let thisInterval = setInterval(() => {
+      console.log(timers);
       let millisecondsElapsed = calculateTimeDifference(startTime, Date.now()).milliseconds;
       let completedPercentage = (millisecondsElapsed / (seconds * 1000)) * 100;
-      setButtonProgress(clickedStartProgress, clickedStartText, completedPercentage);
+
+      setButtonProgress(clickedStartButton, clickedStartProgress, clickedStartText, completedPercentage);
 
       if (completedPercentage <= 0 || completedPercentage > 100) {
         timers[thisInterval] = null;
@@ -87,50 +104,3 @@ function createEventListener(startButton, stopButton, pauseButton) {
     }, increment);
     timers.push(thisInterval);
   });
-
-//   stopButton.addEventListener(`click`, (event) => {
-//     event.preventDefault();
-//     console.log(`Stop!`);
-//   });
-
-//   pauseButton.addEventListener(`click`, (event) => {
-//     event.preventDefault();
-//     console.log(`Pause!`);
-//   });
-}
-// var timers = [];
-// var intervalToggles = [];
-
-// var startButtons = document.querySelectorAll(`.start-timer`);
-// var stopButtons = document.querySelectorAll(`.stop-button`);
-// var pauseButtons = document.querySelectorAll(`.pause-button`);
-// for (let i = 0; i < startButtons.length; i++) {
-//     startButtons[i].addEventListener(`click`, async (event) => {
-//         console.log(event.target)
-//         event.preventDefault();
-//         let increment = 20;
-//         intervalToggles.push(true);
-//         let startTime = Date.now();
-//         let id = startButtons[i].dataset.id;
-//         let minutes = startButtons[i].dataset.minutes;
-//         let seconds = minutes * 60;
-//         let clickedStartButton = document.querySelector(`#start-progress-${id}`);
-//         let clickedStartText = document.querySelector(`#start-timer-text-${id}`);
-//         let clickedStartProgress = document.querySelector(`#start-progress-${id}`);
-
-//         let thisInterval = setInterval(() => {
-//             let millisecondsElapsed = calculateTimeDifference(startTime, Date.now()).milliseconds;
-//             let completedPercentage = ((millisecondsElapsed/(seconds*1000)))*100;
-//             setButtonProgress(clickedStartProgress, clickedStartText, completedPercentage);
-
-//             if (completedPercentage <= 0 || completedPercentage > 100) {
-//                 intervalToggles[i] = false;
-//                 clearInterval(timers[i]);
-//                 setButtonProgress(clickedStartProgress, clickedStartText, 100);
-//                 clickedStartText.innerHTML = `You did it! Click Complete!`;
-
-//             }
-//         }, increment);
-//         timers.push(thisInterval);
-//     });
-// }
