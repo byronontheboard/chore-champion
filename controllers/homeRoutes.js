@@ -53,26 +53,26 @@ router.get('/task', withAuth, (req, res) => {
   }
 });
 
-// router.get('/browse', withAuth, async (req, res) => {
-//   try {
-//     const taskData = await Task.findAll({
-//       include: [
-//         {
-//           model: User
-//         }        
-//       ]
-//     });
+router.get('/browse', withAuth, async (req, res) => {
+  try {
+    const taskData = await Task.findAll({
+      include: [
+        {
+          model: User
+        }        
+      ]
+    });
 
-//     const tasks = taskData.map((project) => project.get({ plain: true }));
-//     console.log(tasks);
-//     res.render('browse', {
-//       tasks,
-//       logged_in: req.session.logged_in,
-//     });
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
+    const tasks = taskData.map((project) => project.get({ plain: true }));
+    console.log(tasks);
+    res.render('browse', {
+      tasks,
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 router.get('/knockoutSelect', async (req, res) => {
   res.render('knockoutSelect', {
@@ -108,7 +108,7 @@ router.get('/knockout/:time', async (req, res) => {
       });
       
       const result = knapsackWithItems(minutes, points, +time_limit);
-
+      
       let tasks = [];
       let minutesSum = 0;
       let pointsSum = 0;
@@ -129,22 +129,25 @@ router.get('/knockout/:time', async (req, res) => {
       const notTaskData = await NotTask.findAll({
         order: [['priority', 'ASC']],
       });
-      console.log(notTaskData);
+      // console.log(notTaskData);
       var notResult;
       let notMinutes = [];
       let notPoints = [];
       var notMinutesSum = 0;
       if (notTaskData) {
-        notTimeLimit = (+req.params.time - +minutesSum) + (.5 * +req.params.time);
+        notTimeLimit = (+req.params.time)*.5;
         const notTaskFilter = notTaskData.map((project) => project.get({ plain: true }));
 
         notTaskFilter.forEach(item => {
           notMinutes.push(item.minutes);
-          notPoints.push(item.points);
+          notPoints.push(1/item.priority);
         });
         
         notResult = knapsackWithItems(notMinutes, notPoints, +notTimeLimit);
-        
+        console.log(notTaskFilter);
+        console.log(notMinutes);
+        console.log(notPoints);
+        console.log(notResult);
         if (notResult.selectedItems.length > 0) {
           notTasks = [];
           
@@ -158,13 +161,10 @@ router.get('/knockout/:time', async (req, res) => {
           }
         }
       }
-      //End of breaking things.
-      // console.log(result);
-      console.log("minutes Sum", minutesSum);
+
       var utilization = ((minutesSum/time_limit)*100).toFixed(1);
-      console.log("Utilization");
-      console.log(utilization);
       var notUtilization = (((notMinutesSum)/time_limit)*100).toFixed(1);
+
       console.log(notTasks);
 
       res.render('knockout', {

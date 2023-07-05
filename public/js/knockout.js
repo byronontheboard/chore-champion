@@ -22,37 +22,6 @@ function calculateTimeDifference(initializationTimestamp, currentTimestamp) {
     };
   }
   
-const setButtonProgress = (clickedStartButton, buttonProgress, text, percent) => {
-    buttonProgress.style.width = `${percent}%`;
-    let percentToFixed = percent.toFixed(2);
-    
-    /* Change the look of the button. */
-    if (percent > 66) {
-      clickedStartButton.classList.replace('btn-warning', 'btn-success');
-    } else if (percent > 33) {
-      clickedStartButton.classList.replace('btn-light', 'btn-warning');
-    } else if (percent >= 0) {
-      clickedStartButton.classList.replace('btn-success', 'btn-light');
-    }
-
-    /* Change the text. */
-    if (percent > 100) {
-        percent = 100;
-        text.innerHTML = `${percentToFixed}% - You did it! Click complete!`;
-    } else if (percent > 87.5) {
-        text.innerHTML = `${percentToFixed}% - Final stretch!`;
-    } else if (percent > 66) {
-        text.innerHTML = `${percentToFixed}% - Almost!`;
-    } else if (percent > 50) {
-        text.innerHTML = `${percentToFixed}% - Half way there!`;
-    } else if (percent > 33) {
-        text.innerHTML = `${percentToFixed}% - Making progress!`;
-    } else if (percent > 20) {
-        text.innerHTML = `${percentToFixed}% - Great start!`;
-    } else {
-        text.innerHTML = `${percentToFixed}% - You can do it!`;
-    }
-}
 
 const pauseProgressButton = (intervalToClear) =>{
     console.log(intervalToClear);
@@ -74,9 +43,43 @@ for (let i = 0; i < startButtons.length; i++) {
   createEventListener(startButtons[i], i);
 }
 
-createInterval = (startTime, seconds, clickedStartButton, clickedStartProgress, clickedStartText, increment) => {
+const setButtonProgress = (clickedStartButton, buttonProgress, text, percent, iteration) => {
+  buttonProgress.style.width = `${percent}%`;
+  let percentToFixed = percent.toFixed(2);
+  
+  /* Change the look of the button. */
+  if (percent > 66) {
+    clickedStartButton.classList.replace('btn-warning', 'btn-success');
+  } else if (percent > 33) {
+    clickedStartButton.classList.replace('btn-light', 'btn-warning');
+  } else if (percent >= 0) {
+    clickedStartButton.classList.replace('btn-success', 'btn-light');
+  }
 
+  /* Change the text. */
+  if (percent >= 100) {
+      percent = 100;
+      text.innerHTML = `${percentToFixed}% - You did it! Click complete!`;
+  } else if (percent > 87.5) {
+      text.innerHTML = `${percentToFixed}% - Final stretch!`;
+  } else if (percent > 66) {
+      text.innerHTML = `${percentToFixed}% - Almost!`;
+  } else if (percent > 50) {
+      text.innerHTML = `${percentToFixed}% - Half way there!`;
+  } else if (percent > 33) {
+      text.innerHTML = `${percentToFixed}% - Making progress!`;
+  } else if (percent > 20) {
+      text.innerHTML = `${percentToFixed}% - Great start!`;
+  } else {
+      text.innerHTML = `${percentToFixed}% - You can do it!`;
+  }
+
+  if (percent >= 100) {
+    clearInterval(timers[iteration]);
+    setButtonProgress(clickedStartProgress, clickedStartText, 0);
+  }
 }
+
 function createEventListener(startButton, iteration) {
   startButton.addEventListener(`click`, (event) => {
     event.preventDefault();
@@ -88,19 +91,14 @@ function createEventListener(startButton, iteration) {
     let clickedStartButton = document.querySelector(`#start-${id}`);
     let clickedStartProgress = document.querySelector(`#start-progress-${id}`);
     let clickedStartText = document.querySelector(`#start-timer-text-${id}`);
-    let increment = 250;
+    let increment = 100;
     if (timerToggle[iteration] === false) {
       timerToggle[iteration] = true;
       timers[iteration] =   setInterval(() => {
         let millisecondsElapsed = calculateTimeDifference(startTime, Date.now()).milliseconds;
         let completedPercentage = (millisecondsElapsed / (seconds * 1000)) * 100;
     
-        setButtonProgress(clickedStartButton, clickedStartProgress, clickedStartText, completedPercentage);
-    
-        if (completedPercentage <= 0 || completedPercentage > 100) {
-          clearInterval(thisInterval);
-          setButtonProgress(clickedStartProgress, clickedStartText, 0);
-        }
+        setButtonProgress(clickedStartButton, clickedStartProgress, clickedStartText, completedPercentage, iteration);
       }, increment);
     } else {
       clearInterval(timers[iteration]);

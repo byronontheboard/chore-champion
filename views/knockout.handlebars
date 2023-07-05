@@ -20,7 +20,7 @@
                       <h3 class="mb-1 card-title text-center w-100">{{task.title}}</h3>
                       <div class="col-12">
                         <a href="#" id="start-{{task.id}}" class="w-100 text-center mx-auto m-2 start-timer btn btn-success" data-id={{task.id}} data-minutes={{task.minutes}} data-progress-text="You can do it!" data-complete-text="You did it!">
-                          <div id="start-progress-{{task.id}}" class="start-timer-progress"></div> 
+                          <div id="start-progress-{{task.id}}" class="rounded-bottom start-timer-progress"></div> 
                           <span id="start-timer-text-{{task.id}}" class="start-timer-warning">Start</span>
                         </a>
                     </div>
@@ -73,7 +73,7 @@
   </div>
   {{log notTasks}}
 {{#if notTasks}}
-<h1 class="text-center my-3">Finished Early?</h1>
+<h1 class="text-center my-3">Finished Early? {{ notTimeLimit }}</h1>
 {{!-- <div class="row d-flex progress m-4 mx-auto" style="height: 35px;">
   <div class="col-12 fs-3 align-center progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="{{capAt100 notUtilization}}" aria-valuemin="0" aria-valuemax="100" style="width: {{capAt100 notUtilization}}%;">{{notUtilization}}% of Time Used!</div>
 </div> --}}
