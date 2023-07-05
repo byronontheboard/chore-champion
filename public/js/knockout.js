@@ -38,7 +38,7 @@ const setButtonProgress = (clickedStartButton, buttonProgress, text, percent) =>
     /* Change the text. */
     if (percent > 100) {
         percent = 100;
-        text.innerHTML = `${percentToFixed}% - You did it!`;
+        text.innerHTML = `${percentToFixed}% - You did it! Click complete!`;
     } else if (percent > 87.5) {
         text.innerHTML = `${percentToFixed}% - Final stretch!`;
     } else if (percent > 66) {
@@ -68,17 +68,18 @@ const clearIntervalOnTimer = (interval) => {
 var timers = [];
 var timerToggle = [];
 var startButtons = document.querySelectorAll(`.start-timer`);
-var stopButtons = document.querySelectorAll(`.stop-button`);
-var pauseButtons = document.querySelectorAll(`.pause-button`);
 
 for (let i = 0; i < startButtons.length; i++) {
-  createEventListener(startButtons[i], stopButtons[i], pauseButtons[i]);
+  timerToggle[i] = false;
+  createEventListener(startButtons[i], i);
 }
 
-function createEventListener(startButton) {
+createInterval = (startTime, seconds, clickedStartButton, clickedStartProgress, clickedStartText, increment) => {
+
+}
+function createEventListener(startButton, iteration) {
   startButton.addEventListener(`click`, (event) => {
     event.preventDefault();
-
     let startTime = Date.now();
     let id = startButton.dataset.id;
     // if (timerToggle[])
@@ -88,19 +89,24 @@ function createEventListener(startButton) {
     let clickedStartProgress = document.querySelector(`#start-progress-${id}`);
     let clickedStartText = document.querySelector(`#start-timer-text-${id}`);
     let increment = 250;
-    let thisInterval = setInterval(() => {
-      console.log(timers);
-      let millisecondsElapsed = calculateTimeDifference(startTime, Date.now()).milliseconds;
-      let completedPercentage = (millisecondsElapsed / (seconds * 1000)) * 100;
-
-      setButtonProgress(clickedStartButton, clickedStartProgress, clickedStartText, completedPercentage);
-
-      if (completedPercentage <= 0 || completedPercentage > 100) {
-        timers[thisInterval] = null;
-        clearInterval(thisInterval);
-        setButtonProgress(clickedStartProgress, clickedStartText, 100);
-        clickedStartText.innerHTML = `You did it! Click Complete!`;
-      }
-    }, increment);
-    timers.push(thisInterval);
-  });
+    if (timerToggle[iteration] === false) {
+      timerToggle[iteration] = true;
+      timers[iteration] =   setInterval(() => {
+        let millisecondsElapsed = calculateTimeDifference(startTime, Date.now()).milliseconds;
+        let completedPercentage = (millisecondsElapsed / (seconds * 1000)) * 100;
+    
+        setButtonProgress(clickedStartButton, clickedStartProgress, clickedStartText, completedPercentage);
+    
+        if (completedPercentage <= 0 || completedPercentage > 100) {
+          clearInterval(thisInterval);
+          setButtonProgress(clickedStartProgress, clickedStartText, 0);
+        }
+      }, increment);
+    } else {
+      clearInterval(timers[iteration]);
+      timerToggle[iteration] = false;
+    }
+    console.log(timers);
+    console.log(timerToggle[iteration]);
+  })
+};
