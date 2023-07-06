@@ -28,6 +28,13 @@ Task.init(
       type: DataTypes.INTEGER,
       defaultValue: 0,
     },
+    points: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+    },
+    minutes: {
+      type: DataTypes.INTEGER,
+    },
     complete_date: {
       type: DataTypes.DATE, // value is null if incomplete
       allowNull: true,
