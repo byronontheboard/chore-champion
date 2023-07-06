@@ -52,18 +52,18 @@ box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 .task-card:hover {
     box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .25);
     border-color: black;
-    transform: scale(1.01); 
+    /* transform: scale(1.01);  */
     transition: all 0.5s ease-out;
 }
 
 .custom-gutter {
-    margin-left: -0.5rem;
-    margin-right: -0.5rem;
+    margin-left: -2rem;
+    margin-right: -2rem;
 }
 
 .custom-gutter > [class^="col-"] {
-padding-left: 0.5rem;
-padding-right: 0.5rem;
+padding-left: 2rem;
+padding-right: 2rem;
 }
 
 hr{

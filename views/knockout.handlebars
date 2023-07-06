@@ -1,9 +1,9 @@
-{{log tasks }}
 {{#if tasks }}
-<h1 class="text-center">Knock Out at Maximum Efficieny</h1>
 {{#if getAll}}
+<h1 class="text-center">Browse</h1>
 <h2 class="text-center">Browse Your Chores</h2>
 {{else}}
+<h1 class="text-center">Knock Out at Maximum Efficieny</h1>
 <h2 class="text-center">We Streamlined {{minutesSum}} Out of {{time_limit}} Minutes, Worth {{pointsSum}} Points</h2>
 <div class="row d-flex progress m-4 mx-auto" style="height: 50px;">
   <div class="col-12 fs-3 align-center progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="{{utilization}}" aria-valuemin="0" aria-valuemax="100" style="width: {{utilization}}%;">{{utilization}}% of Time Used</div>
@@ -20,10 +20,9 @@
         <div class="custom-gutter">
           <div class="row">
             {{#each tasks as |task| }}
-            <div class="col-12 col-sm-12 col-md-6 my-3">
+            <div class="z-1 col-12 col-sm-12 col-md-6 my-3">
               <div class="p-2 card task-card">
                 <div class="card-body">
-
                     <div class="row">
                       <h3 class="mb-1 card-title text-center w-100">{{task.title}}</h3>
                       <div class="col-12">
@@ -53,44 +52,32 @@
                   </div>
                   <hr/>
                   <div class="d-flex "><span class="mx-auto">(not implemented)</span></div>
-                  <div class="d-flex btn-group">
+                <div class="header-top position-relative" style="z-index: 99999 !important;">
+                  <div class="d-flex btn-group z-3 dropdown-center dropdown">
                     <a href="/delegate/{{task.id}}" class="mx-auto m-2 btn btn-primary">Delegate</a>
                     <a href="/complete/{{task.id}}" class="mx-auto m-2 btn btn-success">Complete</a>
                     <a href="/edit/{{task.id}}" class="mx-auto m-2 btn btn-warning">Edit</a>
-                    <div class="dropdown">
-                      <button class="mx-auto m-2 btn btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Snooze
-                      </button>
-                      <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Tomorrow (Midnight)</a></li>
-                        <li><a class="dropdown-item" href="#">Next Week (168 hours from now)(</a></li>
-                        <li><a class="dropdown-item" href="#">Custom</a></li>
-                      </ul>
-                    </div>
+                    <button class="mx-auto m-2 btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Snooze
+                    </button>
+                    <ul class="z-3 dropdown-menu position-absolute mx-auto">
+                      <li><a class="dropdown-item z-3" href="#">Tomorrow (Midnight)</a></li>
+                      <li><a class="dropdown-item z-3" href="#">Next Week (168 hours from now)</a></li>
+                      <li><a class="dropdown-item z-3" href="#">Custom</a></li>
+                    </ul>
                   </div>
-
-
-                  {{!-- <div class="row">
-                    <div class="col-12">
-                      <div class="d-flex btn-group">
-                        <a href="#" class="w-100 mx-auto btn btn-small btn-secondary pause-button">⏸️ Pause</a>
-                        <a href="#" class="w-100 mx-auto btn btn-small btn-secondary stop-button">⏹️ Stop</a>
-                      </div>
-                    </div>
-                  </div> --}}
-                </div>
-
                 </div>
               </div>
-            {{/each}}
             </div>
+          </div>
+          {{/each}}
         </div>
       </div>
     </div>
   </div>
-  {{log notTasks}}
+</div>
 {{#if notTasks}}
-<h1 class="text-center my-3">Finished Early? {{ notTimeLimit }}</h1>
+<h1 class="text-center my-3">Finished Early?</h1>
 <hr/>
 <div class="container">
   <div class="row justify-content-center">
