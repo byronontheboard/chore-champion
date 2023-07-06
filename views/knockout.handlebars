@@ -1,11 +1,19 @@
+{{log tasks }}
+{{#if tasks }}
 <h1 class="text-center">Knock Out at Maximum Efficieny</h1>
+{{#if getAll}}
+<h2 class="text-center">Browse Your Chores</h2>
+{{else}}
 <h2 class="text-center">We Streamlined {{minutesSum}} Out of {{time_limit}} Minutes, Worth {{pointsSum}} Points</h2>
-<h2 class="text-center">Let's Get to Work on These {{tasks.length}} Chores!</h2>
-{{!-- <h1>Points: {{result.maxValue}}</h1> --}}
 <div class="row d-flex progress m-4 mx-auto" style="height: 50px;">
   <div class="col-12 fs-3 align-center progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="{{utilization}}" aria-valuemin="0" aria-valuemax="100" style="width: {{utilization}}%;">{{utilization}}% of Time Used</div>
 </div>
+{{/if}}
+<h2 class="text-center">Let's Get to Work on These {{tasks.length}} Chores!</h2>
 <hr/>
+{{ else }}
+<h1 class="text-center">No Results.<br/>Try adding a chore, or increasing the time limit!</h1>
+{{/if}}
 <div class="container">
     <div class="row justify-content-center">
       <div class="col">
@@ -49,7 +57,16 @@
                     <a href="/delegate/{{task.id}}" class="mx-auto m-2 btn btn-primary">Delegate</a>
                     <a href="/complete/{{task.id}}" class="mx-auto m-2 btn btn-success">Complete</a>
                     <a href="/edit/{{task.id}}" class="mx-auto m-2 btn btn-warning">Edit</a>
-                    <a href="/snooze/{{task.id}}" class="mx-auto m-2 btn btn-danger">Snooze</a>
+                    <div class="dropdown">
+                      <button class="mx-auto m-2 btn btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Snooze
+                      </button>
+                      <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Tomorrow (Midnight)</a></li>
+                        <li><a class="dropdown-item" href="#">Next Week (168 hours from now)(</a></li>
+                        <li><a class="dropdown-item" href="#">Custom</a></li>
+                      </ul>
+                    </div>
                   </div>
 
 
@@ -74,9 +91,6 @@
   {{log notTasks}}
 {{#if notTasks}}
 <h1 class="text-center my-3">Finished Early? {{ notTimeLimit }}</h1>
-{{!-- <div class="row d-flex progress m-4 mx-auto" style="height: 35px;">
-  <div class="col-12 fs-3 align-center progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="{{capAt100 notUtilization}}" aria-valuemin="0" aria-valuemax="100" style="width: {{capAt100 notUtilization}}%;">{{notUtilization}}% of Time Used!</div>
-</div> --}}
 <hr/>
 <div class="container">
   <div class="row justify-content-center">
@@ -94,22 +108,11 @@
                   <div class="col-4 text-center card-subtitle mb-2 text-muted"><div class="minutes-animate">⌛</div>Minutes</br>{{notTask.minutes}}</div>
                   <div class="col-4 text-center card-subtitle mb-2 text-muted"><div class="points-animate">⭐</div>Points</br>{{notTask.points}}</div>
                   </div>
-                  {{!-- <div class="row my-3">
-                    <div class="col-6 text-center card-subtitle mb-2 text-muted">🐣 Created<br/>{{{timeAgo notTask.createdAt}}}</div>
-                  </div> --}}
                   <div class="row">
                     <div class="col-12">
                       <p>{{task.body}}</p>
                     </div>
                   </div>
-                  {{!-- <hr/>
-                  <div class="d-flex btn-group">
-                    <a href="/delegateNot/{{task.id}}" class="mx-auto m-2 btn btn-primary">Delegate</a>
-                    <a href="/completeNot/{{task.id}}" class="mx-auto m-2 btn btn-success">Complete</a>
-                    <a href="/editNot/{{task.id}}" class="mx-auto m-2 btn btn-warning">Edit</a>
-                    <a href="/snoozeNot/{{task.id}}" class="mx-auto m-2 btn btn-danger">Snooze</a>
-                  </div>
-                  <div class="d-flex "><span class="mx-auto">(these buttons do nothing)</span></div> --}}
                 </div>
               </div>
               </div>
