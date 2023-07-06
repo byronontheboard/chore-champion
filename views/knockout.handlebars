@@ -54,13 +54,15 @@
                   <div class="d-flex "><span class="mx-auto">(not implemented)</span></div>
                 <div class="header-top position-relative" style="z-index: 99999 !important;">
                   <div class="d-flex btn-group z-3 dropdown-center dropdown">
-                    <a href="/delegate/{{task.id}}" class="mx-auto m-2 btn btn-primary">Delegate</a>
+                    {{!-- <a href="/delegate/{{task.id}}" class="mx-auto m-2 btn btn-primary">Delegate</a> --}}
                     <a href="/complete/{{task.id}}" class="mx-auto m-2 btn btn-success">Complete</a>
                     <a href="/edit/{{task.id}}" class="mx-auto m-2 btn btn-warning">Edit</a>
                     <button class="mx-auto m-2 btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                       Snooze
                     </button>
-                    <ul class="z-3 dropdown-menu position-absolute mx-auto">
+                    <ul class="z-3 m-1 dropdown-menu position-absolute mx-auto">
+                      <li><a class="dropdown-item z-3" href="#">1 Hour</a></li>
+                      <li><a class="dropdown-item z-3" href="#">6 Hours</a></li>
                       <li><a class="dropdown-item z-3" href="#">Tomorrow (Midnight)</a></li>
                       <li><a class="dropdown-item z-3" href="#">Next Week (168 hours from now)</a></li>
                       <li><a class="dropdown-item z-3" href="#">Custom</a></li>

@@ -57,13 +57,13 @@ box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
 
 .custom-gutter {
-    margin-left: -2rem;
-    margin-right: -2rem;
+    margin-left: -.5rem;
+    margin-right: -.5rem;
 }
 
 .custom-gutter > [class^="col-"] {
-padding-left: 2rem;
-padding-right: 2rem;
+padding-left: .5rem;
+padding-right:.5rem;
 }
 
 hr{
@@ -109,6 +109,7 @@ input {
 
 .start-timer {
     position: relative;
+    transition: all 2s;
 }
 
 .start-timer-progress {
@@ -118,7 +119,7 @@ input {
     left: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, .251);
-    transition: width .1s;
+
 }
 
 .start-timer-text {

@@ -43,8 +43,8 @@ for (let i = 0; i < startButtons.length; i++) {
   createEventListener(startButtons[i], i);
 }
 
-const setButtonProgress = (clickedStartButton, buttonProgress, text, percent, iteration) => {
-  buttonProgress.style.width = `${percent}%`;
+const setButtonProgress = (clickedStartButton, clickedStartProgress, text, percent, iteration) => {
+  clickedStartProgress.style.width = `${percent}%`;
   let percentToFixed = percent.toFixed(2);
   
   /* Change the look of the button. */
@@ -76,7 +76,7 @@ const setButtonProgress = (clickedStartButton, buttonProgress, text, percent, it
 
   if (percent >= 100) {
     clearInterval(timers[iteration]);
-    setButtonProgress(clickedStartProgress, clickedStartText, 0);
+    setButtonProgress(clickedStartButton, clickedStartProgress, clickedStartText, 100, iteration);
   }
 }
 
