@@ -49,7 +49,7 @@ router.get('/user/:id', async (req, res) => {
   }
 });
 
-router.get('user/:id/date/:date', async (req, res) => {
+router.get('/user/:id/date/:date', async (req, res) => {
   try {
     const taskData = await CompletedTask.findOne({
       include: [
@@ -76,7 +76,7 @@ router.get('user/:id/date/:date', async (req, res) => {
 });
 
 // get all completed task data after a specified date
-router.get('user/:id/after/:date', async (req, res) => {
+router.get('/user/:id/after/:date', async (req, res) => {
   try {
     const taskData = await CompletedTask.findAll({
       include: [
@@ -87,7 +87,7 @@ router.get('user/:id/after/:date', async (req, res) => {
       where: {
         user_id: req.params.id,
         complete_date: {
-          [Op.gt]: req.params.date
+          [Op.gt]: new Date(req.params.date)
         }
       },
       attributes: { exclude: ['password', 'user_id'] },
