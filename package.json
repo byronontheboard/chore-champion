@@ -2,7 +2,7 @@
   "name": "chore-champion",
   "version": "1.0.0",
   "description": "an interface allowing users to efficiently list and manage their daily tasks; and subsequently 'knockout' those tasks, based on time allowed",
-  "homepage": "(https://chore-champion-6838d87c31f6.herokuapp.com/",
+  "homepage": "https://chore-champion-6838d87c31f6.herokuapp.com/",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
