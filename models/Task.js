@@ -1,6 +1,5 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
-const User = require('./User');
 const CompletedTask = require('./CompletedTask');
 
 class Task extends Model {}
@@ -57,7 +56,7 @@ Task.init(
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: User,
+        model: 'user',
         key: 'id'
       }
     },

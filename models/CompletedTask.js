@@ -1,7 +1,5 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
-const User = require('./User');
-const Task = require('./Task');
 
 class CompletedTask extends Model {}
 
@@ -24,11 +22,15 @@ CompletedTask.init(
       type: DataTypes.DATE, // value is null if incomplete
       allowNull: true,
     },
+    cumulative_points: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+    },
     user_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: User,
+        model: 'user',
         key: 'id'
       }
     },
@@ -36,7 +38,7 @@ CompletedTask.init(
       type: DataTypes.INTEGER,
       allowNull: true,
       references: {
-        model: Task,
+        model: 'task',
         key: 'id'
       }
     },
@@ -50,4 +52,4 @@ CompletedTask.init(
   }
 );
 
-module.exports = Task;
+module.exports = CompletedTask;
