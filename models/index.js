@@ -62,6 +62,9 @@ Task.afterUpdate(async (task, options) => {
           }
         let total_points = statsData.total_points + task.points;
         statsData.total_points = total_points;
+
+        let total_minutes = statsData.total_minutes + task.minutes;
+        statsData.total_minutes = total_minutes;
   
         await statsData.save();
         // create new CompletedTask row
@@ -70,6 +73,7 @@ Task.afterUpdate(async (task, options) => {
             task_id: task.id,
             complete_date: task.complete_date,
             cumulative_points: total_points,
+            cumulative_minutes: total_minutes,
             
             // Set other completed task values based on the task if needed
             });
