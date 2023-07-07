@@ -1,6 +1,6 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
-const User = require('./User');
+const CompletedTask = require('./CompletedTask');
 
 class Task extends Model {}
 
@@ -36,18 +36,36 @@ Task.init(
       type: DataTypes.INTEGER,
     },
     complete_date: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATE, // value is null if incomplete
+      allowNull: true,
     },
+    // is_complete: {
+    //   type: DataTypes.BOOLEAN,
+    //   defaultValue: false,
+    //   allowNull: false,
+      
+    // },
     user_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: User,
+        model: 'user',
         key: 'id'
       }
     },
   },
   {
+    // hooks: {
+    //   afterUpdate: async (task,options) => {
+    //     // When setting the value of 'is_complete', check if 'complete_date' is null
+    //     // and update 'is_complete' accordingly
+    //     if (task.complete_date === null) {
+    //       task.setDataValue('is_complete', false);
+    //     } else {
+    //       task.setDataValue('is_complete', true);
+    //     }
+    //   },
+    // },
     sequelize,
     timestamps: true,
     freezeTableName: true,

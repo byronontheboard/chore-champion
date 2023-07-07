@@ -1,5 +1,6 @@
 const router = require('express').Router();
-const { Task, User, Stats } = require('../../models');
+const { Task, User } = require('../../models');
+const withAuth = require('../../utils/auth');
 
 router.get('/', async (req, res) => {
   try {
@@ -143,38 +144,31 @@ router.put(':id', async (req, res) => {
   }
 })
 
-router.put('/:id/complete', async (req, res) => {
+// Special update route to toggle a tak.
+router.put('/complete/:id', withAuth, async (req, res) => {
   try {
     const task_id = req.params.id;
     const taskToUpdate = await Task.findByPk(task_id);
 
-    if (req.session.user_id !== taskToDelete.user_id) {
+    if (+req.session.user_id !== +taskToUpdate.user_id) {
+      console.log(req.session.user_id,taskToUpdate.user_id )
       res
         .status(400)
-        .json({ message: 'You can only update your own tasks.' });
+        .json({ message: 'You can only update your own tasks.'+req.session.user_id });
       return;
     }
-    // Set complete_date to current date
-    taskToUpdate.complete_date = new Date();
-    
-    taskToUpdate.save();
 
-    // Update user's total points
-    const statsData = await Stats.findOne({
-      include: [
-        {
-          model: User
-        }        
-      ],
-      where: {
-        user_id: req.session.user_id
-      },
-      attributes: { exclude: ['password', 'user_id'] },
-    });
+    // Toggle completion state
+    if (taskToUpdate.complete_date) {
+      taskToUpdate.complete_date = null;
+    } else {
+      taskToUpdate.complete_date = new Date();
+    }
 
-    statsData.total_points += taskToUpdate.points;
+    // the user's total points are updated in the models' hooks.
 
-    statsData.save();
+    await taskToUpdate.save();
+    res.json(taskToUpdate);
 
   } catch (err) {
     res.status(400).json(err);
