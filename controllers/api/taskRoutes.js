@@ -38,8 +38,9 @@ router.get('/:id', async (req, res) => {
 });
 
 // Get all tasks for a user
-// Optional query parameter "filter"
+// Optional query parameters "filter", "after", and "before"
 // "filter" can be either "complete" or "incomplete", to get only completed or incomplete tasks.
+// "after" and "before" are dates.
 router.get('/user/:id', async (req, res) => {
 
   let where = {user_id: req.params.id}
@@ -51,6 +52,51 @@ router.get('/user/:id', async (req, res) => {
     case 'incomplete':
       where.complete_date = null
       break;
+  }
+
+  const dueAfter = req.query.dueAfter ? new Date(req.query.dueAfter) : undefined;
+  const dueBefore = req.query.dueBefore ? new Date(req.query.dueBefore) : undefined;
+  const createdAfter = req.query.createdAfter ? new Date(req.query.createdAfter) : undefined;
+  const createdBefore = req.query.createdBefore ? new Date(req.query.createdBefore) : undefined;
+
+  if (dueAfter && dueBefore) {
+    if (dueBefore <= dueAfter) {
+      res
+        .status(400)
+        .json({ message: 'Make sure the dueBefore date is later than the dueAfter date.' });
+      return;
+    }
+    where.due_date = {
+      [Op.between]: [dueAfter, dueBefore]
+    }
+  } else if (dueAfter) {
+    where.due_date = {
+      [Op.gte]: dueAfter
+    }
+  } else if (dueBefore) {
+    where.due_date = {
+      [Op.lte]: dueBefore
+    }
+  }
+
+  if (createdAfter && createdBefore) {
+    if (createdBefore <= createdAfter) {
+      res
+        .status(400)
+        .json({ message: 'Make sure the createdBefore date is later than the createdAfter date.' });
+      return;
+    }
+    where.createdAt = {
+      [Op.between]: [createdAfter, createdBefore]
+    }
+  } else if (createdAfter) {
+    where.createdAt = {
+      [Op.gte]: createdAfter
+    }
+  } else if (createdBefore) {
+    where.createdAt = {
+      [Op.lte]: createdBefore
+    }
   }
 
   try {
@@ -67,7 +113,7 @@ router.get('/user/:id', async (req, res) => {
     if (!taskData) {
       res
         .status(400)
-        .json({ message: 'No tasks! Check back later.' });
+        .json({ message: 'No tasks with those criteria! Check back later.' });
       return;
     } else {
       return res.status(200).json(taskData);
