@@ -1,6 +1,9 @@
 const fs = require('fs');
 
 module.exports = {
+  task_length: (task) => {
+    return task.length;
+  },
   get_priority: (priority) => {
     var priority_icon;
     if (priority <= 0) {
