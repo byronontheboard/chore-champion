@@ -1,0 +1,43 @@
+<h1>Profile</h1>
+{{!-- Toast for update button. --}}
+<div class="toast-container m-4 bottom-0 start-50 translate-middle-x">
+  <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header pb-0">
+      <strong class="fs-5 me-auto mx-auto">✅ Profile Successfully Updated!</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+        <p class="text-center mb-0">You can now safely navigate from this page.</p>
+    </div>
+  </div>
+</div>
+
+<form class="profile-form">
+    <div class="form-group">
+        {{!-- Username --}}
+        <label for="">Name</label>
+        <input type="text" class="w-100 m-1 mx-0 form-control" id="name" aria-describedby="emailHelp"
+        value="{{userData.dataValues.name}}">
+    </div>
+    <div class="form-group">
+        {{!-- Email --}}
+        <label for="">Email</label>
+        <input type="text" class="w-100 m-1 mx-0 form-control" id="email" aria-describedby="emailHelp"
+        value="{{userData.dataValues.email}}">
+    </div>
+    <div class="form-group">
+        <label for="icon">Icon</label>
+        <input type="text" class="w-100 m-1 mx-0 form-control" id="icon" aria-describedby="emailHelp" value="{{userData.dataValues.icon}}">
+        <div class="icon-selector">
+            <a class="btn btn-light " onclick="changeIcon('💩')">💩</a>
+            <a class="btn btn-light " onclick="changeIcon('👾')">👾</a>
+            <a class="btn btn-light " onclick="changeIcon('🥸')">🥸</a>
+            <!-- Add more buttons for additional icons as needed -->
+        </div>
+    </div>
+    <div class="form-group">
+        <button class="w-100 mx-0 mt-2 btn btn-success knock-out" type="submit">Update</button>
+    </div>
+</form>
+<script src="/js/profile.js"></script>
+{{log userData}}
