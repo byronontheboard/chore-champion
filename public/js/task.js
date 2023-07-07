@@ -49,14 +49,19 @@ const taskFormHandler = async (event) => {
           body, 
           priority,
           due_date,
+          complete_date,
           minutes, 
           points
         }),
         headers: { 'Content-Type': 'application/json' },
       });
-
+      console.log(response);
       if (response.ok) {
-        alert('Successfully update!');
+        var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+        var toastList = toastElList.map(function(toastEl) {
+            return new bootstrap.Toast(toastEl)
+        });
+        toastList.forEach(toast => toast.show())
       } else {
         alert('Task failed to update.');
       }

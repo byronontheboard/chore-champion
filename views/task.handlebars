@@ -39,20 +39,31 @@
         <label for="minutes">Minutes</label>
         <input class="w-100 m-1 mx-0 form-control" type="number" name="minutes" id="minutes" {{#if taskData.dataValues.minutes}}value="{{taskData.dataValues.minutes}}"{{/if}}/>
       </div>
-      
-      {{!-- <div class="form-group">
+      {{#if updateData}}
+      <div class="form-group">
         <label for="complete_date">Completed</label>
-        <input type="datetime-local" name="complete_date" id="complete_date"/>
-      </div> --}}
-
+        <input class="w-100 m-1 mx-0 form-control" type="datetime-local" name="complete_date" id="complete_date" {{#if taskData.dataValues.complete_date}}value="{{taskData.dataValues.complete_date}}"{{/if}}/>
+      </div>
+      {{/if}}
       <div class="form-group">
           {{#if updateData}}
-        <button class="w-100 mx-0 m-1 btn btn-success" type="submit">Update Task</button>
+        <button class="w-100 mx-0 m-1 btn btn-warning" type="submit">Save Edits</button>
           {{else}}
         <button class="w-100 mx-0 m-1 btn btn-success" type="submit">Create Task</button>
           {{/if}}
       </div>
     </form>
+  </div>
+</div>
+<div class="toast-container m-4 bottom-0 start-50 translate-middle-x">
+  <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header pb-0">
+      <strong class="fs-5 me-auto mx-auto">✅ Task Successfully Updated!</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+        <p class="text-center mb-0">You can now safely navigate from this page.</p>
+    </div>
   </div>
 </div>
 <script src="/js/task.js"></script>

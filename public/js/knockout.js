@@ -1,5 +1,16 @@
-// Adapted from ChatGPT prompt for function that calculates time since initialization.
-
+(function()
+{
+  if( window.localStorage )
+  {
+    if( !localStorage.getItem('firstLoad') )
+    {
+      localStorage['firstLoad'] = true;
+      window.location.reload();
+    }  
+    else
+      localStorage.removeItem('firstLoad');
+  }
+})();
 // Function to calculate the time difference
 function calculateTimeDifference(initializationTimestamp, currentTimestamp) {
     // Calculate the time difference in milliseconds
