@@ -45,6 +45,7 @@ router.get('/profile', async (req, res) => {
       console.log(userData);
       res.render('profile', {
         userData,
+        logged_in: req.session.logged_in
       });
     } catch(error) {
       console.log(error);
@@ -75,9 +76,6 @@ router.get('/browse', withAuth, async (req, res) => {
         }        
       ]
     });
-
-    const tasks = taskData.map((project) => project.get({ plain: true }));
-    console.log(tasks);
     
     const tasks = taskData.map((project) => project.get({ plain: true }));
 
