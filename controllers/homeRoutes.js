@@ -57,6 +57,8 @@ router.get('/profile', async (req, res) => {
 
 router.get('/task', withAuth, async (req, res) => {
   // If a session exists, redirect the request to the homepage
+  const userData = await User.findByPk(req.session.user_id);
+
   if (!req.session.logged_in) {
     res.redirect('/');
     return;
@@ -67,6 +69,24 @@ router.get('/task', withAuth, async (req, res) => {
       logged_in: req.session.logged_in,
       userData
     });
+  }
+});
+
+router.get('/task/:id', withAuth, async (req, res) => {
+  // If a session exists, redirect the request to the homepage
+  const userData = await User.findByPk(req.session.user_id);
+
+  if (!req.session.logged_in) {
+    res.redirect('/');
+    return;
+  } else {
+    if (req.params.id) {
+      res.render('task', {
+        logged_in: req.session.logged_in,
+        userData,
+        updateData: true
+      });
+    }
   }
 });
 
