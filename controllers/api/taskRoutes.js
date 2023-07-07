@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { Task, User } = require('../../models');
 const withAuth = require('../../utils/auth');
+const { Op } = require('sequelize');
 
 router.get('/', async (req, res) => {
   try {
@@ -36,7 +37,22 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+// Get all tasks for a user
+// Optional query parameter "filter"
+// "filter" can be either "complete" or "incomplete", to get only completed or incomplete tasks.
 router.get('/user/:id', async (req, res) => {
+
+  let where = {user_id: req.params.id}
+
+  switch (req.query.filter) {
+    case 'complete':
+      where.complete_date = {[Op.not]: null}
+      break;
+    case 'incomplete':
+      where.complete_date = null
+      break;
+  }
+
   try {
     const taskData = await Task.findAll({
       include: [
@@ -44,9 +60,7 @@ router.get('/user/:id', async (req, res) => {
           model: User
         }        
       ],
-      where: {
-        user_id: req.params.id
-      },
+      where,
       attributes: { exclude: ['password', 'user_id'] },
     });
 
