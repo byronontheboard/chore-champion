@@ -144,7 +144,7 @@ router.put(':id', async (req, res) => {
   }
 })
 
-// Special update route to toggle a tak.
+// Special update route to toggle a task.
 router.put('/complete/:id', withAuth, async (req, res) => {
   try {
     const task_id = req.params.id;
@@ -166,6 +166,34 @@ router.put('/complete/:id', withAuth, async (req, res) => {
     }
 
     // the user's total points are updated in the models' hooks.
+
+    await taskToUpdate.save();
+    res.json(taskToUpdate);
+
+  } catch (err) {
+    res.status(400).json(err);
+  }
+})
+
+// Special update route to snooze a task.
+router.put('/snooze/:id/', withAuth, async (req, res) => {
+  let days = req.query.days || 0;
+  let hours = req.query.hours || 0;
+  let minutes = req.query.minutes || 0;
+
+  // default snooze 1 day
+  if (days+hours+minutes === 0) {days = 1};
+
+  try {
+    const task_id = req.params.id;
+    const taskToUpdate = await Task.findByPk(task_id);
+
+    let dueDate = new Date(taskToUpdate.due_date);
+    dueDate.setDate(dueDate.getDate() + days);
+    dueDate.setHours(dueDate.getHours() + hours);
+    dueDate.setMinutes(dueDate.getMinutes() + minutes);
+
+    taskToUpdate.due_date = dueDate;
 
     await taskToUpdate.save();
     res.json(taskToUpdate);
