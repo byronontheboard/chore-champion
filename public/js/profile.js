@@ -17,6 +17,9 @@ const updateFormHandler = async (event) => {
       });
   
       if (response.ok) {
+        const iconHeaderInput = document.getElementById('icon-text');
+        console.log(iconHeaderInput);
+        iconHeaderInput.innerHTML = icon;
         var toastElList = [].slice.call(document.querySelectorAll('.toast'))
         var toastList = toastElList.map(function(toastEl) {
             return new bootstrap.Toast(toastEl)
@@ -32,8 +35,9 @@ const updateFormHandler = async (event) => {
 // Function to change the selected icon
 function changeIcon(iconFilename) {
 const iconInput = document.getElementById('icon');
-
+const iconHeaderInput = document.getElementById('icon-text');
     iconInput.value = iconFilename;
+    iconHeaderInput.value = iconFilename;
 }
 
 document
