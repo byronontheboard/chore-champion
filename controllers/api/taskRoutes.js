@@ -116,7 +116,7 @@ router.delete(':id', async (req, res) => {
   }
 })
 
-router.put(':id', async (req, res) => {
+router.put('/:id', async (req, res) => {
   try {
     const task_id = req.params.id;
     const taskToUpdate = await Task.findByPk(task_id);
