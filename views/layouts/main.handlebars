@@ -17,6 +17,7 @@
   <header class="p-1 box-shadow">
     <nav class="navbar w-100 navbar-expand-lg bg-body-tertiary">
       <div class="ml-auto container-fluid">
+        <a href="/" style="text-decoration: none; display: flex; align-items: center;">
         <img class="logo" src="/images/chorechampion-dark.svg"/>
         <span class="header-text navbar-brand">CHORECHAMPION</span>
          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,11 +38,12 @@
               <li><a href="/trainingLog" class="btn btn-light px-3 m-1" data-bs-toggle="tooltip" data-bs-placement="bottom"
                     data-bs-custom-class="custom-tooltip"
                     data-bs-title="Get statistics!">Training Log</a></li>
-              {{/if}}
-              {{#if logged_in}}
               <li class=""><a class=" btn btn-light px-3 m-1" id="logout" data-bs-toggle="tooltip" data-bs-placement="bottom"
                     data-bs-custom-class="custom-tooltip"
                     data-bs-title="Time to throw in the towel?">Logout</a></li>
+              <li class=""><a href="/profile" class=" btn btn-light px-3 m-1" id="logout" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                    data-bs-custom-class="custom-tooltip"
+                    data-bs-title="Manage your profile.">{{userData.dataValues.icon}}</a></li>
               {{else}}
               <li><a class="btn btn-light px-3 m-1"  data-bs-toggle="tooltip" data-bs-placement="bottom"
                     data-bs-custom-class="custom-tooltip"

@@ -1,19 +1,16 @@
 const router = require('express').Router();
-const { User, Task, NotTask } = require('../models');
+const { User, Task } = require('../models');
 const withAuth = require('../utils/auth');
 const knapsackWithItems = require('../utils/knapsack');
 
 // Prevent non logged in users from viewing the homepage
 router.get('/', withAuth, async (req, res) => {
   try {
-    const userData = await User.findAll({
-      attributes: { exclude: ['password'] },
-      order: [['name', 'ASC']],
-    });
 
-    const users = userData.map((project) => project.get({ plain: true }));
+    const userData = await User.findByPk(req.session.user_id);
+
     res.render('homepage', {
-      users,
+      userData,
       // Pass the logged in flag to the template
       logged_in: req.session.logged_in,
     });
@@ -41,6 +38,22 @@ router.get('/create', (req, res) => {
   res.render('create');
 });
 
+router.get('/profile', async (req, res) => {
+  if (req.session.logged_in) {
+    try {
+      const userData = await User.findByPk(req.session.user_id);
+      console.log(userData);
+      res.render('profile', {
+        userData,
+      });
+    } catch(error) {
+      console.log(error);
+    }
+  } else {
+    res.render('create');
+  }
+});
+
 router.get('/task', withAuth, (req, res) => {
   // If a session exists, redirect the request to the homepage
   if (!req.session.logged_in) {
@@ -59,13 +72,12 @@ router.get('/browse', withAuth, async (req, res) => {
       include: [
         {
           model: User
-        }
-      ],
-      where: {
-        user_id: req.session.user_id
-      },
-      order: [['priority', 'ASC'], ['points', 'DESC']]
+        }        
+      ]
     });
+
+    const tasks = taskData.map((project) => project.get({ plain: true }));
+    console.log(tasks);
     
     const tasks = taskData.map((project) => project.get({ plain: true }));
 
@@ -83,6 +95,7 @@ router.get('/browse', withAuth, async (req, res) => {
     });
   } catch (err) {
     res.status(500).json(err);
+
     console.log(err);
   }
 });
@@ -110,8 +123,7 @@ router.get('/knockout/:time', async (req, res) => {
         ],
         where: {
           user_id: req.session.user_id
-        },
-        order: [['priority', 'ASC'], ['points', 'DESC']]
+        }
       });
 
       /* Start the taskFilter. */
@@ -124,7 +136,7 @@ router.get('/knockout/:time', async (req, res) => {
 
       taskFilter.forEach(item => {
         minutes.push(item.minutes);
-        points.push(item.points);
+        points.push((1 / item.priority) * item.minutes);
       });
 
       let useLength;
@@ -191,6 +203,7 @@ router.get('/knockout/:time', async (req, res) => {
 
       let taskLength = tasks.length;
       res.render('knockout', {
+        
         time_limit: time_limit,
         notTimeLimit,
         utilization,
@@ -206,15 +219,8 @@ router.get('/knockout/:time', async (req, res) => {
       });
     } catch (err) {
       res.status(500).json(err);
-      console.log(err);
     }
   }
 });
 
-
-router.get('/trainingLog', async (req, res) => {
-  res.render('trainingLog', {
-    logged_in: req.session.logged_in,
-  });
-});
 module.exports = router;

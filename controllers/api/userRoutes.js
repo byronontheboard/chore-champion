@@ -57,6 +57,20 @@ router.post('/create', async (req, res) => {
   }
 });
 
+router.post('/profile', async (req, res) => {
+  try {
+    const result = await User.update(
+      { name: req.body.name, 
+        email: req.body.email,  
+        icon: req.body.icon  
+      },
+      { where: { id: req.session.user_id } }
+    )
+    res.status(200).json("Successfully updated profile.");
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
 
 router.post('/logout', (req, res) => {
   if (req.session.logged_in) {
