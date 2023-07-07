@@ -242,7 +242,8 @@ router.put('/snooze/:id/', withAuth, async (req, res) => {
   let minutes = req.query.minutes || 0;
 
   // default snooze 1 day
-  if (days+hours+minutes === 0) {days = 1};
+  // but maybe someone wants to snooze for 0 time??
+  // if (days+hours+minutes === 0) {days = 1};
 
   try {
     const task_id = req.params.id;
