@@ -1,5 +1,6 @@
 const router = require('express').Router();
-const { Task, User, Stats } = require('../../../models');
+const { Task, User, Stats, CompletedTask } = require('../../../models');
+const { Op } = require('sequelize');
 
 // Get all points data
 router.get('/', async (req, res) => {
@@ -42,8 +43,61 @@ router.get('/:id', async (req, res) => {
   } catch (err) {
     res.status(400).json(err);
   }
+  
 });
 
+// Get cumulative points to a specified date
+// `/${user_id}/date/${encodeURIComponent(date.toISOString())}`
+router.get('/:id/date/:date', async (req, res) => {
+  try {
+    const pointsData = await CompletedTask.findOne({
+      include: [
+        {
+          model: User
+        }        
+      ],
+      where: {
+        user_id: req.params.id,
+        complete_date: {
+          [Op.lt]: req.params.date
+        }
+      },
+      attributes: ['cumulative_points'],
+      order: [['complete_date', 'DESC']],
+      limit: 1
+    });
 
+    return res.status(200).json(pointsData);
+    
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
+// get all points data after a specified date
+router.get('/:id/after/:date', async (req, res) => {
+  try {
+    const pointsData = await CompletedTask.findAll({
+      include: [
+        {
+          model: User
+        }        
+      ],
+      where: {
+        user_id: req.params.id,
+        complete_date: {
+          [Op.gt]: req.params.date
+        }
+      },
+      attributes: ['cumulative_points'],
+      order: [['complete_date', 'DESC']]
+    });
+
+    return res.status(200).json(pointsData);
+    
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
 
 module.exports = router;
