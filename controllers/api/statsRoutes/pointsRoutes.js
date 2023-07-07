@@ -24,7 +24,7 @@ router.get('/', async (req, res) => {
 });
 
 // get total points for specific user
-router.get('/:id', async (req, res) => {
+router.get('user/:id', async (req, res) => {
   try {
     const statsData = await Stats.findOne({
       include: [
@@ -48,7 +48,7 @@ router.get('/:id', async (req, res) => {
 
 // Get cumulative points to a specified date
 // `/${user_id}/date/${encodeURIComponent(date.toISOString())}`
-router.get('/:id/date/:date', async (req, res) => {
+router.get('user/:id/date/:date', async (req, res) => {
   try {
     const pointsData = await CompletedTask.findOne({
       include: [
@@ -75,7 +75,7 @@ router.get('/:id/date/:date', async (req, res) => {
 });
 
 // get all points data after a specified date
-router.get('/:id/after/:date', async (req, res) => {
+router.get('user/:id/after/:date', async (req, res) => {
   try {
     const pointsData = await CompletedTask.findAll({
       include: [
