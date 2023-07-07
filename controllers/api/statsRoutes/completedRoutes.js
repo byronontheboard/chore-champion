@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Task, User, Stats, CompletedTask } = require('../../models');
+const { Task, User, Stats, CompletedTask } = require('../../../models');
 
 // Get all completedTask data
 router.get('/', async (req, res) => {

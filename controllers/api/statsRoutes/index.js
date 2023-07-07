@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Task, User, Stats } = require('../../models');
+const { Task, User, Stats } = require('../../../models');
 
 const pointsRoutes = require('./pointsRoutes');
 const completedRoutes = require('./completedRoutes');

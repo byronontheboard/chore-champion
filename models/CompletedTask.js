@@ -26,6 +26,10 @@ CompletedTask.init(
       type: DataTypes.INTEGER,
       defaultValue: 0,
     },
+    cumulative_minutes: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+    },
     user_id: {
       type: DataTypes.INTEGER,
       allowNull: false,

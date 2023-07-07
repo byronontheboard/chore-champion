@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { Task, User } = require('../../models');
+const withAuth = require('../../utils/auth');
 
 router.get('/', async (req, res) => {
   try {
@@ -136,21 +137,22 @@ router.put(':id', async (req, res) => {
   }
 })
 
-// Special update route to toggle a .
-router.put('/complete/:id', async (req, res) => {
+// Special update route to toggle a tak.
+router.put('/complete/:id', withAuth, async (req, res) => {
   try {
     const task_id = req.params.id;
     const taskToUpdate = await Task.findByPk(task_id);
 
-    if (req.session.user_id !== taskToUpdate.user_id) {
+    if (+req.session.user_id !== +taskToUpdate.user_id) {
+      console.log(req.session.user_id,taskToUpdate.user_id )
       res
         .status(400)
-        .json({ message: 'You can only update your own tasks.' });
+        .json({ message: 'You can only update your own tasks.'+req.session.user_id });
       return;
     }
 
     // Toggle completion state
-    if (taskToUpdate.is_complete) {
+    if (taskToUpdate.complete_date) {
       taskToUpdate.complete_date = null;
     } else {
       taskToUpdate.complete_date = new Date();

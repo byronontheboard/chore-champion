@@ -38,20 +38,12 @@ Task.init(
       type: DataTypes.DATE, // value is null if incomplete
       allowNull: true,
     },
-    is_complete: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false,
-      allowNull: false,
-      set(value) {
-        // When setting the value of 'is_complete', check if 'complete_date' is null
-        // and update 'is_complete' accordingly
-        if (this.complete_date === null) {
-          this.setDataValue('is_complete', false);
-        } else {
-          this.setDataValue('is_complete', true);
-        }
-      },
-    },
+    // is_complete: {
+    //   type: DataTypes.BOOLEAN,
+    //   defaultValue: false,
+    //   allowNull: false,
+      
+    // },
     user_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -62,29 +54,17 @@ Task.init(
     },
   },
   {
-    hooks: {
-      afterUpdate: async (task, options) => {
-        if (task.complete_date !== null && task.previous('complete_date') === null) {
-          try {
-            await CompletedTask.create({
-              task_id: task.id,
-              complete_date: task.complete_date,
-              // Set other completed task values based on the task if needed
-            });
-          } catch (error) {
-            console.error('Error creating CompletedTask:', error);
-          }
-        } else if (task.complete_date === null && task.previous('complete_date') !== null) {
-          try {
-            await CompletedTask.destroy({
-              where: { task_id: task.id },
-            });
-          } catch (error) {
-            console.error('Error deleting CompletedTask:', error);
-          }
-        }
-      },
-    },
+    // hooks: {
+    //   afterUpdate: async (task,options) => {
+    //     // When setting the value of 'is_complete', check if 'complete_date' is null
+    //     // and update 'is_complete' accordingly
+    //     if (task.complete_date === null) {
+    //       task.setDataValue('is_complete', false);
+    //     } else {
+    //       task.setDataValue('is_complete', true);
+    //     }
+    //   },
+    // },
     sequelize,
     timestamps: true,
     freezeTableName: true,
