@@ -34,13 +34,7 @@ NotTask.init(
     },
     minutes: {
       type: DataTypes.INTEGER,
-    },
-    due_date: {
-      type: DataTypes.DATE // or DATEONLY if you don't want time.  Might be easier to have a default time if a user doesn't import one
-    },
-    complete_date: {
-      type: DataTypes.DATE,
-    },
+    }
   },
   {
     sequelize,

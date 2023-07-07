@@ -35,6 +35,11 @@ User.init(
         len: [8],
       },
     },
+    icon: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: '👤',
+    }
   },
   {
     hooks: {
@@ -50,7 +55,7 @@ User.init(
     modelName: 'user',
     defaultScope: {
       attributes: {
-        exclude: ['password', 'email']
+        exclude: ['password']
       }
     }, 
     scopes: {

@@ -1,23 +1,115 @@
-<h1>If You've Got {{time_limit}} Minutes...</h1>
-{{!-- <h1>Points: {{result.maxValue}}</h1> --}}
-{{#each tasks as |task| }}
-<div class="mx-0 m-4">
-  <div class="row align-center">
-    <div>
-      <h2>{{{get_emoji}}} {{task.title}}</h2>
-    </div>
-    <div>
-      <p>{{task.body}}</p>
-    </div>
-    <div>
-      {{task.minutes}}
-    </div>
-    <div>
-      {{task.due_date}}
-    </div>
-    <div>
-      <h7>By: {{task.user.name}} @ {{task.createdAt}}</a></h7>
+{{#if tasks }}
+{{#if getAll}}
+<h1 class="text-center">Browse</h1>
+<h2 class="text-center">Browse Your Chores</h2>
+{{else}}
+<h1 class="text-center">Knock Out at Maximum Efficieny</h1>
+<h2 class="text-center">We Streamlined {{minutesSum}} Out of {{time_limit}} Minutes, Worth {{pointsSum}} Points</h2>
+<div class="row d-flex progress m-4 mx-auto" style="height: 50px;">
+  <div class="col-12 fs-3 align-center progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="{{utilization}}" aria-valuemin="0" aria-valuemax="100" style="width: {{utilization}}%;">{{utilization}}% of Time Used</div>
+</div>
+{{/if}}
+<h2 class="text-center">Let's Get to Work on These {{tasks.length}} Chores!</h2>
+<hr/>
+{{ else }}
+<h1 class="text-center">No Results.<br/>Try adding a chore, or increasing the time limit!</h1>
+{{/if}}
+<div class="container">
+    <div class="row justify-content-center">
+      <div class="col">
+        <div class="custom-gutter">
+          <div class="row">
+            {{#each tasks as |task| }}
+            <div class="z-1 col-12 col-sm-12 col-md-6 my-3">
+              <div class="p-2 card task-card">
+                <div class="card-body">
+                    <div class="row">
+                      <h3 class="mb-1 card-title text-center w-100">{{task.title}}</h3>
+                      <div class="col-12">
+                        <a href="#" id="start-{{task.id}}" class="w-100 text-center mx-auto m-2 start-timer btn btn-success" data-id={{task.id}} data-minutes={{task.minutes}} data-progress-text="You can do it!" data-complete-text="You did it!">
+                          <div id="start-progress-{{task.id}}" class="rounded-bottom start-timer-progress"></div> 
+                          <span id="start-timer-text-{{task.id}}" class="start-timer-warning">Start</span>
+                        </a>
+                    </div>
+                  </div>
+                  <hr/>
+                  <div class="row">
+                    <div class="col-4 text-center card-subtitle mb-2 text-muted"><div class="priority-animate">{{{get_priority task.priority}}}</div>Priority</br>{{task.priority}}<br/></div>
+                    <div class="col-4 text-center card-subtitle mb-2 text-muted"><div class="minutes-animate">⌛</div>Minutes</br>{{task.minutes}}</div>
+                    <div class="col-4 text-center card-subtitle mb-2 text-muted"><div class="points-animate">⭐</div>Points</br>{{task.points}}</div>
+                  </div>
+                  <div class="row my-3">
+                    <div class="col-6 text-center card-subtitle mb-2 text-muted"><div class="created-animate">🐣</div>Created<br/>{{{timeAgo task.createdAt}}}</div>
+                    {{#if task.due_date}}
+                    <div class="col-6 text-center card-subtitle mb-2 text-muted"><div class="due-animate">🗓️</div>Due<br/>{{timeAgo task.due_date}}</div>
+                    {{/if}}
+                  </div>
+                  {{!-- <hr/> --}}
+                  <div class="row">
+                    <div class="col-12">
+                      <p>{{task.body}}</p>
+                    </div>
+                  </div>
+                  <hr/>
+                  <div class="d-flex "><span class="mx-auto">(not implemented)</span></div>
+                <div class="header-top position-relative" style="z-index: 99999 !important;">
+                  <div class="d-flex btn-group z-3 dropdown-center dropdown">
+                    {{!-- <a href="/delegate/{{task.id}}" class="mx-auto m-2 btn btn-primary">Delegate</a> --}}
+                    <a href="/complete/{{task.id}}" class="mx-auto m-2 btn btn-success">Complete</a>
+                    <a href="/edit/{{task.id}}" class="mx-auto m-2 btn btn-warning">Edit</a>
+                    <button class="mx-auto m-2 btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Snooze
+                    </button>
+                    <ul class="z-3 m-1 dropdown-menu position-absolute mx-auto">
+                      <li><a class="dropdown-item z-3" href="#">1 Hour</a></li>
+                      <li><a class="dropdown-item z-3" href="#">6 Hours</a></li>
+                      <li><a class="dropdown-item z-3" href="#">Tomorrow (Midnight)</a></li>
+                      <li><a class="dropdown-item z-3" href="#">Next Week (168 hours from now)</a></li>
+                      <li><a class="dropdown-item z-3" href="#">Custom</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {{/each}}
+        </div>
+      </div>
     </div>
   </div>
 </div>
-{{/each}}
+{{#if notTasks}}
+<h1 class="text-center my-3">Finished Early?</h1>
+<hr/>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col">
+      <div class="custom-gutter">
+        <div class="row">
+            {{#each notTasks as |notTask|}}
+            <div class="col-12 col-sm-12 col-md-6 my-3">
+              <div class="p-2 card task-card m-2">
+                <div class="card-body m-2">
+                  <h3 class="mb-3 card-title text-center w-100">{{notTask.title}}</h3>
+                  <hr/>
+                  <div class="row">
+                  <div class="col-4 text-center card-subtitle mb-2 text-muted"><div class="priority-animate">{{{get_priority notTask.priority}}}</div>Priority</br>{{notTask.priority}}<br/></div>
+                  <div class="col-4 text-center card-subtitle mb-2 text-muted"><div class="minutes-animate">⌛</div>Minutes</br>{{notTask.minutes}}</div>
+                  <div class="col-4 text-center card-subtitle mb-2 text-muted"><div class="points-animate">⭐</div>Points</br>{{notTask.points}}</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12">
+                      <p>{{task.body}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              </div>
+            {{/each}}
+            {{/if}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="/js/knockout.js"></script>
