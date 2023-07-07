@@ -2,10 +2,27 @@ html {
     overflow: scroll;
 }
 
-@media (min-width: 768px) {
-html {
-    font-size: 16px;
+body {
+    font-family: 'Koulen', sans-serif;
 }
+.logo {
+    height:50px; 
+    margin-top: px;
+}
+.header-text {
+    font-size: 2em;
+    font-weight: 700;
+    margin-bottom: -5px;
+    /* text-shadow: 1px 1px 1px #919191,
+        1px 2px 5px #919191; */
+}
+.chorechampion-text {
+    color: white;
+}
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
 }
 
 .container {
@@ -31,3 +48,188 @@ border-bottom: 1px solid #e5e5e5;
 .box-shadow {
 box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
+
+.task-card:hover {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .25);
+    border-color: black;
+    /* transform: scale(1.01);  */
+    transition: all 0.5s ease-out;
+}
+
+.custom-gutter {
+    margin-left: -.5rem;
+    margin-right: -.5rem;
+}
+
+.custom-gutter > [class^="col-"] {
+padding-left: .5rem;
+padding-right:.5rem;
+}
+
+hr{
+    text-shadow: 0 .25rem .75rem rgba(0, 0, 0, .25);
+}
+.btn-warning {
+    color: #fff !important;
+    background-color: #ffca2c;
+}
+
+.btn-warning:hover {
+    --bs-btn-color: #fff;
+    background-color: #ffc107;
+    color: #fff;
+}
+
+input {
+    text-align: center;
+}
+
+.btn:hover {
+    font-weight: 400;
+    /* font-size: 1.1em; */
+    transition: all 0.5s ease-out;
+}
+
+.time-delimiter-adjust {
+    margin-left: .25em;
+    user-select: all;
+}
+
+@media screen and (max-width: 768px) {
+    .time-delimiter-adjust {
+        margin-left: .005em;
+    }
+    
+}
+
+::selection {
+    color: white;
+    background: darkgreen;
+}
+
+.start-timer {
+    position: relative;
+    transition: all 2s;
+}
+
+.start-timer-progress {
+    position: absolute;
+    height: 15%;
+    width: 0%;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .251);
+
+}
+
+.start-timer-text {
+    position: relative;
+}
+
+/* Explicitly stop all animation if the user has recued motion set up. */
+
+@media (prefers-reduced-motion: ) {
+    * {
+        animation: none !important;
+     
+     }
+}
+
+/* Animations, if the user is cool with that. */
+@media (prefers-reduced-motion: no-preference) {
+    .priority-animate:hover {
+        animation: priority-animate-animation 1s linear infinite alternate;
+        cursor: pointer;
+    }
+    
+    @keyframes priority-animate-animation {
+        0% {
+            transform: translateY(3px);
+        }
+        100% {
+            transform: translateY(-3px);
+        }
+    }
+    
+    .minutes-animate:hover {
+        animation: minutes-animate-animation 1s linear infinite alternate;
+    }
+    
+    @keyframes minutes-animate-animation {
+        0% {
+            transform: rotate(195deg);
+        }
+        50% {
+            transform: rotate(-25deg);
+        }
+        75% {
+            transform: rotate(10deg);
+        }
+        87.5% {
+            transform: rotate(5deg);
+        }
+        100% {
+            transform: rotate(-5deg);
+        }
+    }
+    
+    .points-animate:hover {
+        animation: points-animate-animation 1s linear infinite alternate .25s;
+        cursor: pointer;
+    }
+    
+    @keyframes points-animate-animation {
+        0% {
+            transform: translateY(-15px);
+            opacity: 0;
+        }
+        100% {
+            transform: rotate(-1280deg);
+            opacity: 1;
+        }
+    }
+    
+    .created-animate:hover {
+        animation: created-animate-animation 1s linear infinite alternate;
+        cursor: pointer;
+    }
+    
+    @keyframes created-animate-animation {
+        0% {
+            transform: translateY(-3px);
+        }
+        50% {
+            transform: translateY(3px);
+        }
+        75% {
+            transform: rotate(15deg);
+        }
+        87.5% {
+            transform: rotate(-30deg);
+        }
+        100% {
+            transform: rotate(15deg);
+        }
+    }
+    
+    .due-animate:hover {
+        animation: due-animate-animation 2s linear infinite alternate;
+        cursor: pointer;
+    }
+    
+    @keyframes due-animate-animation {
+        0% { opacity: .5}
+        50% { opacity: 1; transform: scale(1.1);  }
+        100% { opacity: .5; text-shadow: 0 .25rem .75rem rgba(0, 0, 0, .25); }
+    }
+    
+    .knock-out:hover {
+        animation: knock-out-animation 1s linear infinite alternate;
+    }
+    
+    @keyframes knock-out-animation {
+        0%   {rotate: .1deg; transform: scale(1.01);}
+        50%  {rotate: -.1deg; transform: scale(1.03);}
+        100%  {rotate: .1deg; transform: scale(1.03);}
+    }
+  }

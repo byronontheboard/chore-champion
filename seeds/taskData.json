@@ -4,55 +4,167 @@
     "body" : "...",
     "user_id" : 1,
     "priority" : 2,
-    "minutes" : 60
+    "minutes" : 60,
+    "points": 200
   },
   {
     "title" : "Do Dishes",
     "body" : "...",
     "user_id" : 1,
     "priority" : 2,
-    "minutes" : 20
+    "minutes" : 20,
+    "points": 100
   },
   {
     "title" : "Read a Book",
     "body" : "...",
     "user_id" : 1,
     "priority" : 5,
-    "minutes" : 600
+    "minutes" : 600,
+    "points": 250
   },
   {
     "title" : "Do Laundry",
     "body" : "...",
     "user_id" : 1,
     "priority" : 3,
-    "minutes" : 30
+    "minutes" : 30,
+    "points": 100
   },
   {
     "title" : "Take Out Trash",
     "body" : "...",
     "user_id" : 1,
     "priority" : 1,
-    "minutes" : 5
+    "minutes" : 5,
+    "points": 100
   },
   {
     "title" : "Clean House",
     "body" : "...",
     "user_id" : 1,
     "priority" : 1,
-    "minutes" : 120
+    "minutes" : 120,
+    "points": 500
   },
   {
     "title" : "Pick Up Food",
     "body" : "...",
     "user_id" : 1,
     "priority" : 2,
-    "minutes" : 30
+    "minutes" : 30,
+    "points": 100
   },
   {
     "title" : "Run Errands",
     "body" : "...",
     "user_id" : 1,
     "priority" : 4,
-    "minutes" : 60
+    "minutes" : 60,
+    "points": 100
+  },
+  {
+    "title" : "Water Plants",
+    "body" : "...",
+    "user_id" : 1,
+    "priority" : 3,
+    "minutes" : 15,
+    "points": 150
+  },
+  {
+    "title" : "Organize Closet",
+    "body" : "...",
+    "user_id" : 1,
+    "priority" : 2,
+    "minutes" : 90,
+    "points": 100
+  },
+  {
+    "title" : "Pay Bills",
+    "body" : "...",
+    "user_id" : 1,
+    "priority" : 3,
+    "minutes" : 60,
+    "points": 100
+  },
+  {
+    "title" : "Prepare Meals for the Week",
+    "body" : "...",
+    "user_id" : 1,
+    "priority" : 4,
+    "minutes" : 120,
+    "points": 250
+  },
+  {
+    "title" : "Clean Windows",
+    "body" : "...",
+    "user_id" : 1,
+    "priority" : 2,
+    "minutes" : 60,
+    "points": 200
+  },
+  {
+    "title" : "Sort and File Documents",
+    "body" : "...",
+    "user_id" : 1,
+    "priority" : 3,
+    "minutes" : 45,
+    "points": 100
+  },
+  {
+    "title" : "Vacuum the House",
+    "body" : "...",
+    "user_id" : 1,
+    "priority" : 2,
+    "minutes" : 30,
+    "points": 200
+  },
+  {
+    "title" : "Wash Windows",
+    "body" : "...",
+    "user_id" : 1,
+    "priority" : 3,
+    "minutes" : 60,
+    "points": 250
+  },
+  {
+    "title" : "Change Bed Sheets",
+    "body" : "...",
+    "user_id" : 1,
+    "priority" : 2,
+    "minutes" : 15,
+    "points": 150
+  },
+  {
+    "title" : "Clean Bathroom",
+    "body" : "...",
+    "user_id" : 1,
+    "priority" : 2,
+    "minutes" : 45,
+    "points": 100
+  },
+  {
+    "title" : "Sort and Declutter Wardrobe",
+    "body" : "...",
+    "user_id" : 1,
+    "priority" : 3,
+    "minutes" : 60,
+    "points": 100
+  },
+  {
+    "title" : "Take Pets for a Walk",
+    "body" : "...",
+    "user_id" : 1,
+    "priority" : 4,
+    "minutes" : 30,
+    "points": 200
+  },
+  {
+    "title" : "Clean the Garage",
+    "body" : "...",
+    "user_id" : 1,
+    "priority" : 3,
+    "minutes" : 120,
+    "points": 500
   }
 ]
