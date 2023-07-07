@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Task } = require('../models');
+const { User, Task, NotTask } = require('../models');
 const withAuth = require('../utils/auth');
 const knapsackWithItems = require('../utils/knapsack');
 
@@ -121,7 +121,8 @@ router.get('/knockout/:time', async (req, res) => {
         ],
         where: {
           user_id: req.session.user_id
-        }
+        },
+        order: [['priority', 'ASC'], ['points', 'DESC']]
       });
 
       /* Start the taskFilter. */
@@ -134,7 +135,7 @@ router.get('/knockout/:time', async (req, res) => {
 
       taskFilter.forEach(item => {
         minutes.push(item.minutes);
-        points.push((1 / item.priority) * item.minutes);
+        points.push(item.points);
       });
 
       let useLength;
@@ -183,8 +184,9 @@ router.get('/knockout/:time', async (req, res) => {
       });
       
       var notResult = knapsackWithItems(notMinutes, notPoints, +notTimeLimit);
+      notTasks = [];
       if (notResult.selectedItems.length > 0) {
-        notTasks = [];
+        
         
         for (let i = 0; i < notTaskFilter.length; i++) {
           for (let j = 0; j < notResult.selectedItems.length; j++) {
@@ -201,7 +203,6 @@ router.get('/knockout/:time', async (req, res) => {
 
       let taskLength = tasks.length;
       res.render('knockout', {
-        
         time_limit: time_limit,
         notTimeLimit,
         utilization,
@@ -217,8 +218,17 @@ router.get('/knockout/:time', async (req, res) => {
       });
     } catch (err) {
       res.status(500).json(err);
+      console.log(err);
     }
   }
 });
+
+
+router.get('/trainingLog', async (req, res) => {
+  res.render('trainingLog', {
+    logged_in: req.session.logged_in,
+  });
+});
+module.exports = router;
 
 module.exports = router;
