@@ -11,7 +11,7 @@ const updateFormHandler = async (event) => {
     if (name && email && icon) {
       // TODO: Add a comment describing the functionality of this expression
       const response = await fetch('/api/users/profile', {
-        method: 'POST',
+        method: 'PUT',
         body: JSON.stringify({ name, email, icon }),
         headers: { 'Content-Type': 'application/json' },
       });
