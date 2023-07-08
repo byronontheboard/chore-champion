@@ -5,7 +5,14 @@ const { Op } = require('sequelize');
 
 router.get('/', async (req, res) => {
   try {
-    const taskData = await Task.findAll();
+    const taskData = await Task.findAll({
+      include: [
+        {
+          model: User
+        }        
+      ],
+      attributes: { exclude: ['password', 'user_id'] },
+    });
 
     if (!taskData) {
       res
@@ -147,7 +154,7 @@ router.post('/', async (req, res) => {
   }
 })
 
-router.delete(':id', async (req, res) => {
+router.delete(':id', withAuth, async (req, res) => {
   try {
     const task_id = req.params.id;
     const taskToDelete = await Task.findByPk(task_id);
@@ -176,7 +183,7 @@ router.delete(':id', async (req, res) => {
   }
 })
 
-router.put(':id', async (req, res) => {
+router.put(':id', withAuth, async (req, res) => {
   try {
     const task_id = req.params.id;
     const taskToUpdate = await Task.findByPk(task_id);
@@ -236,7 +243,7 @@ router.put('/complete/:id', withAuth, async (req, res) => {
 })
 
 // Special update route to snooze a task.
-router.put('/snooze/:id/', withAuth, async (req, res) => {
+router.put('/snooze/:id', withAuth, async (req, res) => {
   let days = req.query.days || 0;
   let hours = req.query.hours || 0;
   let minutes = req.query.minutes || 0;
