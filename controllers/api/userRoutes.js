@@ -57,7 +57,7 @@ router.post('/create', async (req, res) => {
   }
 });
 
-router.post('/profile', async (req, res) => {
+router.put('/profile', async (req, res) => {
   try {
     const result = await User.update(
       { name: req.body.name, 
@@ -72,7 +72,7 @@ router.post('/profile', async (req, res) => {
   }
 });
 
-router.post('/logout', (req, res) => {
+router.delete('/logout', (req, res) => {
   if (req.session.logged_in) {
     // Remove the session variables
     req.session.destroy(() => {
@@ -82,5 +82,21 @@ router.post('/logout', (req, res) => {
     res.status(404).end();
   }
 });
+
+router.get('/', async (req, res) => {
+try {
+  const userData = await User.findAll({attributes: { exclude: ['email','password', 'user_id'] }})
+  if (!userData) {
+    res
+      .status(400)
+      .json({ message: 'No users exist.' });
+    return;
+  } else {
+    return res.status(200).json(userData);
+  }
+} catch (err) {
+  res.status(400).json(err);
+}
+})
 
 module.exports = router;
