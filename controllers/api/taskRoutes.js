@@ -333,9 +333,12 @@ router.put('/snooze/:id', withAuth, async (req, res) => {
     const taskToUpdate = await Task.findByPk(task_id);
 
     let dueDate = new Date(taskToUpdate.due_date);
-    dueDate.setDate(dueDate.getDate() + days);
-    dueDate.setHours(dueDate.getHours() + hours);
-    dueDate.setMinutes(dueDate.getMinutes() + minutes);
+    // console.log(dueDate);
+    // dueDate.setDate(dueDate.getDate() + days);
+    // console.log(dueDate);
+    // dueDate.setHours(dueDate.getHours() + hours);
+    // console.log(dueDate);
+    // dueDate.setMinutes(dueDate.getMinutes() + minutes);
 
     taskToUpdate.due_date = dueDate;
 
