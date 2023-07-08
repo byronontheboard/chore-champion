@@ -55,51 +55,51 @@ router.get('/profile', async (req, res) => {
   }
 });
 
-router.get('/task', withAuth, (req, res) => {
+router.get('/task', withAuth, async (req, res) => {
   // If a session exists, redirect the request to the homepage
+  const userData = await User.findByPk(req.session.user_id);
+
   if (!req.session.logged_in) {
     res.redirect('/');
     return;
   } else {
+    const userData = await User.findByPk(req.session.user_id);
+
     res.render('task', {
-      logged_in: req.session.logged_in
+      logged_in: req.session.logged_in,
+      userData
     });
   }
 });
 
-router.get('/browse', withAuth, async (req, res) => {
-  try {
-    const taskData = await Task.findAll({
-      include: [
-        {
-          model: User
-        }        
-      ]
-    });
-    
-    const tasks = taskData.map((project) => project.get({ plain: true }));
-
-    // This might break things.
-    const notTaskData = await NotTask.findAll({
-      order: [['priority', 'ASC']],
-    });
-
-    const notTasks = notTaskData.map((project) => project.get({ plain: true }));
-
-    res.render('browse', {
-      notTasks,
-      tasks,
-      logged_in: req.session.logged_in,
-    });
-  } catch (err) {
-    res.status(500).json(err);
-
-    console.log(err);
+router.get('/task/:id', withAuth, async (req, res) => {
+  // If a session exists, redirect the request to the homepage
+  const userData = await User.findByPk(req.session.user_id);
+  const taskId = req.params.id;
+  if (!req.session.logged_in) {
+    res.redirect('/');
+    return;
+  } else {
+    if (taskId) {
+      const taskData = await Task.findByPk(taskId);
+      if (taskData.user_id === req.session.user_id) {
+        res.render('task', {
+          logged_in: req.session.logged_in,
+          userData,
+          taskData,
+          updateData: true
+        });
+      } else {
+        res.status(404);
+      }
+    }
   }
 });
 
 router.get('/knockoutSelect', async (req, res) => {
+  const userData = await User.findByPk(req.session.user_id);
   res.render('knockoutSelect', {
+    userData,
     logged_in: req.session.logged_in,
   });
 });
@@ -202,6 +202,8 @@ router.get('/knockout/:time', async (req, res) => {
       var notUtilization = (((notMinutesSum)/time_limit)*100).toFixed(1);
 
       let taskLength = tasks.length;
+      const userData = await User.findByPk(req.session.user_id);
+
       res.render('knockout', {
         time_limit: time_limit,
         notTimeLimit,
@@ -214,6 +216,7 @@ router.get('/knockout/:time', async (req, res) => {
         tasks,
         taskLength,
         getAll,
+        userData,
         logged_in: req.session.logged_in,
       });
     } catch (err) {
@@ -225,10 +228,12 @@ router.get('/knockout/:time', async (req, res) => {
 
 
 router.get('/trainingLog', async (req, res) => {
+  const userData = await User.findByPk(req.session.user_id);
+
   res.render('trainingLog', {
     logged_in: req.session.logged_in,
+    userData
   });
 });
-module.exports = router;
 
 module.exports = router;
