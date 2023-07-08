@@ -258,7 +258,7 @@ router.delete(':id', withAuth, async (req, res) => {
   }
 })
 
-router.put(':id', withAuth, async (req, res) => {
+router.put('/:id', withAuth, async (req, res) => {
   try {
     const task_id = req.params.id;
     const taskToUpdate = await Task.findByPk(task_id);
@@ -273,7 +273,8 @@ router.put(':id', withAuth, async (req, res) => {
     taskToUpdate.set({
       title: req.body.title || taskToUpdate.title,
       body: req.body.body || taskToUpdate.body,
-      due_date: new Date(req.body.due_date) || taskToUpdate.due_date,
+      due_date: req.body.due_date || taskToUpdate.due_date,
+      complete_date: req.body.complete_date || taskToUpdate.due_date,
       priority: req.body.priority || taskToUpdate.priority,
       points: req.body.points || taskToUpdate.points,
       minutes: req.body.minutes || taskToUpdate.minutes,

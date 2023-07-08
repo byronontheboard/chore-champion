@@ -10,7 +10,17 @@
     "nodemon": "nodemon server.js",
     "seed": "node seeds/seed.js"
   },
-  "keywords": ["tasks", "task manager",  "chores", "time management", "priority tasks", "due dates", "task scheduling", "productivity", "goal tracking"],
+  "keywords": [
+    "tasks",
+    "task manager",
+    "chores",
+    "time management",
+    "priority tasks",
+    "due dates",
+    "task scheduling",
+    "productivity",
+    "goal tracking"
+  ],
   "contributors": [
     "Ben Storlie <benjstorlie@gmail.com> (https://benjstorlie.github.io/)",
     "Byron Thomas <email@email.com> (https://github.com/byronontheboard)",
@@ -30,6 +40,7 @@
     "express": "^4.18.2",
     "express-handlebars": "^5.2.0",
     "express-session": "^1.17.1",
+    "luxon": "^3.3.0",
     "mysql2": "^2.2.5",
     "sequelize": "^6.3.5"
   },

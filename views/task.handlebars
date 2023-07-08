@@ -30,7 +30,7 @@
         <label for="due_date">Due Date</label>
         <input class="w-100 m-1 mx-0 form-control d-flex align-items-center"
           data-bs-toggle="tooltip" data-bs-placement="right" data-bs-custom-class="custom-tooltip" 
-          data-bs-title="Please use the calendar to select the expected date of completion for your task." type="datetime-local" name="due_date" id="due_date" {{#if taskData.dataValues.due_date}}value="{{taskData.dataValues.due_date}}"{{/if}}>
+          data-bs-title="Please use the calendar to select the expected date of completion for your task." type="datetime-local" name="due_date" id="due_date" {{#if taskData.dataValues.due_date}}value="{{formatTime taskData.dataValues.due_date}}"{{/if}}>
       </div>
 
       <div class="form-group">
@@ -51,12 +51,12 @@
         <label for="minutes">Minutes</label>
         <input class="w-100 m-1 mx-0 form-control d-flex align-items-center"
           data-bs-toggle="tooltip" data-bs-placement="right" data-bs-custom-class="custom-tooltip" 
-          data-bs-title="Please provide an approximate amount of time that this task will require to be completed(this data will be useful when utilizing the 'Knock Out' tool)." type="number" name="minutes" id="minutes" {{#if taskData.dataValues.minutes}}value="{{taskData.dataValues.minutes}}{{/if}}/>
+          data-bs-title="Please provide an approximate amount of time that this task will require to be completed(this data will be useful when utilizing the 'Knock Out' tool)." type="number" name="minutes" id="minutes" {{#if taskData.dataValues.minutes}}value="{{taskData.dataValues.minutes}}"{{/if}}/>
       </div>
       {{#if updateData}}
       <div class="form-group">
         <label for="complete_date">Completed</label>
-        <input class="w-100 m-1 mx-0 form-control" type="datetime-local" name="complete_date" id="complete_date" {{#if taskData.dataValues.complete_date}}value="{{taskData.dataValues.complete_date}}"{{/if}}/>
+        <input class="w-100 m-1 mx-0 form-control" type="datetime-local" name="complete_date" id="complete_date" {{#if taskData.dataValues.complete_date}}value="{{formatTime taskData.dataValues.complete_date}}"{{/if}}/>
       </div>
       {{/if}}
       <div class="form-group">
@@ -82,3 +82,4 @@
 </div>
 <script src="/js/task.js"></script>
 <script src="/js/complete.js"></script>
+<script src="/js/snooze.js"></script>

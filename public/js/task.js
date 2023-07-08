@@ -7,9 +7,15 @@ const taskFormHandler = async (event) => {
   const body = document.querySelector('#body-task').value.trim();
   var due_date;
   if (document.querySelector('#due_date')) {
-    due_date = null;
+    due_date = document.querySelector('#due_date').value;
   } else {
-    due_date = new Date(document.querySelector('#due_date').value);
+    due_date = null;
+  }
+  var complete_date;
+  if (document.querySelector('#complete_date')) {
+    complete_date = document.querySelector('#complete_date').value;
+  } else {
+    complete_date = null;
   }
   console.log("due date", due_date);
   const minutes = document.querySelector('#minutes').value;
@@ -49,9 +55,9 @@ const taskFormHandler = async (event) => {
           body, 
           priority,
           due_date,
-          complete_date,
           minutes, 
-          points
+          points,
+          complete_date
         }),
         headers: { 'Content-Type': 'application/json' },
       });
