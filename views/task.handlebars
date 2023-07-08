@@ -51,7 +51,7 @@
         <label for="minutes">Minutes</label>
         <input class="w-100 m-1 mx-0 form-control d-flex align-items-center"
           data-bs-toggle="tooltip" data-bs-placement="right" data-bs-custom-class="custom-tooltip" 
-          data-bs-title="Please provide an approximate amount of time that this task will require to be completed(this data will be useful when utilizing the 'Knock Out' tool)." type="number" name="minutes" id="minutes" {{#if taskData.dataValues.minutes}}value="{{taskData.dataValues.minutes}}{{#if taskData.dataValues.minutes}}value="{{taskData.dataValues.minutes}}"{{/if}}/>
+          data-bs-title="Please provide an approximate amount of time that this task will require to be completed(this data will be useful when utilizing the 'Knock Out' tool)." type="number" name="minutes" id="minutes" {{#if taskData.dataValues.minutes}}value="{{taskData.dataValues.minutes}}{{/if}}/>
       </div>
       {{#if updateData}}
       <div class="form-group">
@@ -81,3 +81,4 @@
   </div>
 </div>
 <script src="/js/task.js"></script>
+<script src="/js/complete.js"></script>
