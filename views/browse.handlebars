@@ -1,0 +1,67 @@
+{{#each tasks as |task| }}
+<div class="mx-0 m-4">
+  <div class="row align-center">
+    <div>
+      <h2>{{{get_priority task.priority}}} {{task.title}}</h2>
+    </div>
+    <div>
+      <p>{{task.body}}</p>
+      <button id="complete-{{task.id}}" data-id="{{task.id}}" onClick="completeTask({{task.id}})"> {{task.id}} </button>
+    </div>
+    <div>
+      {{task.due_date}}
+    </div>
+    <div>
+      <h7>By: {{task.user.name}}</h7>
+    </div>
+  </div>
+</div>
+{{/each}}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{{!-- <div class="d-flex justify-content-center" style="width:50vw">
+<div style="width:250px; height:250px" class="d-flex"> 
+<canvas id="myChart" class="justify-content-center"></canvas>
+
+</div> --}}
+
+{{!-- </div> --}}
+  <div class="container-fluid d-flex justify-content-center" style="height: 100vh;">
+    <div style="width:250px; height:250px">
+      <!-- Canvas element -->
+       <canvas id="myChart"></canvas>
+    </div>
+  </div>
+
+<script>
+var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+        labels: ['Red','Green','Orange'],
+        datasets: [{
+            label: '# of Chores',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                
+                
+                'rgba(0,255,0,0.3)',
+                
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                
+                'rgba(75, 192, 192, 0.2)',
+                
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+       
+    }
+});
+</script>
+<script src="/js/browse.js"></script>

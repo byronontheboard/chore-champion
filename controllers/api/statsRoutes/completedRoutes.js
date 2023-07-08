@@ -1,5 +1,7 @@
 const router = require('express').Router();
 const { Task, User, Stats, CompletedTask } = require('../../../models');
+const { Op } = require('sequelize');
+
 
 // Get all completedTask data
 router.get('/', async (req, res) => {
@@ -22,7 +24,7 @@ router.get('/', async (req, res) => {
 // get all completed Task data for specified user
 router.get('/user/:id', async (req, res) => {
   try {
-    const completedTaskData = await CompletedTask.findAll({
+    const taskData = await CompletedTask.findAll({
       include: [
         {
           model: User
@@ -34,14 +36,66 @@ router.get('/user/:id', async (req, res) => {
       attributes: { exclude: ['password', 'user_id'] },
     });
 
-    if (!completedTaskData) {
+    if (!taskData) {
       res
         .status(400)
         .json({ message: 'No tasks! Check back later.' });
       return;
     } else {
-      return res.status(200).json(completedTaskData);
+      return res.status(200).json(taskData);
     }
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
+router.get('/user/:id/date/:date', async (req, res) => {
+  try {
+    const taskData = await CompletedTask.findOne({
+      include: [
+        {
+          model: User
+        }        
+      ],
+      where: {
+        user_id: req.params.id,
+        complete_date: {
+          [Op.lt]: req.params.date
+        }
+      },
+      attributes: { exclude: ['password', 'user_id'] },
+      order: [['complete_date', 'DESC']],
+      limit: 1
+    });
+
+    return res.status(200).json(taskData);
+    
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
+// get all completed task data after a specified date
+router.get('/user/:id/after/:date', async (req, res) => {
+  try {
+    const taskData = await CompletedTask.findAll({
+      include: [
+        {
+          model: User
+        }        
+      ],
+      where: {
+        user_id: req.params.id,
+        complete_date: {
+          [Op.gt]: new Date(req.params.date)
+        }
+      },
+      attributes: { exclude: ['password', 'user_id'] },
+      order: [['complete_date', 'DESC']]
+    });
+
+    return res.status(200).json(taskData);
+    
   } catch (err) {
     res.status(400).json(err);
   }
