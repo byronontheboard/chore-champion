@@ -110,6 +110,7 @@ const populateForm = () => {
       optionEl.text = x;
     } else if (type == 'add' || !priority) {
       optionEl.selected = true;
+      optionEl.text = '-'
     }
     if (x==priority) {
       // if the option refers to the current priority value, remove "selected" status from the first option, and give it to the current option.
