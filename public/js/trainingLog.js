@@ -1,26 +1,48 @@
-var completedVsNotCompleted = document.getElementById('completed-vs-not-completed').getContext('2d');
-var completedVsNotCompletedChart = new Chart(completedVsNotCompleted, {
-    type: 'doughnut',
-    data: {
-        labels: ['Not Completed', 'Completed'],
-        datasets: [{
-            data: [1, 99],
-            backgroundColor: [
-                'white',
-                'green'
-            ],
-            borderColor: [
-                'darkgreen',
-                'darkgreen'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
+const completedVsNotCompleteFunction = async (event) => {
+   
+      const completeResponse = await fetch('/api/tasks/completeCount', {
+        method: 'GET',
        
+        headers: { 'Content-Type': 'application/json' },
+      });
+      const incompleteResponse = await fetch('/api/tasks/incompleteCount', {
+        method: 'GET',
+       
+        headers: { 'Content-Type': 'application/json' },
+      });
+  
+      if (completeResponse.ok && incompleteResponse.ok ) {
+        var completeCount = await completeResponse.json();
+        var incompleteCount = await incompleteResponse.json();
+        var completedVsNotCompleted = document.getElementById('completed-vs-not-completed').getContext('2d');
+        var completedVsNotCompletedChart = await new Chart(completedVsNotCompleted, {
+        type: 'doughnut',
+        data: {
+            labels: ['Not Completed', 'Completed'],
+            datasets: [{
+                data: [incompleteCount, completeCount],
+                backgroundColor: [
+                    'red',
+                    'green'
+                ],
+                borderColor: [
+                    'darkred',
+                    'darkgreen'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            
+        }
+        });
+        return response
+        alert('Successfully tasked!');
+      } else {
+        alert('Task failed to create.');
+      }
     }
-});
-
+    window.onload = completedVsNotCompleteFunction;
 var priority = document.getElementById('priority').getContext('2d');
 var priorityChart = new Chart(priority, {
     type: 'doughnut',

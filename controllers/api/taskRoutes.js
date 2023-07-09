@@ -27,6 +27,81 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.get('/incompleteCount', async (req, res) => {
+  try {
+    const taskData = await Task.count({
+      include: [
+        {
+          model: User
+        }        
+      ],
+      attributes: { exclude: ['password', 'user_id'] },
+      where: { complete_date: null}
+    });
+
+    if (!taskData) {
+      res
+        .status(400)
+        .json({ message: 'No tasks! Check back later.' });
+      return;
+    } else {
+      return res.status(200).json(taskData);
+    }
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
+router.get('/completeCount', async (req, res) => {
+  try {
+    const taskData = await Task.count({
+      include: [
+        {
+          model: User
+        }        
+      ],
+      attributes: { exclude: ['password', 'user_id'] },
+      where: { complete_date: {[Op.not]: null}}
+    });
+
+    if (!taskData) {
+      res
+        .status(400)
+        .json({ message: 'No tasks! Check back later.' });
+      return;
+    } else {
+      return res.status(200).json(taskData);
+    }
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
+router.get('/completeCount/:count', async (req, res) => {
+  try {
+    const taskData = await Task.count({
+      include: [
+        {
+          model: User
+        }        
+      ],
+      attributes: { exclude: ['password', 'user_id'] },
+      where: { priority: req.params.count }
+    });
+
+    if (!taskData) {
+      res
+        .status(400)
+        .json({ message: 'No tasks! Check back later.' });
+      return;
+    } else {
+      return res.status(200).json(taskData);
+    }
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
 router.get('/:id', async (req, res) => {
   try {
     const taskData = await Task.findByPk(req.params.id);
@@ -205,7 +280,7 @@ router.put(':id', withAuth, async (req, res) => {
     })
     
     taskToUpdate.save();
-
+    res.status(200).json("Success.");
   } catch (err) {
     res.status(400).json(err);
   }
