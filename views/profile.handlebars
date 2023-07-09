@@ -27,12 +27,20 @@
     </div>
     <div class="form-group">
         <label for="icon">Icon</label>
-        <input type="text" class="w-100 m-1 mx-0 form-control" id="icon" aria-describedby="emailHelp" value="{{userData.dataValues.icon}}">
-        <div class="icon-selector">
-            <a class="btn btn-light " onclick="changeIcon('💩')">💩</a>
-            <a class="btn btn-light " onclick="changeIcon('👾')">👾</a>
-            <a class="btn btn-light " onclick="changeIcon('🥸')">🥸</a>
+        <input type="text" class="w-100 m-1 mx-0 form-control d-flex align-items-center"
+          data-bs-toggle="tooltip" data-bs-placement="right" data-bs-custom-class="custom-tooltip" 
+          data-bs-title="Not seeing the icon that you would like to use? Feel free to enter any emoji that you would like to use as your icon." id="icon" aria-describedby="emailHelp" value="{{userData.dataValues.icon}}">
+        <div class="icon-selector d-flex justify-content-center">
             <!-- Add more buttons for additional icons as needed -->
+            <a class="btn btn-light m-1" onclick="changeIcon('👑')">👑</a>
+            <a class="btn btn-light m-1" onclick="changeIcon('💩')">💩</a>
+            <a class="btn btn-light m-1" onclick="changeIcon('👾')">👾</a>
+            <a class="btn btn-light m-1" onclick="changeIcon('🐶')">🐶</a>
+            <a class="btn btn-light m-1" onclick="changeIcon('🥸')">🥸</a>
+            <a class="btn btn-light m-1" onclick="changeIcon('🤖')">🤖</a>
+            <a class="btn btn-light m-1" onclick="changeIcon('😼')">😼</a>
+            <a class="btn btn-light m-1" onclick="changeIcon('💀')">💀</a>
+            <a class="btn btn-light m-1" onclick="changeIcon('🐵')">🐵</a>
         </div>
     </div>
     <div class="form-group">

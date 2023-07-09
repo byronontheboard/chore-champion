@@ -1,47 +1,83 @@
 <div class="row">
+  {{#if updateData}}
+  <h1 class="text-center">Update Task</h1>
+  <input id="id" value="{{taskData.dataValues.id}}" hidden />
+  <input id="type" value="update" hidden />
+  {{else}}
   <h1 class="text-center">Add a New Task</h1>
+  <input id="type" value="add" hidden />
+  {{/if}}
   <div class="col-12-6">
     <form class="w-75 mx-auto task-form">
       <div class="form-group">
         <label for="title-task">Title</label>
-        <input type="text" class="w-100 m-1 mx-0 form-control" id="title-task" aria-describedby="emailHelp"
-          placeholder="Enter task title">
+        <input type="text" class="w-100 m-1 mx-0 form-control d-flex align-items-center"
+          data-bs-toggle="tooltip" data-bs-placement="right" data-bs-custom-class="custom-tooltip" 
+          data-bs-title="Please provide a unique title for your task that will help you differentiate it from any other task(s) that you create." id="title-task" aria-describedby="emailHelp"
+          placeholder="Enter task title" {{#if taskData.dataValues.title}}value="{{taskData.dataValues.title}}"{{/if}}/>
       </div>
 
       <div class="form-group">
         <label for="body-task">Body</label>
-        <textarea class="w-100 m-1 mx-0 form-control" id="body-task" placeholder="Enter task content"></textarea>
+        <textarea class="w-100 m-1 mx-0 form-control d-flex align-items-center"
+          data-bs-toggle="tooltip" data-bs-placement="right" data-bs-custom-class="custom-tooltip" 
+          data-bs-title="Please provide any details or conditions required to complete your task." id="body-task" placeholder="Enter task content">
+          {{#if taskData.dataValues.body}}{{taskData.dataValues.body}}{{/if}}
+        </textarea>
       </div>
 
       <div class="form-group">
         <label for="due_date">Due Date</label>
-        <input class="w-100 m-1 mx-0 form-control" type="datetime-local" name="due_date" id="due_date"/>
+        <input class="w-100 m-1 mx-0 form-control d-flex align-items-center"
+          data-bs-toggle="tooltip" data-bs-placement="right" data-bs-custom-class="custom-tooltip" 
+          data-bs-title="Please use the calendar to select the expected date of completion for your task." type="datetime-local" name="due_date" id="due_date" {{#if taskData.dataValues.due_date}}value="{{taskData.dataValues.due_date}}"{{/if}}>
       </div>
 
       <div class="form-group">
         <label for="priority">Priority</label>
-        <input class="w-100 m-1 mx-0 form-control" type="number" name="priority" id="priority"/>
+        <input class="w-100 m-1 mx-0 form-control d-flex align-items-center"
+          data-bs-toggle="tooltip" data-bs-placement="right" data-bs-custom-class="custom-tooltip" 
+          data-bs-title="Please assign a priority value for your task(with '1' being the highest value possible)." type="number" name="priority" id="priority"  {{#if taskData.dataValues.priority}}value="{{taskData.dataValues.priority}}"{{/if}}/>
       </div>
 
       <div class="form-group">
         <label for="points">Points</label>
-        <input class="w-100 m-1 mx-0 form-control" type="number" name="points" id="points"/>
+        <input class="w-100 m-1 mx-0 form-control d-flex align-items-center"
+          data-bs-toggle="tooltip" data-bs-placement="right" data-bs-custom-class="custom-tooltip" 
+          data-bs-title="Please provide the amount of points that you would like to receive as a reward, upon completion of this task." type="number" name="points" id="points" {{#if taskData.dataValues.points}}value="{{taskData.dataValues.points}}"{{/if}}/>
       </div>
 
       <div class="form-group">
         <label for="minutes">Minutes</label>
-        <input class="w-100 m-1 mx-0 form-control" type="number" name="minutes" id="minutes"/>
+        <input class="w-100 m-1 mx-0 form-control d-flex align-items-center"
+          data-bs-toggle="tooltip" data-bs-placement="right" data-bs-custom-class="custom-tooltip" 
+          data-bs-title="Please provide an approximate amount of time that this task will require to be completed(this data will be useful when utilizing the 'Knock Out' tool)." type="number" name="minutes" id="minutes" {{#if taskData.dataValues.minutes}}value="{{taskData.dataValues.minutes}}{{#if taskData.dataValues.minutes}}value="{{taskData.dataValues.minutes}}"{{/if}}/>
       </div>
-      
-      {{!-- <div class="form-group">
-        <label for="complete_date">Completed</label>
-        <input type="datetime-local" name="complete_date" id="complete_date"/>
-      </div> --}}
-
+      {{#if updateData}}
       <div class="form-group">
+        <label for="complete_date">Completed</label>
+        <input class="w-100 m-1 mx-0 form-control" type="datetime-local" name="complete_date" id="complete_date" {{#if taskData.dataValues.complete_date}}value="{{taskData.dataValues.complete_date}}"{{/if}}/>
+      </div>
+      {{/if}}
+      <div class="form-group">
+          {{#if updateData}}
+        <button class="w-100 mx-0 m-1 btn btn-warning" type="submit">Save Edits</button>
+          {{else}}
         <button class="w-100 mx-0 m-1 btn btn-success" type="submit">Create Task</button>
+          {{/if}}
       </div>
     </form>
+  </div>
+</div>
+<div class="toast-container m-4 bottom-0 start-50 translate-middle-x">
+  <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header pb-0">
+      <strong class="fs-5 me-auto mx-auto">✅ Task Successfully Updated!</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+        <p class="text-center mb-0">You can now safely navigate from this page.</p>
+    </div>
   </div>
 </div>
 <script src="/js/task.js"></script>
