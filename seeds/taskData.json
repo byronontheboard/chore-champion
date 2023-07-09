@@ -152,19 +152,23 @@
     "points": 100
   },
   {
+    "id": 50,
     "title" : "Take Pets for a Walk",
     "body" : "...",
     "user_id" : 1,
     "priority" : 4,
     "minutes" : 30,
-    "points": 200
+    "points": 200,
+    "complete_date": "2023-07-07T06:49:17.715Z"
   },
   {
+    "id": 51,
     "title" : "Clean the Garage",
     "body" : "...",
     "user_id" : 1,
     "priority" : 3,
     "minutes" : 120,
-    "points": 500
+    "points": 500,
+    "complete_date": "2023-07-06T18:50:15.384Z"
   }
 ]

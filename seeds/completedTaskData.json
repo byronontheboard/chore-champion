@@ -1,0 +1,52 @@
+[
+  {
+    "user_id" : 1,
+    "task_id" : null,
+    "priority" : 2,
+    "minutes" : 60,
+    "points": 200,
+    "complete_date": "2023-04-16T05:16:31.155Z",
+    "cumulative_points": 200,
+    "cumulative_minutes": 60
+  },
+  {
+    "task_id" : null,
+    "user_id" : 1,
+    "priority" : 2,
+    "minutes" : 20,
+    "points": 100,
+    "complete_date": "2023-05-16T05:16:31.155Z",
+    "cumulative_points": 300,
+    "cumulative_minutes": 80
+  },
+  {
+    "task_id" : null,
+    "user_id" : 1,
+    "priority" : 5,
+    "minutes" : 600,
+    "points": 250,
+    "complete_date": "2023-06-16T05:16:31.155Z",
+    "cumulative_points": 750,
+    "cumulative_minutes": 330
+  },
+  {
+    "task_id": 50,
+    "user_id" : 1,
+    "priority" : 4,
+    "minutes" : 30,
+    "points": 200,
+    "cumulative_points": 950,
+    "cumulative_minutes": 360,
+    "complete_date": "2023-07-07T06:49:17.715Z"
+  },
+  {
+    "task_id": 51,
+    "user_id" : 1,
+    "priority" : 3,
+    "minutes" : 120,
+    "points": 500,
+    "cumulative_points": 1450,
+    "cumulative_minutes": 480,
+    "complete_date": "2023-07-06T18:50:15.384Z"
+  }
+]

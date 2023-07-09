@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { Task, User, Stats } = require('../../../models');
+const { Op } = require('sequelize');
 
 const pointsRoutes = require('./pointsRoutes');
 const completedRoutes = require('./completedRoutes');
