@@ -11,7 +11,7 @@ const seedDatabase = async () => {
   await sequelize.sync({ force: true });
 
   await User.bulkCreate(userData, {
-    individualHooks: false,  // stats has their own seeds values, instead of creating a blank one for each new user
+    individualHooks: true,
     returning: true,
   });
 

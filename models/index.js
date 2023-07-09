@@ -124,11 +124,20 @@ Task.afterUpdate(async (task, options) => {
 // Hook to create Stats row when a new User is created
 User.afterCreate(async (user, options) => {
     try {
-      await Stats.create({
-        user_id: user.id,
+      const statsData = await Stats.findOne({
+        where: {
+          user_id: user.id,
+        },
       });
+
+      if (!statsData) {
+          // Create new Stats row if it doesn't exist, just in case
+          statsData = await Stats.create({
+            user_id: user.id,
+          });
+        }
     } catch (error) {
-      console.error('Error creating Stats:', error);
+      console.error('Error aligning user with a matching stats row.', error);
     }
   });
 
