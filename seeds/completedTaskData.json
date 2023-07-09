@@ -10,8 +10,8 @@
     "cumulative_minutes": 60
   },
   {
-    "task_id" : null,
     "user_id" : 1,
+    "task_id" : null,
     "priority" : 2,
     "minutes" : 20,
     "points": 100,
@@ -20,8 +20,8 @@
     "cumulative_minutes": 80
   },
   {
-    "task_id" : null,
     "user_id" : 1,
+    "task_id" : null,
     "priority" : 5,
     "minutes" : 600,
     "points": 250,
@@ -40,8 +40,8 @@
     "complete_date": "2023-07-07T06:49:17.715Z"
   },
   {
-    "task_id": 51,
     "user_id" : 1,
+    "task_id": 51,
     "priority" : 3,
     "minutes" : 120,
     "points": 500,
