@@ -5,7 +5,8 @@
     "user_id" : 1,
     "priority" : 2,
     "minutes" : 60,
-    "points": 200
+    "points": 200,
+    "due_date": "2023-07-08T16:03:34.746Z"
   },
   {
     "title" : "Do Dishes",
@@ -13,7 +14,8 @@
     "user_id" : 1,
     "priority" : 2,
     "minutes" : 20,
-    "points": 100
+    "points": 100,
+    "due_date": "2023-07-14T16:03:34.746Z"
   },
   {
     "title" : "Read a Book",
@@ -37,7 +39,8 @@
     "user_id" : 1,
     "priority" : 1,
     "minutes" : 5,
-    "points": 100
+    "points": 100,
+    "due_date": "2023-07-09T16:03:34.746Z"
   },
   {
     "title" : "Clean House",
@@ -85,7 +88,8 @@
     "user_id" : 1,
     "priority" : 3,
     "minutes" : 60,
-    "points": 100
+    "points": 100,
+    "due_date": "2023-08-08T16:03:34.746Z"
   },
   {
     "title" : "Prepare Meals for the Week",
