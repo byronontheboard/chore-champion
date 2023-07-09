@@ -51,6 +51,7 @@ router.post('/create', async (req, res) => {
       email: req.body.email,
       password: req.body.password
     });
+    // console.log(newUser);
     res.status(200).json("Successfully created account.");
   } catch (err) {
     res.status(400).json(err);
