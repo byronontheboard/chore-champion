@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { Task, User, Stats } = require('../../../models');
+const { Op } = require('sequelize');
 
 // Get all points data
 router.get('/', async (req, res) => {
