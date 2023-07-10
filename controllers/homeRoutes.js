@@ -38,7 +38,7 @@ router.get('/create', (req, res) => {
   res.render('create');
 });
 
-router.get('/profile', async (req, res) => {
+router.get('/profile', withAuth, async (req, res) => {
   if (req.session.logged_in) {
     try {
       const userData = await User.findByPk(req.session.user_id);
@@ -57,7 +57,7 @@ router.get('/profile', async (req, res) => {
 
 router.get('/task', withAuth, async (req, res) => {
   // If a session exists, redirect the request to the homepage
-  const userData = await User.findByPk(req.session.user_id);
+  // const userData = await User.findByPk(req.session.user_id);
 
   if (!req.session.logged_in) {
     res.redirect('/');
@@ -74,14 +74,16 @@ router.get('/task', withAuth, async (req, res) => {
 
 router.get('/task/:id', withAuth, async (req, res) => {
   // If a session exists, redirect the request to the homepage
-  const userData = await User.findByPk(req.session.user_id);
+  
   const taskId = req.params.id;
   if (!req.session.logged_in) {
     res.redirect('/');
     return;
   } else {
+    const userData = await User.findByPk(req.session.user_id);
     if (taskId) {
       const taskData = await Task.findByPk(taskId);
+      console.log(taskData.due_date);
       if (taskData.user_id === req.session.user_id) {
         res.render('task', {
           logged_in: req.session.logged_in,
@@ -96,7 +98,7 @@ router.get('/task/:id', withAuth, async (req, res) => {
   }
 });
 
-router.get('/knockoutSelect', async (req, res) => {
+router.get('/knockoutSelect', withAuth,async (req, res) => {
   const userData = await User.findByPk(req.session.user_id);
   res.render('knockoutSelect', {
     userData,
@@ -104,7 +106,7 @@ router.get('/knockoutSelect', async (req, res) => {
   });
 });
 
-router.get('/knockout/:time', async (req, res) => {
+router.get('/knockout/:time', withAuth, async (req, res) => {
   if (req.params.time) {
     console.log('req.params.time', req.params.time);
     var getAll;
@@ -114,11 +116,6 @@ router.get('/knockout/:time', async (req, res) => {
     try {
       /*  Get all of the task data for this user. */
       const taskData = await Task.findAll({
-        include: [
-          {
-            model: User
-          }
-        ],
         where: {
           user_id: req.session.user_id
         },
@@ -227,7 +224,7 @@ router.get('/knockout/:time', async (req, res) => {
 });
 
 
-router.get('/trainingLog', async (req, res) => {
+router.get('/trainingLog', withAuth, async (req, res) => {
   const userData = await User.findByPk(req.session.user_id);
 
   res.render('trainingLog', {

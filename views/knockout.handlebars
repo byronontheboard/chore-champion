@@ -51,21 +51,25 @@
                     </div>
                   </div>
                   <hr/>
-                  <div class="d-flex "><span class="mx-auto">(not implemented)</span></div>
+                  {{!-- <div class="d-flex "><span class="mx-auto">(not implemented)</span></div> --}}
                 <div class="header-top position-relative" style="z-index: 99999 !important;">
                   <div class="d-flex btn-group z-3 dropdown-center dropdown">
                     {{!-- <a href="/delegate/{{task.id}}" class="mx-auto m-2 btn btn-primary">Delegate</a> --}}
-                    <a onClick="completeTask({{task.id}})" class="mx-auto m-2 btn btn-success">Complete</a>
+                    {{#if task.complete_date}}
+                      <a onClick="completeTask({{task.id}})" id="complete-{{task.id}}" class="mx-auto m-2 btn btn-secondary">Completed</a>
+                     {{else}}
+                        <a onClick="completeTask({{task.id}})" id="complete-{{task.id}}"  class="mx-auto m-2 btn btn-success">Complete</a>
+                     {{/if}}
                     <a href="/task/{{task.id}}" class="mx-auto m-2 btn btn-warning">Edit</a>
                     <button class="mx-auto m-2 btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                       Snooze
                     </button>
                     <ul class="z-3 m-1 dropdown-menu position-absolute mx-auto">
-                      <li><a class="dropdown-item z-3" href="#">1 Hour</a></li>
-                      <li><a class="dropdown-item z-3" href="#">6 Hours</a></li>
-                      <li><a class="dropdown-item z-3" href="#">Tomorrow (Midnight)</a></li>
-                      <li><a class="dropdown-item z-3" href="#">Next Week (168 hours from now)</a></li>
-                      <li><a class="dropdown-item z-3" href="#">Custom</a></li>
+                      <li><a class="dropdown-item z-3" onClick="snooze({{task.id}}, 0, 1, 0)">1 Hour</a></li>
+                      <li><a class="dropdown-item z-3" onClick="snooze({{task.id}}, 0, 6, 0)">6 Hours</a></li>
+                      <li><a class="dropdown-item z-3" onClick="snooze({{task.id}}, 0, 24, 0)">Tomorrow (24 Hours)</a></li>
+                      <li><a class="dropdown-item z-3" onClick="snooze({{task.id}}, 7, 0, 0)">Next Week (168 hours from now)</a></li>
+                      {{!-- <li><a class="dropdown-item z-3" onClick="snooze({{task.id}}, 0, 1, 0)">Custom</a></li> --}}
                     </ul>
                   </div>
                 </div>
@@ -114,3 +118,4 @@
 </div>
 <script src="/js/knockout.js"></script>
 <script src="/js/complete.js"></script>
+<script src="/js/snooze.js"></script>

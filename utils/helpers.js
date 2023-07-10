@@ -1,5 +1,5 @@
 const fs = require('fs');
-
+const {DateTime} = require('luxon');
 module.exports = {
   task_length: (task) => {
     return task.length;
@@ -82,6 +82,10 @@ module.exports = {
     } else {
       return value;
     }
+  },
+  formatTime : (time) => {
+    time = DateTime.fromISO(time.toISOString()).toFormat('yyyy-MM-dd HH:mm:ss');;
+    return time
   },
   svg : function(iconName) {
       // points to my icons folder

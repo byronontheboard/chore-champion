@@ -128,7 +128,7 @@ input {
 
 /* Explicitly stop all animation if the user has recued motion set up. */
 
-@media (prefers-reduced-motion: ) {
+@media (prefers-reduced-motion: reduce) {
     * {
         animation: none !important;
      

@@ -1,6 +1,6 @@
 const router = require('express').Router();
-const { Task, User } = require('../../models');
-const withAuth = require('../../utils/auth');
+const { Task, User, CompletedTask } = require('../../models');
+
 const { Op } = require('sequelize');
 
 router.get('/', async (req, res) => {
@@ -8,13 +8,14 @@ router.get('/', async (req, res) => {
     const taskData = await Task.findAll({
       include: [
         {
-          model: User
+          model: User,
+          attributes: { exclude: ['password', 'id', 'email'] }
         }        
       ],
-      attributes: { exclude: ['password', 'user_id'] },
+      attributes: { exclude: ['user_id'] },
     });
 
-    if (!taskData) {
+    if (!taskData.length) {
       res
         .status(400)
         .json({ message: 'No tasks! Check back later.' });
@@ -30,13 +31,11 @@ router.get('/', async (req, res) => {
 router.get('/incompleteCount', async (req, res) => {
   try {
     const taskData = await Task.count({
-      include: [
-        {
-          model: User
-        }        
-      ],
-      attributes: { exclude: ['password', 'user_id'] },
-      where: { complete_date: null}
+      attributes: { exclude: ['user_id'] },
+      where: {
+        complete_date: null,
+        user_id: req.session.user_id,
+      }
     });
 
     if (!taskData) {
@@ -54,14 +53,10 @@ router.get('/incompleteCount', async (req, res) => {
 
 router.get('/completeCount', async (req, res) => {
   try {
-    const taskData = await Task.count({
-      include: [
-        {
-          model: User
-        }        
-      ],
-      attributes: { exclude: ['password', 'user_id'] },
-      where: { complete_date: {[Op.not]: null}}
+    const taskData = await CompletedTask.count({
+      where: { 
+        user_id: req.session.user_id,
+      }
     });
 
     if (!taskData) {
@@ -77,16 +72,13 @@ router.get('/completeCount', async (req, res) => {
   }
 });
 
-router.get('/completeCount/:count', async (req, res) => {
+router.get('/completeCount/:priority', async (req, res) => {
   try {
-    const taskData = await Task.count({
-      include: [
-        {
-          model: User
-        }        
-      ],
-      attributes: { exclude: ['password', 'user_id'] },
-      where: { priority: req.params.count }
+    const taskData = await CompletedTask.count({
+      where: { 
+        priority: req.params.priority,
+        user_id: req.session.user_id,
+       }
     });
 
     if (!taskData) {
@@ -120,26 +112,33 @@ router.get('/:id', async (req, res) => {
 });
 
 // Get all tasks for a user
-// Optional query parameters "filter", "after", and "before"
-// "filter" can be either "complete" or "incomplete", to get only completed or incomplete tasks.
+// Optional query parameters "complete", "priority", "dueAfter", and "dueBefore", "createdAfter", "createdBefore"
+// "complete" can be either "yes" or "no", to get only completed or incomplete tasks.
 // "after" and "before" are dates.
 router.get('/user/:id', async (req, res) => {
 
-  let where = {user_id: req.params.id}
+  let user_id = req.params.id || req.session.user_id;
+  if (user_id === 'me') {user_id = req.session.user_id};
+  
+  let where = {user_id}
 
-  switch (req.query.filter) {
-    case 'complete':
+  switch (req.query.complete) {
+    case 'yes':
       where.complete_date = {[Op.not]: null}
       break;
-    case 'incomplete':
+    case 'no':
       where.complete_date = null
       break;
   }
 
-  const dueAfter = req.query.dueAfter ? new Date(req.query.dueAfter) : undefined;
-  const dueBefore = req.query.dueBefore ? new Date(req.query.dueBefore) : undefined;
-  const createdAfter = req.query.createdAfter ? new Date(req.query.createdAfter) : undefined;
-  const createdBefore = req.query.createdBefore ? new Date(req.query.createdBefore) : undefined;
+  if (req.query.priority) {
+    where.priority = req.query.priority
+  }
+
+  const dueAfter = req.query.dueAfter ? new Date(decodeURIComponent(req.query.dueAfter)) : undefined;
+  const dueBefore = req.query.dueBefore ? new Date(decodeURIComponent(req.query.dueBefore)) : undefined;
+  const createdAfter = req.query.createdAfter ? new Date(decodeURIComponent(req.query.createdAfter)) : undefined;
+  const createdBefore = req.query.createdBefore ? new Date(decodeURIComponent(req.query.createdBefore)) : undefined;
 
   if (dueAfter && dueBefore) {
     if (dueBefore <= dueAfter) {
@@ -185,14 +184,15 @@ router.get('/user/:id', async (req, res) => {
     const taskData = await Task.findAll({
       include: [
         {
-          model: User
+          model: User,
+          attributes: { exclude: ['password', 'id', 'email'] }
         }        
       ],
+      attributes: { exclude: ['user_id'] },
       where,
-      attributes: { exclude: ['password', 'user_id'] },
     });
 
-    if (!taskData) {
+    if (!taskData.length) {
       res
         .status(400)
         .json({ message: 'No tasks with those criteria! Check back later.' });
@@ -229,7 +229,7 @@ router.post('/', async (req, res) => {
   }
 })
 
-router.delete(':id', withAuth, async (req, res) => {
+router.delete('/:id', async (req, res) => {
   try {
     const task_id = req.params.id;
     const taskToDelete = await Task.findByPk(task_id);
@@ -258,45 +258,46 @@ router.delete(':id', withAuth, async (req, res) => {
   }
 })
 
-router.put(':id', withAuth, async (req, res) => {
+router.put('/:id', async (req, res) => {
   try {
     const task_id = req.params.id;
     const taskToUpdate = await Task.findByPk(task_id);
 
-    if (req.session.user_id !== taskToUpdate.user_id) {
-      res
-        .status(400)
-        .json({ message: 'You can only update your own tasks.' });
-      return;
-    }
+      if (req.session.user_id !== taskToUpdate.user_id) {
+        res
+          .status(400)
+          .json({ message: 'You can only update your own tasks.' });
+        return;
+      }
 
-    taskToUpdate.set({
-      title: req.body.title || taskToUpdate.title,
-      body: req.body.body || taskToUpdate.body,
-      due_date: new Date(req.body.due_date) || taskToUpdate.due_date,
-      priority: req.body.priority || taskToUpdate.priority,
-      points: req.body.points || taskToUpdate.points,
-      minutes: req.body.minutes || taskToUpdate.minutes,
-    })
-    
-    taskToUpdate.save();
-    res.status(200).json("Success.");
-  } catch (err) {
-    res.status(400).json(err);
+      taskToUpdate.set({
+        title: req.body.title || taskToUpdate.title,
+        body: req.body.body || taskToUpdate.body,
+        due_date: new Date(req.body.due_date) || taskToUpdate.due_date,
+        complete_date: new Date(req.body.complete_date) || taskToUpdate.complete_date,
+        priority: req.body.priority || taskToUpdate.priority,
+        points: req.body.points || taskToUpdate.points,
+        minutes: req.body.minutes || taskToUpdate.minutes,
+      })
+      
+      taskToUpdate.save();
+      res.status(200).json("Success.");
+    } catch (err) {
+      res.status(400).json(err);
+    }
   }
-})
+)
 
 // Special update route to toggle a task.
-router.put('/complete/:id', withAuth, async (req, res) => {
+router.put('/complete/:id',  async (req, res) => {
   try {
     const task_id = req.params.id;
     const taskToUpdate = await Task.findByPk(task_id);
 
     if (+req.session.user_id !== +taskToUpdate.user_id) {
-      console.log(req.session.user_id,taskToUpdate.user_id )
       res
         .status(400)
-        .json({ message: 'You can only update your own tasks.'+req.session.user_id });
+        .json({ message: 'You can only update your own tasks.' });
       return;
     }
 
@@ -318,33 +319,35 @@ router.put('/complete/:id', withAuth, async (req, res) => {
 })
 
 // Special update route to snooze a task.
-router.put('/snooze/:id', withAuth, async (req, res) => {
-  let days = req.query.days || 0;
-  let hours = req.query.hours || 0;
-  let minutes = req.query.minutes || 0;
+router.put('/snooze/:id', 
+  async (req, res) => {
+    let days = req.query.days || 0;
+    let hours = req.query.hours || 0;
+    let minutes = req.query.minutes || 0;
 
-  // default snooze 1 day
-  // but maybe someone wants to snooze for 0 time??
-  // if (days+hours+minutes === 0) {days = 1};
+    // default snooze 1 day
+    // but maybe someone wants to snooze for 0 time??
+    // if (days+hours+minutes === 0) {days = 1};
 
-  try {
-    const task_id = req.params.id;
-    const taskToUpdate = await Task.findByPk(task_id);
+    try {
+      const task_id = req.params.id;
+      const taskToUpdate = await Task.findByPk(task_id);
 
-    let dueDate = new Date(taskToUpdate.due_date);
-    dueDate.setDate(dueDate.getDate() + days);
-    dueDate.setHours(dueDate.getHours() + hours);
-    dueDate.setMinutes(dueDate.getMinutes() + minutes);
+      let dueDate = new Date(taskToUpdate.due_date);
+      dueDate.setDate(dueDate.getDate() + days);
+      dueDate.setHours(dueDate.getHours() + hours);
+      dueDate.setMinutes(dueDate.getMinutes() + minutes);
 
-    taskToUpdate.due_date = dueDate;
+      taskToUpdate.due_date = dueDate;
 
-    await taskToUpdate.save();
-    res.json(taskToUpdate);
+      await taskToUpdate.save();
+      res.json(taskToUpdate);
 
-  } catch (err) {
-    res.status(400).json(err);
+    } catch (err) {
+      res.status(400).json(err);
+    }
   }
-})
+)
 
 
 module.exports = router;
