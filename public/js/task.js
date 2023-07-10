@@ -56,15 +56,19 @@ const taskFormHandler = async (event) => {
   // console.log(due_date);
 
   if (title && body && priority && minutes && points) {
-
+     try{
     console.log(form.lastChild.classList.contains('error-message'));
     console.log(form.lastChild)
+     
     // Remove error message if it exists
     if (form.lastChild.classList.contains('error-message')) {
       console.log('removed error message');
       form.lastChild.remove();
     }
-  
+  }
+     catch{
+      
+     }
     // const due_date = '2023-06-27 12:00:00'
     // TODO: Add a comment describing the functionality of this expression
     console.log(type);
