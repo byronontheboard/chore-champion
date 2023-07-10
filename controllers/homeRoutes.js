@@ -82,6 +82,7 @@ router.get('/task/:id', withAuth, async (req, res) => {
   } else {
     if (taskId) {
       const taskData = await Task.findByPk(taskId);
+      console.log(taskData.due_date);
       if (taskData.user_id === req.session.user_id) {
         res.render('task', {
           logged_in: req.session.logged_in,
@@ -114,11 +115,6 @@ router.get('/knockout/:time', async (req, res) => {
     try {
       /*  Get all of the task data for this user. */
       const taskData = await Task.findAll({
-        include: [
-          {
-            model: User
-          }
-        ],
         where: {
           user_id: req.session.user_id
         },
