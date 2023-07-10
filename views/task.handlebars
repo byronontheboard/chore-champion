@@ -49,7 +49,7 @@
         <label for="due_date">Due Date</label>
         <input class="w-100 m-1 mx-0 form-control d-flex align-items-center"
           data-bs-toggle="tooltip" data-bs-placement="right" data-bs-custom-class="custom-tooltip" 
-          data-bs-title="Please use the calendar to select the expected date of completion for your task." type="datetime-local" name="due_date" id="due_date" {{#if taskData.dataValues.due_date}}value="{{formatTime taskData.dataValues.due_date}}"{{/if}}>
+          data-bs-title="Please use the calendar to select the expected date of completion for your task." type="datetime-local" name="due_date" id="due_date" required {{#if taskData.dataValues.due_date}}value="{{formatTime taskData.dataValues.due_date}}"{{/if}}>
       </div>
       
       {{#if updateData}}
