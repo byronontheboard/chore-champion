@@ -1,7 +1,7 @@
 # Chore Champion | ᕦ(ò_óˇ)ᕤ
 When my collegues and I came together to produce this application, our intent was set on providing the user with an interface that would allow them to efficiently list and manage their daily tasks; and subsequently 'knockout' those tasks with ease to become the ___Chore Champion___ they were always destined to be!
 
-[Display an image of the Homepage of a user]
+<img width="1080" alt="Screen Shot 2023-07-10 at 3 38 21 PM" src="https://github.com/byronontheboard/chore-champion/assets/127366720/8330358b-026e-4f2a-ae4b-fb46d76982bd">
 
 ----
 
@@ -50,6 +50,8 @@ Once the user clicks 'Add' in the navigation bar, they will be given a form that
 
 ## Tasks Browser
 After the user has created a task, they then have the option to view their task(s) when they click the 'Browse' tab in the navigation bar. Here the tasks will be displayed with their Title, Priority, Minutes(to complete) Points, when the task was Created, and the Due Date for the task. From there, the user then has the option to begin 'knocking' their task out, by clicking the 'Start' button.
+
+<img width="1080" alt="Browse-CC" src="https://github.com/byronontheboard/chore-champion/assets/127366720/ebf561e7-102c-468c-b0df-9c1dfeb484fc">
 
 ----
 
