@@ -27,4 +27,14 @@ As a ___Chore Champion___, I want to be able to create a list of tasks that I pl
 - Priority
 - Points
 - Minutes
- 
+
+***WHEN*** I create a new task,
+- [x] ***THEN*** I am able to view it alongside my other tasks, in the 'Browse' section, displaying all parameters regarding them.
+
+***WHEN*** I want to view my progress in real time,
+- [x] ***THEN*** I am able to view charts displaying:
+- A percentage for my total tasks that are completed and uncompleted.
+- My total tasks and where each of them rank in regards to their Priority Type.
+
+## Deployed Application 
+https://byronontheboard.github.io/chore-champion/
