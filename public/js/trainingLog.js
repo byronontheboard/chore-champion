@@ -24,6 +24,8 @@ const completedVsNotCompleteFunction = async (event) => {
        
         headers: { 'Content-Type': 'application/json' },
       });
+      console.log(completeResponse);
+      console.log(incompleteResponse);
   
       if (completeResponse.ok && incompleteResponse.ok ) {
         var completeCount = await completeResponse.json();
@@ -51,45 +53,50 @@ const completedVsNotCompleteFunction = async (event) => {
         }
         });
         
-        return response
       } else {
         console.log('Complete vs. Incomplete data failed.');
       }
     }
 
-const minutesChartFunction = async () => {
+
+const monthlyChartFunction = async () => {
 
     const monthNames = [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
     const today = new Date();
     const thisMonth = today.getMonth();
 
-    
+    let labels = monthNames;
+    let dataMinutes = [];
+    let dataPoints = [];
+    await Promise.all(monthNames.map( async (month,index) => {
 
-    let labels = [];
-    let data = [];
-    monthNames.forEach( async (month,index) => {
-        labels.push(monthNames[(index-thisMonth) % 12]);
-        // The last day of the month
-            let endMonth = new Date();
-            endMonth.setMonth(index-thisMonth+1);
-            console.log(dateOnly2url(endMonth))
-            endMonth.setDate(0);
-            console.log(dateOnly2url(endMonth))
-        const statsResponse = await fetch(`/api/stats/me/date/${dateOnly2url(endMonth)}`, {
-            method: 'GET',
-           
-            headers: { 'Content-Type': 'application/json' },
-        });
+        if (index <= thisMonth+1) {
+            //labels[index] = monthNames[(index+thisMonth) % 12];
+            // The last day of the month
+                let endMonth = new Date();
+                //endMonth.setMonth(index-thisMonth+1);
+                endMonth.setMonth(index);
+                endMonth.setDate(0);
+            const statsResponse = await fetch(`/api/stats/me/date/${dateOnly2url(endMonth)}`, {
+                method: 'GET',
+            
+                headers: { 'Content-Type': 'application/json' },
+            });
 
-    
-        if (statsResponse.ok) {
-            const statsData = await statsResponse.json();
-            data.push(statsData.total_minutes);
-        } else {
-            console.log(`Monthly Minutes data failed for ${labels[index]}.`)
+        
+            if (statsResponse.ok) {
+                const statsData = await statsResponse.json();
+                dataMinutes[index]=(statsData.total_minutes);
+                dataPoints[index]=(statsData.total_points);
+            } else {
+                console.log(`Monthly Minutes data failed for ${labels[index]}.`)
+            }
         }
-    });
+    }));
+
+    document.getElementById('total-minutes-this-year').textContent = dataMinutes[thisMonth]-dataMinutes[0];
+    document.getElementById('total-points').textContent = dataPoints[thisMonth];
     // Make the chart
     var minutes = document.getElementById('minutes').getContext('2d');
     var minutesChart = new Chart(minutes, {
@@ -97,7 +104,7 @@ const minutesChartFunction = async () => {
         data: {
             labels ,
             datasets: [{
-                data,
+                data: dataMinutes,
                 backgroundColor: [
                     'black'
                 ],
@@ -120,13 +127,45 @@ const minutesChartFunction = async () => {
             }
         }
     });
+
+    var pointsYear = document.getElementById('points-year').getContext('2d');
+var pointsYearChart = new Chart(pointsYear, {
+    type: 'line',
+    data: {
+        labels,
+        datasets: [{
+            data: dataPoints,
+            backgroundColor: [
+                'black'
+            ],
+            borderColor: [
+                'black'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        plugins: {
+            legend: {
+                display: false
+            },
+        },
+        elements: {
+            line: {
+                tension : 0.4  // smooth lines
+            },
+        },  
+    }
+});
     
 } 
 
-window.onload = () => {
-    completedVsNotCompleteFunction();
-    minutesChartFunction();
+window.onload = async () => {
+    await completedVsNotCompleteFunction();
+    await monthlyChartFunction();
 }
+
+
 var priority = document.getElementById('priority').getContext('2d');
 var priorityChart = new Chart(priority, {
     type: 'doughnut',
@@ -229,32 +268,3 @@ var pointsDailyChart = new Chart(pointsDaily, {
     }
 });
 
-var pointsYear = document.getElementById('points-year').getContext('2d');
-var pointsYearChart = new Chart(pointsYear, {
-    type: 'line',
-    data: {
-        labels: [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-        datasets: [{
-            data: [10456, 12659, 10675, 11352, 9575, 11023, 9002, 10214, 12012, 13234, 12021, 11105],
-            backgroundColor: [
-                'black'
-            ],
-            borderColor: [
-                'black'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        plugins: {
-            legend: {
-                display: false
-            },
-        },
-        elements: {
-            line: {
-                tension : 0.4  // smooth lines
-            },
-        },  
-    }
-});
