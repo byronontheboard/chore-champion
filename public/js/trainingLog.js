@@ -1,3 +1,13 @@
+// Function to simulate an asynchronous operation
+function fetchData() {
+    return new Promise(resolve => {
+      // Simulate a delay of 2 seconds
+      setTimeout(() => {
+        resolve();
+      }, 2000);
+    });
+  }
+
 /**
  * changes a date object into a format that can go in a URL
  * @param {Date} date - date to transform
@@ -95,8 +105,8 @@ const monthlyChartFunction = async () => {
         }
     }));
 
-    document.getElementById('total-minutes-this-year').textContent = dataMinutes[thisMonth]-dataMinutes[0];
-    document.getElementById('total-points').textContent = dataPoints[thisMonth];
+    document.querySelector('#minutes-heading h3').textContent = dataMinutes[thisMonth]-dataMinutes[0];
+    document.querySelector('#total-points').textContent = dataPoints[thisMonth];
     // Make the chart
     var minutes = document.getElementById('minutes').getContext('2d');
     var minutesChart = new Chart(minutes, {
@@ -160,9 +170,44 @@ var pointsYearChart = new Chart(pointsYear, {
     
 } 
 
+/**
+ * Show or hide loading box
+ * @param {HTMLDivElement} el - the loading div element
+ * @param {String} oper - either "show" or "hide"
+ */
+function showHide(el, oper) {
+    try {
+        console.log('start',oper,el.classList
+        )
+        switch (oper) {
+            case "show": 
+            el.classList.remove('d-none')
+            el.classList.add('d-flex')
+            console.log('hid', el.classList,el);
+            break;
+            case "hide": 
+            el.classList.add('d-none')
+            el.classList.remove('d-flex');
+            console.log('showed',el.classList, el)
+            break;
+        }
+    } catch {
+        return;
+    }
+    console.log('end',oper,el.classList
+        )
+}
+
 window.onload = async () => {
+     document.querySelectorAll(".loading").forEach((el) => {showHide(el,"show")});
+    //await fetchData();
     await completedVsNotCompleteFunction();
+    showHide(document.querySelector("#completed-vs-not-completed-heading .loading"), "hide")
     await monthlyChartFunction();
+    [
+        document.querySelector("#points-year-heading .loading"),
+        document.querySelector("#minutes-heading .loading")
+    ].forEach((el) => { showHide(el, "hide")})
 }
 
 

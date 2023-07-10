@@ -96,7 +96,7 @@ module.exports = {
 
   loading: function() {
     return new Handlebars.SafeString(`
-      <div class="loading display-none h4 mx-auto my-2">
+      <div class="loading d-none h4 mx-auto my-2">
         Loading...
         <img alt="null" src="/images/loading-arrow.png">
       </div>

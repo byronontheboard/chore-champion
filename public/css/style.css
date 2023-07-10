@@ -237,7 +237,7 @@ input {
         100%  {rotate: .1deg; transform: scale(1.03);}
     }
 
-    .loading.display-flex img {
+    .loading.d-flex img {
         animation: rotateImg 2s linear infinite;
     }
 
