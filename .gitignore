@@ -134,3 +134,6 @@ dist
 
 # Package Lock
 package-lock.json
+
+# Temporary file for testing
+temp.js

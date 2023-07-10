@@ -1,5 +1,6 @@
 const fs = require('fs');
 const {DateTime} = require('luxon');
+const Handlebars = require('handlebars');
 module.exports = {
   task_length: (task) => {
     return task.length;
@@ -91,7 +92,17 @@ module.exports = {
       // points to my icons folder
       let path = '/images/' + iconName + '.svg';
       return path;
-    }
+    },
+
+  loading: function() {
+    return new Handlebars.SafeString(`
+      <div class="loading d-none h4 mx-auto my-2">
+        Loading...
+        <img alt="null" src="/images/loading-arrow.png">
+      </div>
+    `);
+  },
+
 };
 
 
