@@ -39,18 +39,22 @@ As a ___Chore Champion___, I want to be able to create a list of tasks that I pl
 ----
 
 ## Getting Started
+Upon entering the deployed application, the user will be given the option to either create an account or login with their own personal account(if already registered as a user). From there they will be given options to either add a task, browse their created tasks, view their task statistics, and edit their user profile.
 
 ----
 
 ## Adding Task
+Once the user clicks 'Add' in the navigation bar, they will be given a form that they must fillout completely in order to submit a task. The essential parameters for the user's tasks must include a Title, Body, Due Date, Priority, Points and Minutes.
 
 ----
 
 ## Tasks Browser
+After the user has created a task, they then have the option to view their task(s) when they click the 'Browse' tab in the navigation bar. Here the tasks will be displayed with their Title, Priority, Minutes(to complete) Points, when the task was Created, and the Due Date for the task. From there, the user then has the option to begin 'knocking' their task out, by clicking the 'Start' button.
 
 ----
 
 ## Knock Out Function
+If the user is on a crunch for time, they also have the option to utilize the 'Knock Out' page to maximize their productivity. On this page, the user can fill out a form to submit that has queries regarding Days(max of 8 hours), Hours, and Minutes. After submitting this form by clicking the 'Knockout' button, the application will then put together an array of the user's tasks, that can be completed within the given timeframe(filled out prior).
 
 ----
 
