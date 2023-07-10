@@ -52,7 +52,7 @@ CompletedTask.init(
     timestamps: true,
     freezeTableName: true,
     underscored: true,
-    modelName: 'task',
+    modelName: 'completedTask',
   }
 );
 
