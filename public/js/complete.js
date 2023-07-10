@@ -1,4 +1,4 @@
-async function completeTask(task_id, toggle_status) {
+async function completeTask(task_id) {
   var toggleMode;
     const response = await fetch('/api/tasks/complete/'+task_id, {
       method: 'PUT',

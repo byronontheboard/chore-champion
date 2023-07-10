@@ -206,6 +206,7 @@ router.get('/user/:id', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
+  console.log(req);
    try {
     // var due_date;
     // if (req.body.due_date = '') {
@@ -217,7 +218,7 @@ router.post('/', async (req, res) => {
     const newTask = await Task.create({
       title: req.body.title,
       body: req.body.body,
-      due_date: req.body.due_date,
+      due_date: req.body.due_date || undefined,
       priority: req.body.priority,
       points: req.body.points,
       minutes: req.body.minutes,
@@ -273,8 +274,8 @@ router.put('/:id', withAuth, async (req, res) => {
     taskToUpdate.set({
       title: req.body.title || taskToUpdate.title,
       body: req.body.body || taskToUpdate.body,
-      due_date: req.body.due_date || taskToUpdate.due_date,
-      complete_date: req.body.complete_date || taskToUpdate.due_date,
+      due_date: req.body.due_date || undefined,
+      complete_date: req.body.complete_date || undefuned,
       priority: req.body.priority || taskToUpdate.priority,
       points: req.body.points || taskToUpdate.points,
       minutes: req.body.minutes || taskToUpdate.minutes,

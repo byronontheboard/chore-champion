@@ -8,14 +8,10 @@ const taskFormHandler = async (event) => {
   var due_date;
   if (document.querySelector('#due_date')) {
     due_date = document.querySelector('#due_date').value;
+
+    
   } else {
-    due_date = null;
-  }
-  var complete_date;
-  if (document.querySelector('#complete_date')) {
-    complete_date = document.querySelector('#complete_date').value;
-  } else {
-    complete_date = null;
+    due_date = undefined;
   }
   console.log("due date", due_date);
   const minutes = document.querySelector('#minutes').value;
@@ -29,7 +25,7 @@ const taskFormHandler = async (event) => {
     // TODO: Add a comment describing the functionality of this expression
     console.log(type);
     if (type === 'add') {
-      const response = await fetch('/api/tasks', {
+      const response = await fetch('/api/tasks/', {
         method: 'POST',
         body: JSON.stringify({ 
           title,
@@ -43,6 +39,7 @@ const taskFormHandler = async (event) => {
       });
       if (response.ok) {
         alert('Successfully tasked!');
+        window.location.replace('/knockout/all')
       } else {
         alert('Task failed to create.');
       }
@@ -55,9 +52,9 @@ const taskFormHandler = async (event) => {
           body, 
           priority,
           due_date,
+          complete_date,
           minutes, 
-          points,
-          complete_date
+          points
         }),
         headers: { 'Content-Type': 'application/json' },
       });
