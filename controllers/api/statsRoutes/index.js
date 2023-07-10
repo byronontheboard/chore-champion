@@ -48,8 +48,12 @@ router.get('/:id', async (req, res) => {
 
     if (!statsData) {
       res
-        .status(400)
-        .json({ message: 'No stats for that user! Check back later.' });
+        .status(200)
+        .json({
+          "total_points": 0,
+          "total_minutes": 0,
+          "updatedAt": "1970-01-01T00:00:00.000Z"
+        });
       return;
     } else {
       return res.status(200).json(statsData);
@@ -76,7 +80,7 @@ router.get('/:id/date/:date', async (req, res) => {
         }
       },
       attributes: [
-        [ 'cumulative_points', 'total_points' ],
+        ['cumulative_points', 'total_points' ],
         ['cumulative_minutes', 'total_minutes'],
         ['complete_date','updatedAt']
       ] ,
@@ -87,8 +91,12 @@ router.get('/:id/date/:date', async (req, res) => {
     
     if (!taskData.length) {
       res
-        .status(400)
-        .json({ message: 'No data for date '+ date.toLocaleString()});
+        .status(200)
+        .json({
+          "total_points": 0,
+          "total_minutes": 0,
+          "updatedAt": "1970-01-01T00:00:00.000Z"
+        });
       return;
     } else {
       return res.status(200).json(taskData[0]);
