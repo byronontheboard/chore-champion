@@ -6,7 +6,7 @@ When my collegues and I came together to produce this application, our intent wa
 ----
 
 ## Acceptance Criteria
-As a ___Chore Champion___, I want to be able to create a list of tasks that I plan to complete.
+As a ___ChoreChampion___, I want to be able to create a list of tasks that I plan to complete.
 
 ### *GIVEN* a task managing application:  
 
