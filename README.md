@@ -8,7 +8,7 @@ When my collegues and I came together to produce this application, our intent wa
 ## Acceptance Criteria
 As a ___Chore Champion___, I want to be able to create a list of tasks that I plan to complete.
 
-### *GIVEN* a weather dashboard with form inputs:  
+### *GIVEN* a task managing application:  
 
 ***WHEN*** I enter the web application,
 - [x] ***THEN*** I am met with a webpage that grants the option to create or login with an account.
@@ -17,9 +17,6 @@ As a ___Chore Champion___, I want to be able to create a list of tasks that I pl
 - [x] ***THEN*** I am able to navigate to the an 'Add', 'Browse', 'Knock Out', and 'Training Log' page.
 
 ***WHEN*** I click 'Add' in the navigation bar,
-- [x] ***THEN*** I am able to 
-
-***WHEN*** I am logged in as a user,
 - [x] ***THEN*** I am able to create a new task with the following parameters to fill out:  
 - Title
 - Body
@@ -34,7 +31,10 @@ As a ___Chore Champion___, I want to be able to create a list of tasks that I pl
 ***WHEN*** I want to view my progress in real time,
 - [x] ***THEN*** I am able to view charts displaying:
 - A percentage for my total tasks that are completed and uncompleted.
-- My total tasks and where each of them rank in regards to their Priority Type.
+- My total tasks and where each of them rank in regards to their priority.
+
+***WHEN*** I need to edit my user profile,
+- [x] ***THEN*** I am able to modify my name, email address, and profile icon.
 
 ## Deployed Application 
 https://byronontheboard.github.io/chore-champion/
