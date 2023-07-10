@@ -28,20 +28,20 @@ const taskFormHandler = async (event) => {
   if (document.querySelector('#due_date')) {
     due_date = document.querySelector('#due_date').value;
   } else {
-    due_date = null;
+    due_date = undefined;
   }
   var complete_date;
   if (document.querySelector('#complete_date')) {
     complete_date = document.querySelector('#complete_date').value;
   } else {
-    complete_date = null;
+    complete_date = undefined;
   }
   console.log("due date", due_date);
 
   var complete_date;
   if (type === 'update') {
     if (!document.querySelector('#complete_date').value) {
-      complete_date = null;
+      complete_date = undefined;
     } else {
       complete_date = new Date(document.querySelector('#complete_date').value);
     }
@@ -50,7 +50,7 @@ const taskFormHandler = async (event) => {
   const minutes = document.querySelector('#minutes').value;
   const points = document.querySelector('#points').value;
 
-  const priority = document.querySelector('#priority').value || null;
+  const priority = document.querySelector('#priority').value || undefined;
 
     
   // console.log(due_date);
