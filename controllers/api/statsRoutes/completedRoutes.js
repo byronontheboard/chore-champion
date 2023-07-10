@@ -51,11 +51,6 @@ router.get('/user/:id', async (req, res) => {
 router.get('/user/:id/date/:date', async (req, res) => {
   try {
     const taskData = await CompletedTask.findOne({
-      include: [
-        {
-          model: User
-        }        
-      ],
       where: {
         user_id: req.params.id,
         complete_date: {
@@ -78,11 +73,6 @@ router.get('/user/:id/date/:date', async (req, res) => {
 router.get('/user/:id/after/:date', async (req, res) => {
   try {
     const taskData = await CompletedTask.findAll({
-      include: [
-        {
-          model: User
-        }        
-      ],
       where: {
         user_id: req.params.id,
         complete_date: {

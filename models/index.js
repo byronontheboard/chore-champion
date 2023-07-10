@@ -70,6 +70,7 @@ Task.afterUpdate(async (task, options) => {
         // create new CompletedTask row
         try {
             await CompletedTask.create({
+            user_id: task.user_id,
             task_id: task.id,
             complete_date: task.complete_date,
             cumulative_points: total_points,
