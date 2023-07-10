@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Task, User } = require('../../models');
+const { Task, User, CompletedTask } = require('../../models');
 
 const { Op } = require('sequelize');
 
@@ -53,16 +53,8 @@ router.get('/incompleteCount', async (req, res) => {
 
 router.get('/completeCount', async (req, res) => {
   try {
-    const taskData = await Task.count({
-      include: [
-        {
-          model: User,
-          attributes: { exclude: ['password', 'id', 'email'] }
-        }        
-      ],
-      attributes: { exclude: ['user_id'] },
+    const taskData = await CompletedTask.count({
       where: { 
-        complete_date: {[Op.not]: null},
         user_id: req.session.user_id,
       }
     });
@@ -82,8 +74,7 @@ router.get('/completeCount', async (req, res) => {
 
 router.get('/completeCount/:priority', async (req, res) => {
   try {
-    const taskData = await Task.count({
-      attributes: { exclude: ['user_id'] },
+    const taskData = await CompletedTask.count({
       where: { 
         priority: req.params.priority,
         user_id: req.session.user_id,

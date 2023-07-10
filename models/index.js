@@ -72,6 +72,8 @@ Task.afterUpdate(async (task, options) => {
             await CompletedTask.create({
             user_id: task.user_id,
             task_id: task.id,
+            priority: task.priority,
+            due_date: task.due_date,
             complete_date: task.complete_date,
             cumulative_points: total_points,
             cumulative_minutes: total_minutes,
