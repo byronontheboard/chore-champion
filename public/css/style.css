@@ -128,11 +128,15 @@ input {
 
 /* Explicitly stop all animation if the user has recued motion set up. */
 
-@media (prefers-reduced-motion: ) {
+@media (prefers-reduced-motion: reduce) {
     * {
         animation: none !important;
      
      }
+}
+
+.loading img {
+    width: 100px;
 }
 
 /* Animations, if the user is cool with that. */
@@ -231,5 +235,18 @@ input {
         0%   {rotate: .1deg; transform: scale(1.01);}
         50%  {rotate: -.1deg; transform: scale(1.03);}
         100%  {rotate: .1deg; transform: scale(1.03);}
+    }
+
+    .loading.display-flex img {
+        animation: rotateImg 2s linear infinite;
+    }
+
+    @keyframes rotateImg {
+        from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(359deg);
+        }
     }
   }
