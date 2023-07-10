@@ -1,3 +1,17 @@
+/**
+ * changes a date object into a format that can go in a URL
+ * @param {Date} date - date to transform
+ * @returns {String}
+ */
+const date2url = (date) => encodeURIComponent(date.toISOString())
+
+/**
+ * changes a date object into a format that can go in a URL, but without the time
+ * @param {Date} date - date to transform
+ * @returns {String}
+ */
+const dateOnly2url = (date) => date.toISOString().slice(0,10);
+
 const completedVsNotCompleteFunction = async (event) => {
    
       const completeResponse = await fetch('/api/tasks/completeCount', {
@@ -36,13 +50,83 @@ const completedVsNotCompleteFunction = async (event) => {
             
         }
         });
+        
         return response
-        alert('Successfully tasked!');
       } else {
-        alert('Task failed to create.');
+        console.log('Complete vs. Incomplete data failed.');
       }
     }
-    window.onload = completedVsNotCompleteFunction;
+
+const minutesChartFunction = async () => {
+
+    const monthNames = [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+    const today = new Date();
+    const thisMonth = today.getMonth();
+
+    
+
+    let labels = [];
+    let data = [];
+    monthNames.forEach( async (month,index) => {
+        labels.push(monthNames[(index-thisMonth) % 12]);
+        // The last day of the month
+            let endMonth = new Date();
+            endMonth.setMonth(index-thisMonth+1);
+            console.log(dateOnly2url(endMonth))
+            endMonth.setDate(0);
+            console.log(dateOnly2url(endMonth))
+        const statsResponse = await fetch(`/api/stats/me/date/${dateOnly2url(endMonth)}`, {
+            method: 'GET',
+           
+            headers: { 'Content-Type': 'application/json' },
+        });
+
+    
+        if (statsResponse.ok) {
+            const statsData = await statsResponse.json();
+            data.push(statsData.total_minutes);
+        } else {
+            console.log(`Monthly Minutes data failed for ${labels[index]}.`)
+        }
+    });
+    // Make the chart
+    var minutes = document.getElementById('minutes').getContext('2d');
+    var minutesChart = new Chart(minutes, {
+        type: 'line',
+        data: {
+            labels ,
+            datasets: [{
+                data,
+                backgroundColor: [
+                    'black'
+                ],
+                borderColor: [
+                    'black'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            plugins: {
+                legend: {
+                    display: false
+                },
+            },
+            elements: {
+                line: {
+                    tension : 0.4  // smooth lines
+                },
+            }
+        }
+    });
+    
+} 
+
+window.onload = () => {
+    completedVsNotCompleteFunction();
+    minutesChartFunction();
+}
 var priority = document.getElementById('priority').getContext('2d');
 var priorityChart = new Chart(priority, {
     type: 'doughnut',
@@ -72,35 +156,7 @@ var priorityChart = new Chart(priority, {
 
 
 
-var minutes = document.getElementById('minutes').getContext('2d');
-var minutesChart = new Chart(minutes, {
-    type: 'line',
-    data: {
-        labels: [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-        datasets: [{
-            data: [4087, 8786, 17079, 2315, 30983, 39465, 45213, 67334, 80324, 91283, 100075, 101071],
-            backgroundColor: [
-                'black'
-            ],
-            borderColor: [
-                'black'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        plugins: {
-            legend: {
-                display: false
-            },
-        },
-        elements: {
-            line: {
-                tension : 0.4  // smooth lines
-            },
-        }
-    }
-});
+
 
 var pointsWeekly = document.getElementById('points-weekly').getContext('2d');
 var pointsWeeklyChart = new Chart(pointsWeekly, {
