@@ -3,10 +3,8 @@ const userRoutes = require('./userRoutes');
 const taskRoutes = require('./taskRoutes');
 const statsRoutes = require('./statsRoutes');
 
-const withAuth = require('../../utils/auth');
-
 router.use('/users', userRoutes);
-router.use('/tasks', withAuth, taskRoutes);
-router.use('/stats', withAuth, statsRoutes);
+router.use('/tasks', taskRoutes);
+router.use('/stats', statsRoutes);
 
 module.exports = router;

@@ -98,7 +98,7 @@ router.get('/task/:id', withAuth, async (req, res) => {
   }
 });
 
-router.get('/knockoutSelect', async (req, res) => {
+router.get('/knockoutSelect', withAuth, async (req, res) => {
   const userData = await User.findByPk(req.session.user_id);
   res.render('knockoutSelect', {
     userData,
@@ -106,7 +106,7 @@ router.get('/knockoutSelect', async (req, res) => {
   });
 });
 
-router.get('/knockout/:time', async (req, res) => {
+router.get('/knockout/:time', withAuth, async (req, res) => {
   if (req.params.time) {
     console.log('req.params.time', req.params.time);
     var getAll;
@@ -224,7 +224,7 @@ router.get('/knockout/:time', async (req, res) => {
 });
 
 
-router.get('/trainingLog', async (req, res) => {
+router.get('/trainingLog',withAuth, async (req, res) => {
   const userData = await User.findByPk(req.session.user_id);
 
   res.render('trainingLog', {
