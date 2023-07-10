@@ -1,12 +1,24 @@
+/**
+   * The task form itself
+   * @type {HTMLFormElement}
+   */
+const form = document
+  .querySelector('.task-form')
+  
 const taskFormHandler = async (event) => {
   // preventDefault keeps the form from clearing after submitting
   event.preventDefault();
+
   /** 
    * Either "add" or "update".  From a hidden HTMLInputElement which passes along whether the page is creating a new task or updating an existing one
    * @type {String}
   */
  const type = document.getElementById('type').value;
-    /** 
+
+  // Checks that required fields are filled in, and highlights the not valid fields.
+  // document.querySelector('.task-form').classList.add('was-validated'); 
+
+  /** 
    * Task title from input
    * @type {String}
   */
@@ -36,12 +48,23 @@ const taskFormHandler = async (event) => {
 }
   
   const minutes = document.querySelector('#minutes').value;
-  const points = document.querySelector('#points').value
+  const points = document.querySelector('#points').value;
 
-  const priority = document.querySelector('#priority').value
+  const priority = document.querySelector('#priority').value || null;
 
+    
   // console.log(due_date);
+
   if (title && body && priority && minutes && points) {
+
+    console.log(form.lastChild.classList.contains('error-message'));
+    console.log(form.lastChild)
+    // Remove error message if it exists
+    if (form.lastChild.classList.contains('error-message')) {
+      console.log('removed error message');
+      form.lastChild.remove();
+    }
+  
     // const due_date = '2023-06-27 12:00:00'
     // TODO: Add a comment describing the functionality of this expression
     console.log(type);
@@ -90,12 +113,18 @@ const taskFormHandler = async (event) => {
       }
     }
     
+  } else {
+
+    // Show error message if it doesn't already exist
+    invalidated();
   }
 };
 
 
 
-
+/**
+ * Adds options to the priority select element
+*/
 const populateForm = () => {
   /** 
    * Either "add" or "update".  From a hidden HTMLInputElement which passes along whether the page is creating a new task or updating an existing one
@@ -115,7 +144,9 @@ const populateForm = () => {
       optionEl.value = x;
       optionEl.text = x;
     } else if (type == 'add' || !priority) {
+      optionEl.value = "";
       optionEl.selected = true;
+      optionEl.disabled = true;
     }
     if (x==priority) {
       // if the option refers to the current priority value, remove "selected" status from the first option, and give it to the current option.
@@ -125,34 +156,82 @@ const populateForm = () => {
   }
 
   // Modify date values
+  // ***** This is now accomplished by "formatTime" helper function *******
   // Somehow they're coming through in the .toLocaleString() format instead of ISO, even though it console.logs the ISO string on the server.
   // This also ensures that a blank date isn't interpreted as 1970.
-  const dueDateEl = document.querySelector('#due_date');
-  let dueDate = dueDateEl.getAttribute('data-value');
+  // const dueDateEl = document.querySelector('#due_date');
+  // let dueDate = dueDateEl.getAttribute('data-value');
 
-  if (dueDate) {
-    dueDate = new Date(dueDate);
-    if (dueDate.valueOf()) {
-      console.log(dueDate)
-      dueDateEl.value = dueDate.toISOString().slice(0,16);
-      console.log(dueDate)
-    }
-  }
-  if (type == 'update') {
-    const completeDateEl = document.querySelector('#complete_date');
-    let completeDate = completeDateEl.getAttribute('data-value');
-    if (completeDate) {
-      completeDate = new Date(completeDate);
-      if (+completeDate.valueOf()) {
-        completeDateEl.value = completeDate.toISOString().slice(0,16);
-      }
-    }
+  // if (dueDate) {
+  //   dueDate = new Date(dueDate);
+  //   if (dueDate.valueOf()) {
+  //     console.log(dueDate)
+  //     dueDateEl.value = dueDate.toISOString().slice(0,16);
+  //     console.log(dueDate)
+  //   }
+  // }
+  // if (type == 'update') {
+  //   const completeDateEl = document.querySelector('#complete_date');
+  //   let completeDate = completeDateEl.getAttribute('data-value');
+  //   if (completeDate) {
+  //     completeDate = new Date(completeDate);
+  //     if (+completeDate.valueOf()) {
+  //       completeDateEl.value = completeDate.toISOString().slice(0,16);
+  //     }
+  //   }
     
-  }
+  // }
 }
 
+/**
+ * Adds error messages if form is incomplete
+ */
+function invalidated() {
+
+    setCustomValidity(document.querySelector('#title-task'));
+    setCustomValidity(document.querySelector('#body-task'));
+
+    form.classList.add('was-validated');
+    
+    // Show error message if it doesn't already exist
+    if (!form.lastElementChild.classList.contains('error-message')) {
+      const message = document.createElement('div');
+      message.textContent = 'Please fill in required fields';
+      message.classList.add('error-message');
+      form.appendChild(message);
+    }
+}
+
+/**
+ * Changes the valid/invalid check, so that the input is invalid if the value only contains whitespace.
+ * @param {HTMLInputElement} element 
+ */
+function setCustomValidity(element) {
+  if (element.value.trim() === '') {
+    element.setCustomValidity('Invalid text');
+  } else {
+    element.setCustomValidity('');
+  }
+  element.addEventListener('input', function() {
+    if (element.value.trim() === '') {
+      element.setCustomValidity('Invalid text');
+    } else {
+      element.setCustomValidity('');
+    }
+  });
+}
+
+// Adds options to the priority select element
 populateForm();
 
-document
-  .querySelector('.task-form')
-  .addEventListener('submit', taskFormHandler);
+// prevent default browser behavior for an invalid form being submitted
+// 
+document.querySelectorAll('.task-form input,select').forEach((el) => {
+  el.addEventListener('invalid', (event) => {
+    event.preventDefault();
+    console.log(el,'invalid')
+    invalidated();
+  })
+});
+
+form.addEventListener('submit', taskFormHandler);

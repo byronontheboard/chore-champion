@@ -57,7 +57,7 @@ router.get('/profile', async (req, res) => {
 
 router.get('/task', withAuth, async (req, res) => {
   // If a session exists, redirect the request to the homepage
-  const userData = await User.findByPk(req.session.user_id);
+  // const userData = await User.findByPk(req.session.user_id);
 
   if (!req.session.logged_in) {
     res.redirect('/');
@@ -74,12 +74,13 @@ router.get('/task', withAuth, async (req, res) => {
 
 router.get('/task/:id', withAuth, async (req, res) => {
   // If a session exists, redirect the request to the homepage
-  const userData = await User.findByPk(req.session.user_id);
+  
   const taskId = req.params.id;
   if (!req.session.logged_in) {
     res.redirect('/');
     return;
   } else {
+    const userData = await User.findByPk(req.session.user_id);
     if (taskId) {
       const taskData = await Task.findByPk(taskId);
       console.log(taskData.due_date);
