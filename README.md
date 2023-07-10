@@ -41,7 +41,7 @@ As a ___Chore Champion___, I want to be able to create a list of tasks that I pl
 ## Getting Started
 Upon entering the deployed application, the user will be given the option to either create an account or login with their own personal account(if already registered as a user). From there they will be given options to either add a task, browse their created tasks, view their task statistics, and edit their user profile.
 
-<img width="1192" alt="Create:Login-CC" src="https://github.com/byronontheboard/chore-champion/assets/127366720/00a454f9-5f8e-4af1-89cd-253aefc61f65">
+<img width="1080" alt="Create:Login-CC" src="https://github.com/byronontheboard/chore-champion/assets/127366720/00a454f9-5f8e-4af1-89cd-253aefc61f65">
 
 ----
 
@@ -67,14 +67,24 @@ If the user is on a crunch for time, they also have the option to utilize the 'K
 ----
 
 ## Training Log
+When the user wants to monitor the progress of their tasks that are completed and uncompleted, they can click on 'Training Log' in the navigation bar. Here the user's data and progress will be displayed through the utilization of multiple charts.
 
 <img width="1080" alt="Training-CC" src="https://github.com/byronontheboard/chore-champion/assets/127366720/ffdb65b6-2cbf-4d8d-b7c3-74e4a1288d91">
 
 ----
 
 ## User Profile
+Here the user can customize their profile icon instead of using the default '👤' emoji that is set. Additionally, the user can change their email and name for their account(to be used whenever they login using this application).
 
-<img width="1192" alt="Profile-CC" src="https://github.com/byronontheboard/chore-champion/assets/127366720/50388af3-6ee0-48cd-a7fa-45ab0a711966">
+<img width="1080" alt="Profile-CC" src="https://github.com/byronontheboard/chore-champion/assets/127366720/50388af3-6ee0-48cd-a7fa-45ab0a711966">
+
+----
+
+## Contributors
+- [Mark Ciubal](https://github.com/markciubal)  
+- [Ben Storlie](https://github.com/benjstorlie)  
+- [Ibrahim Muhieddine](https://github.com/Ibrahim9166)  
+- [Byron Thomas](https://github.com/byronontheboard)  
 
 ## Deployed Application 
-https://byronontheboard.github.io/chore-champion/
+[https://byronontheboard.github.io/chore-champion/](https://chore-champion-6838d87c31f6.herokuapp.com/login)
