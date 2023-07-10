@@ -229,7 +229,7 @@ router.post('/', async (req, res) => {
   }
 })
 
-router.delete('/:id', withAuth, async (req, res) => {
+router.delete('/:id', async (req, res) => {
   try {
     const task_id = req.params.id;
     const taskToDelete = await Task.findByPk(task_id);
@@ -258,7 +258,7 @@ router.delete('/:id', withAuth, async (req, res) => {
   }
 })
 
-router.put('/:id', withAuth, async (req, res) => {
+router.put('/:id', async (req, res) => {
   try {
     const task_id = req.params.id;
     const taskToUpdate = await Task.findByPk(task_id);
