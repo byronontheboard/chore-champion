@@ -41,10 +41,14 @@ As a ___Chore Champion___, I want to be able to create a list of tasks that I pl
 ## Getting Started
 Upon entering the deployed application, the user will be given the option to either create an account or login with their own personal account(if already registered as a user). From there they will be given options to either add a task, browse their created tasks, view their task statistics, and edit their user profile.
 
+<img width="1192" alt="Create:Login-CC" src="https://github.com/byronontheboard/chore-champion/assets/127366720/00a454f9-5f8e-4af1-89cd-253aefc61f65">
+
 ----
 
 ## Adding Task
 Once the user clicks 'Add' in the navigation bar, they will be given a form that they must fillout completely in order to submit a task. The essential parameters for the user's tasks must include a Title, Body, Due Date, Priority, Points and Minutes.
+
+<img width="1080" alt="Add-CC" src="https://github.com/byronontheboard/chore-champion/assets/127366720/23e49b49-312e-4967-985e-00c807becc8f">
 
 ----
 
@@ -58,13 +62,19 @@ After the user has created a task, they then have the option to view their task(
 ## Knock Out Function
 If the user is on a crunch for time, they also have the option to utilize the 'Knock Out' page to maximize their productivity. On this page, the user can fill out a form to submit that has queries regarding Days(max of 8 hours), Hours, and Minutes. After submitting this form by clicking the 'Knockout' button, the application will then put together an array of the user's tasks, that can be completed within the given timeframe(filled out prior).
 
+<img width="1080" alt="Knockout-CC" src="https://github.com/byronontheboard/chore-champion/assets/127366720/c338e45a-bf18-42fe-9f87-c5baa14ec5bc">
+
 ----
 
 ## Training Log
 
+<img width="1080" alt="Training-CC" src="https://github.com/byronontheboard/chore-champion/assets/127366720/ffdb65b6-2cbf-4d8d-b7c3-74e4a1288d91">
+
 ----
 
 ## User Profile
+
+<img width="1192" alt="Profile-CC" src="https://github.com/byronontheboard/chore-champion/assets/127366720/50388af3-6ee0-48cd-a7fa-45ab0a711966">
 
 ## Deployed Application 
 https://byronontheboard.github.io/chore-champion/
