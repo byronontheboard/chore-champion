@@ -47,7 +47,7 @@ router.get('/:id', async (req, res) => {
 
 
 // get all completed task data after a specified date
-router.get('/:id/after/:date', async (req, res) => {
+router.get('/:id/date/:date', async (req, res) => {
   try {
     const taskData = await CompletedTask.findAll({
       where: {
