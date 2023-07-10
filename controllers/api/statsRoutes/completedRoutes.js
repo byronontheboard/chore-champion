@@ -23,9 +23,12 @@ const { Op } = require('sequelize');
 // get all completed Task data for specified user
 router.get('/:id', async (req, res) => {
   try {
+    let user_id = req.params.id || req.session.user_id;
+    if (user_id === 'me') {user_id = req.session.user_id};
+    
     const taskData = await CompletedTask.findAll({
       where: {
-        user_id: req.params.id
+        user_id,
       },
       attributes: { exclude: ['id','user_id'] },
       order: [['complete_date', 'DESC']],
@@ -49,9 +52,12 @@ router.get('/:id', async (req, res) => {
 // get all completed task data after a specified date
 router.get('/:id/date/:date', async (req, res) => {
   try {
+    let user_id = req.params.id || req.session.user_id;
+    if (user_id === 'me') {user_id = req.session.user_id};
+    
     const taskData = await CompletedTask.findAll({
       where: {
-        user_id: req.params.id,
+        user_id,
         complete_date: {
           [Op.gt]: new Date(decodeURIComponent(req.params.date))
         }

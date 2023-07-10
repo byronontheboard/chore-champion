@@ -3,7 +3,7 @@ const { Task, User, Stats, CompletedTask } = require('../../../models');
 const { Op } = require('sequelize');
 
 // Get all points data
-router.get('/', async (req, res) => {
+router.get('/all', async (req, res) => {
   try {
     const statsData = await Stats.findAll({
       order: [['total_points', 'DESC']],
@@ -26,9 +26,12 @@ router.get('/', async (req, res) => {
 // get total points for specific user
 router.get('/:id', async (req, res) => {
   try {
+    let user_id = req.params.id || req.session.user_id;
+    if (user_id === 'me') {user_id = req.session.user_id};
+    
     const statsData = await Stats.findOne({
       where: {
-        user_id: req.params.id
+        user_id,
       },
       attributes: ['total_points'],
     });
@@ -45,9 +48,12 @@ router.get('/:id', async (req, res) => {
 // `/${user_id}/date/${encodeURIComponent(date.toISOString())}`
 router.get('/:id/date/:date', async (req, res) => {
   try {
+    let user_id = req.params.id || req.session.user_id;
+    if (user_id === 'me') {user_id = req.session.user_id};
+    
     const pointsData = await CompletedTask.findAll({
       where: {
-        user_id: req.params.id,
+        user_id,
         complete_date: {
           [Op.lt]: new Date(req.params.date)
         }
@@ -67,14 +73,12 @@ router.get('/:id/date/:date', async (req, res) => {
 // get all points data after a specified date
 router.get('/user/:id/after/:date', async (req, res) => {
   try {
+    let user_id = req.params.id || req.session.user_id;
+    if (user_id === 'me') {user_id = req.session.user_id};
+
     const pointsData = await CompletedTask.findAll({
-      include: [
-        {
-          model: User
-        }        
-      ],
       where: {
-        user_id: req.params.id,
+        user_id,
         complete_date: {
           [Op.gt]: req.params.date
         }

@@ -36,9 +36,12 @@ router.get('/', async (req, res) => {
 // get stats for specific user
 router.get('/:id', async (req, res) => {
   try {
+    let user_id = req.params.id || req.session.user_id;
+    if (user_id === 'me') {user_id = req.session.user_id};
+    
     const statsData = await Stats.findOne({
       where: {
-        user_id: req.params.id
+        user_id,
       },
       attributes: { exclude: ['id','user_id', 'createdAt'] },
     });
@@ -59,12 +62,15 @@ router.get('/:id', async (req, res) => {
 
 router.get('/:id/date/:date', async (req, res) => {
   try {
+    let user_id = req.params.id || req.session.user_id;
+    if (user_id === 'me') {user_id = req.session.user_id};
+    
 
     const date = new Date(decodeURIComponent(req.params.date));
 
     const taskData = await CompletedTask.findAll({
       where: {
-        user_id: req.params.id,
+        user_id,
         complete_date: {
           [Op.lt]: date
         }

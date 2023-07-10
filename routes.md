@@ -1,5 +1,7 @@
 # Fetch request routes
 
+Note: I only now realized that you would have to do another fetch request to get the logged in user's id.  So now if you want the logged in user's info, in the spot for a user id, just leave it blank, or write in `'me'`.
+
 ## Users
 
 1. `method: 'POST'`

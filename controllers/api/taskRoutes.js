@@ -117,7 +117,10 @@ router.get('/:id', async (req, res) => {
 // "after" and "before" are dates.
 router.get('/user/:id', async (req, res) => {
 
-  let where = {user_id: req.params.id}
+  let user_id = req.params.id || req.session.user_id;
+  if (user_id === 'me') {user_id = req.session.user_id};
+  
+  let where = {user_id}
 
   switch (req.query.complete) {
     case 'yes':
