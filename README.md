@@ -36,5 +36,29 @@ As a ___Chore Champion___, I want to be able to create a list of tasks that I pl
 ***WHEN*** I need to edit my user profile,
 - [x] ***THEN*** I am able to modify my name, email address, and profile icon.
 
+----
+
+## Getting Started
+
+----
+
+## Adding Task
+
+----
+
+## Tasks Browser
+
+----
+
+## Knock Out Function
+
+----
+
+## Training Log
+
+----
+
+## User Profile
+
 ## Deployed Application 
 https://byronontheboard.github.io/chore-champion/
