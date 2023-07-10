@@ -38,7 +38,7 @@ router.get('/create', (req, res) => {
   res.render('create');
 });
 
-router.get('/profile', async (req, res) => {
+router.get('/profile', withAuth, async (req, res) => {
   if (req.session.logged_in) {
     try {
       const userData = await User.findByPk(req.session.user_id);
@@ -98,7 +98,9 @@ router.get('/task/:id', withAuth, async (req, res) => {
   }
 });
 
-router.get('/knockoutSelect', withAuth, async (req, res) => {
+
+router.get('/knockoutSelect', withAuth,async (req, res) => {
+
   const userData = await User.findByPk(req.session.user_id);
   res.render('knockoutSelect', {
     userData,
@@ -224,7 +226,8 @@ router.get('/knockout/:time', withAuth, async (req, res) => {
 });
 
 
-router.get('/trainingLog',withAuth, async (req, res) => {
+router.get('/trainingLog', withAuth, async (req, res) => {
+
   const userData = await User.findByPk(req.session.user_id);
 
   res.render('trainingLog', {
