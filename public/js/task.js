@@ -43,7 +43,7 @@ const taskFormHandler = async (event) => {
     if (!document.querySelector('#complete_date').value) {
       complete_date = undefined;
     } else {
-      complete_date = new Date(document.querySelector('#complete_date').value);
+      complete_date = new document.querySelector('#complete_date').value;
     }
 }
   
