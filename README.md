@@ -1,7 +1,7 @@
 # Chore Champion | ᕦ(ò_óˇ)ᕤ
 When my collegues and I came together to produce this application, our intent was set on providing the user with an interface that would allow them to efficiently list and manage their daily tasks; and subsequently 'knockout' those tasks with ease to become the ___Chore Champion___ they were always destined to be!
 
-[Display an image of the Homepage of a user]
+![Main page listing the tasks](/readme-assets/Screenshot-Browse.png)
 
 ----
 
