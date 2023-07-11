@@ -135,10 +135,6 @@ input {
      }
 }
 
-.loading img {
-    width: 100px;
-}
-
 /* Animations, if the user is cool with that. */
 @media (prefers-reduced-motion: no-preference) {
     .priority-animate:hover {
@@ -235,18 +231,5 @@ input {
         0%   {rotate: .1deg; transform: scale(1.01);}
         50%  {rotate: -.1deg; transform: scale(1.03);}
         100%  {rotate: .1deg; transform: scale(1.03);}
-    }
-
-    .loading.d-flex img {
-        animation: rotateImg 2s linear infinite;
-    }
-
-    @keyframes rotateImg {
-        from {
-            transform: rotate(0deg);
-          }
-          to {
-            transform: rotate(359deg);
-        }
     }
   }
