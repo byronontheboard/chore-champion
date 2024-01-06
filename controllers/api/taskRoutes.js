@@ -244,7 +244,7 @@ router.delete('/:id', async (req, res) => {
 
     const deletedRows = await Task.destroy({
       where: {
-        id: task_id,
+        id: task_id
       },
     });
     
@@ -273,8 +273,8 @@ router.put('/:id', async (req, res) => {
       taskToUpdate.set({
         title: req.body.title || taskToUpdate.title,
         body: req.body.body || taskToUpdate.body,
-        due_date: new Date(req.body.due_date) || taskToUpdate.due_date,
-        complete_date: new Date(req.body.complete_date) || taskToUpdate.complete_date,
+        due_date: req.body.due_date || null,
+        complete_date: req.body.complete_date || null,
         priority: req.body.priority || taskToUpdate.priority,
         points: req.body.points || taskToUpdate.points,
         minutes: req.body.minutes || taskToUpdate.minutes,

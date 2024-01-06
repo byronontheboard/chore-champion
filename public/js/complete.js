@@ -18,7 +18,7 @@ async function completeTask(task_id, toggle_status) {
         document.getElementById("complete-" + task_id).innerText = 'Completed'
         toggleMode = 'complete';
       }
-      alert(`Task marked as ${toggleMode}!`)
+      // alert(`Task marked as ${toggleMode}!`)
     } else {
       alert('Error marking task complete.');
     }
