@@ -15,21 +15,15 @@
 <form class="profile-form">
     <div class="form-group">
         {{!-- Username --}}
-        <label for="">Name</label>
-        <input type="text" class="w-100 m-1 mx-0 form-control" id="name" aria-describedby="emailHelp"
-        value="{{userData.dataValues.name}}">
-    </div>
-    <div class="form-group">
-        {{!-- Email --}}
-        <label for="">Email</label>
-        <input type="text" class="w-100 m-1 mx-0 form-control" id="email" aria-describedby="emailHelp"
-        value="{{userData.dataValues.email}}">
+        <label for="">Username</label>
+        <input type="text" class="w-100 m-1 mx-0 form-control" id="username" aria-describedby="usernameHelp"
+        value="{{userData.dataValues.username}}">
     </div>
     <div class="form-group">
         <label for="icon">Icon</label>
         <input type="text" class="w-100 m-1 mx-0 form-control d-flex align-items-center"
           data-bs-toggle="tooltip" data-bs-placement="right" data-bs-custom-class="custom-tooltip" 
-          data-bs-title="Not seeing the icon that you would like to use? Feel free to enter any emoji that you would like to use as your icon." id="icon" aria-describedby="emailHelp" value="{{userData.dataValues.icon}}">
+          data-bs-title="Not seeing the icon that you would like to use? Feel free to enter any emoji that you would like to use as your icon." id="icon" aria-describedby="usernameHelp" value="{{userData.dataValues.icon}}">
         <div class="icon-selector d-flex justify-content-center">
             <!-- Add more buttons for additional icons as needed -->
             <a class="btn btn-light m-1" onclick="changeIcon('👑')">👑</a>

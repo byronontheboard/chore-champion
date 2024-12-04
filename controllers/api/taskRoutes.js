@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const { OpenAI } = require('openai');
 const { Task, User, CompletedTask } = require('../../models');
 
 const { Op } = require('sequelize');
@@ -9,7 +10,7 @@ router.get('/', async (req, res) => {
       include: [
         {
           model: User,
-          attributes: { exclude: ['password', 'id', 'email'] }
+          attributes: { exclude: ['password', 'id'] }
         }        
       ],
       attributes: { exclude: ['user_id'] },
@@ -185,7 +186,7 @@ router.get('/user/:id', async (req, res) => {
       include: [
         {
           model: User,
-          attributes: { exclude: ['password', 'id', 'email'] }
+          attributes: { exclude: ['password', 'id'] }
         }        
       ],
       attributes: { exclude: ['user_id'] },
@@ -228,6 +229,26 @@ router.post('/', async (req, res) => {
     res.status(400).json(err);
   }
 })
+
+
+router.post('/random', async (req, res) => {
+  try {
+    const randomTask = taskJSON[Math.floor(Math.random() * taskJSON.length)];
+ 
+    try {
+      return res.status(200).json(randomTask);
+    
+    } catch (error) {
+      console.log(error);
+      console.log(randomTask);
+      return error + "There was an error generating a solution. Please try again.";
+    };
+  } catch (error) {
+    console.log("Failed to get solution.");
+    console.log(error);
+    return error + "There was an error generating a solution. Please try again.";
+  }
+});
 
 router.delete('/:id', async (req, res) => {
   try {
@@ -273,8 +294,8 @@ router.put('/:id', async (req, res) => {
       taskToUpdate.set({
         title: req.body.title || taskToUpdate.title,
         body: req.body.body || taskToUpdate.body,
-        due_date: new Date(req.body.due_date) || taskToUpdate.due_date,
-        complete_date: new Date(req.body.complete_date) || taskToUpdate.complete_date,
+        due_date: req.body.due_date || taskToUpdate.due_date,
+        complete_date: req.body.complete_date || taskToUpdate.complete_date,
         priority: req.body.priority || taskToUpdate.priority,
         points: req.body.points || taskToUpdate.points,
         minutes: req.body.minutes || taskToUpdate.minutes,

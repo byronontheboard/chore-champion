@@ -1,23 +1,52 @@
-<h2>Create Account</h2>
-<form class="login-form">
+<div class="container mt-5">
+  <div class="text-center">
+      <h1 class="display-4">Create a ChoreChampion Account!</h1>
+  </div>
+</div>
+<div class="text-center">We don't ask for your information.<br/>Here's a random username and password for you, just make sure to save it in your password manager.</div>
+<form autocomplete="on" class="create-form">
   <div class="form-group">
-    <label for="email-login">Name</label>
-    <input type="text" class="w-100 m-1 mx-0 form-control" id="name-create" aria-describedby="emailHelp"
-      placeholder="Enter name">
-    <small id="emailHelp" class="form-text text-muted">What do you go by?</small>
+  <div class="form-group">
+    <label for="username-create">Username</label>
+    <input type="username" class="w-100 m-1 mx-0 form-control" name="username" id="username" aria-describedby="usernameHelp"
+      placeholder="Enter username">
   </div>
   <div class="form-group">
-    <label for="email-login">Email address</label>
-    <input type="email" class="w-100 m-1 mx-0 form-control" id="email-create" aria-describedby="emailHelp"
-      placeholder="Enter email address">
-    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    <label for="password-create">Password</label>
+    <input type="password" class="w-100 m-1 mx-0 form-control" name="password" id="password">
   </div>
   <div class="form-group">
-    <label for="password-login">Password</label>
-    <input type="password" class="w-100 m-1 mx-0 form-control" id="password-create" placeholder="Password">
-  </div>
-  <div class="form-group">
-    <button class="w-100 mx-0 m-1 btn btn-success" type="submit">Create Account</button>
+    <button class="w-100 mx-0 m-1 btn btn-success" type="submit">Create - Become a Chore Champion!</button>
+    <center><a class="w-100 mx-0 m-1 btn btn-primary"  data-bs-toggle="tooltip" data-bs-placement="bottom"
+                    data-bs-custom-class="custom-tooltip"
+                    data-bs-title="Join up!" href="/login">Log In - Already a Chore Champion?</a></center>
   </div>
 </form>
+  <div class="row justify-content-center mt-5">
+      <div class="col-md-8">
+          <div class="card mb-4">
+              <div class="card-body">
+
+                  <div class="accordion" id="accordionExample">
+                      <div class="accordion-item">
+                          <h2 class="accordion-header text-center" id="headingOne">
+                              <button class="accordion-button text-center" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                  Learn More
+                              </button>
+                          </h2>
+                          <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                              <div class="accordion-body">
+                                  <strong>Fight Your Way to Victory:</strong> ChoreChampion employs advanced algorithms to prioritize tasks, empowering you to take on your to-do list like a pro and emerge victorious over the chaos.
+                                  <br><br>
+                                  <strong>Unleash Your Potential:</strong> Craft a chore schedule that aligns with your unique style, enabling you to punch through daily hurdles and achieve your goals with precision.
+                                  <br/><br/>
+                                  <strong>Pack a Punch:</strong> ChoreChampion leverages the power of the knapsack problem, an optimization strategy that selects tasks with the highest value to fit within your available time, ensuring maximum productivity and satisfaction.
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
 <script src="/js/create.js"></script>

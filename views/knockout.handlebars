@@ -20,7 +20,7 @@
         <div class="custom-gutter">
           <div class="row">
             {{#each tasks as |task| }}
-            <div class="z-1 col-12 col-sm-12 col-md-6 my-3">
+            <div class="z-1 col-12 col-sm-12 col-md-6 my-3" id="sortable">
               <div class="p-2 card task-card">
                 <div class="card-body">
                     <div class="row">
@@ -47,7 +47,7 @@
                   {{!-- <hr/> --}}
                   <div class="row">
                     <div class="col-12">
-                      <p>{{task.body}}</p>
+                      <p><center>{{task.body}}</center></p>
                     </div>
                   </div>
                   <hr/>

@@ -19,10 +19,37 @@ body {
 .chorechampion-text {
     color: white;
 }
-@media (min-width: 768px) {
-    html {
-        font-size: 16px;
+@-moz-keyframes spin-animation {
+    from { -moz-transform: rotate(0deg); }
+    to { -moz-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin-animation {
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin-animation {
+    0% {transform:rotate(0deg);}
+    100% {transform:rotate(60deg);}
+}
+
+@keyframes scale-animation {
+    0% {
+        transform: scale(1.00);
     }
+    50% {
+        transform: scale(1.025);
+    }
+    100% {
+        transform: scale(1.00);
+    }
+}
+
+.spin {
+    animation: spin-animation 2s linear infinite;
+}
+
+.scale {
+    animation: scale-animation 2s linear infinite;
 }
 
 .container {

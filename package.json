@@ -43,6 +43,7 @@
     "handlebars": "^4.7.7",
     "luxon": "^3.3.0",
     "mysql2": "^2.2.5",
+    "openai": "^4.53.2",
     "sequelize": "^6.3.5"
   },
   "devDependencies": {

@@ -119,3 +119,7 @@ function createEventListener(startButton, iteration) {
     console.log(timerToggle[iteration]);
   })
 };
+$( document ).ready(function() {
+  $("#sortable").sortable();
+       $("#sortable").disableSelection();
+});
